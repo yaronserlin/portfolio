@@ -1,0 +1,20 @@
+/* Make body and html take full height */
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Use flexbox to layout the page */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* Full viewport height */
+}
+
+/* Let content grow to fill available space */
+.content {
+    flex: 1;
+    padding-top: 64px;
+}

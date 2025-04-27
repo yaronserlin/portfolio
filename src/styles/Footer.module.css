@@ -1,0 +1,19 @@
+/* .footer { */
+/* position: fixed; */
+/* bottom: 0; */
+/* width: 100%; */
+/* text-align: center; */
+/* padding: 1rem 0; */
+/* background-color: #fff; */
+/* Optional: to avoid transparency */
+/* z-index: 1000; */
+/* Ensure it stays above other content */
+/* } */
+
+/* Footer will naturally go to the bottom if there's space,
+     or follow content if page is longer */
+.footer {
+    background: #eee;
+    padding: 1rem;
+    text-align: center;
+}

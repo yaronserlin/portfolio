@@ -1,0 +1,26 @@
+body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+}
+
+h1,
+h2,
+h3 {
+    color: var(--color-text-primary);
+}
+
+p {
+    color: var(--color-text-secondary);
+}
+
+a {
+    color: var(--color-accent-primary);
+}
+
+a:hover {
+    color: var(--color-accent-secondary);
+}
+
+hr {
+    border-color: var(--color-border);
+}

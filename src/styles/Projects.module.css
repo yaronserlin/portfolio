@@ -1,0 +1,14 @@
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    padding: 24px;
+}
+
+.sectionTitle {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 24px;
+    color: #333;
+}
