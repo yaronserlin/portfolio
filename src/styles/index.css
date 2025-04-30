@@ -15,12 +15,24 @@ p {
 
 a {
     color: var(--color-accent-primary);
+    text-decoration: none;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+
 }
 
 a:hover {
     color: var(--color-accent-secondary);
+    text-decoration: underline;
 }
 
 hr {
     border-color: var(--color-border);
+}
+
+img {
+    transition: filter 0.3s ease;
+}
+
+[data-theme='dark'] img {
+    filter: brightness(0.9);
 }

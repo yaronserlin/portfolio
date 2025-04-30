@@ -12,8 +12,44 @@
 
 /* Footer will naturally go to the bottom if there's space,
      or follow content if page is longer */
-.footer {
-    background: #eee;
+/* .footer {
+    background: var(--color-backgound-secondary);
     padding: 1rem;
     text-align: center;
+} */
+
+.footer {
+    padding: 0 20px 20px 20px;
+    text-align: center;
+    background-color: var(--color-background-secondary);
+    color: var(--color-text-primary);
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid var(--color-text-primary);
+    margin: 0 0 20px 0;
+    width: 100%;
+}
+
+.text {
+    font-size: 1rem;
+    color: var(--color-text-primary);
+}
+
+
+
+.themeToggle {
+    margin-top: 10px;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: var(--color-button-bg);
+    border: none;
+    color: var(--color-button-text);
+    font-size: 1rem;
+}
+
+.themeToggle:hover {
+    background-color: var(--color-button-bg-hover);
 }
