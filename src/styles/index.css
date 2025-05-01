@@ -1,38 +1,19 @@
-body {
-    background-color: var(--color-background);
-    color: var(--color-text-primary);
+/* body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
 }
 
-h1,
-h2,
-h3 {
-    color: var(--color-text-primary);
+.section-about {
+    background-color: var(--bg-section-alt);
 }
 
-p {
-    color: var(--color-text-secondary);
+.section-dark {
+    background-color: var(--bg-section-dark);
+    color: var(--text-light);
 }
 
-a {
-    color: var(--color-accent-primary);
-    text-decoration: none;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
-
-}
-
-a:hover {
-    color: var(--color-accent-secondary);
-    text-decoration: underline;
-}
-
-hr {
-    border-color: var(--color-border);
-}
-
-img {
-    transition: filter 0.3s ease;
-}
-
-[data-theme='dark'] img {
-    filter: brightness(0.9);
-}
+.button {
+    border-radius: 20px;
+    background-color: var(--btn-bg);
+    color: var(--text-light);
+} */

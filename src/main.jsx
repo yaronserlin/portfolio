@@ -18,10 +18,10 @@ import {
 } from "react-router";
 
 import Home from './pages/Home.jsx';
-import AboutMe from './pages/AboutMe.jsx';
-import Projects from './pages/Projects.jsx';
-import Contact from './pages/Contact.jsx';
-import ProjectDetails from './pages/ProjectDetails.jsx';
+// import AboutMe from './pages/AboutMe.jsx';
+// import Projects from './pages/Projects.jsx';
+// import Contact from './pages/Contact.jsx';
+// import ProjectDetails from './pages/ProjectDetails.jsx';
 import { StrictMode } from 'react';
 
 let router = createBrowserRouter([
@@ -30,10 +30,10 @@ let router = createBrowserRouter([
     Component: App,
     children: [
       { path: '/', Component: Home },
-      { path: '/about', Component: AboutMe },
-      { path: '/projects', Component: Projects },
-      { path: '/contact', Component: Contact },
-      { path: '/projects/:projectId', Component: ProjectDetails }
+      // { path: '/about', Component: AboutMe },
+      // { path: '/projects', Component: Projects },
+      // { path: '/contact', Component: Contact },
+      // { path: '/projects/:projectId', Component: ProjectDetails }
 
     ]
   },
