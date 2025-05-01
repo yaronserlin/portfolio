@@ -31,12 +31,10 @@ src/
 │  ├─ SampleWork/
 │  │  ├─ SampleWork.jsx
 │  │  └─ SampleWork.module.css
-│  ├─ SkillsProficiencies/
-│  │  ├─ SkillsProficiencies.jsx
-│  │  └─ SkillsProficiencies.module.css
-│  └─ StackedSections/
-│     ├─ StackedSections.jsx
-│     └─ StackedSections.module.css
+│  └─ SkillsProficiencies/
+│     ├─ SkillsProficiencies.jsx
+│     └─ SkillsProficiencies.module.css
+│  
 │
 ├─ styles/                 # Global CSS variables and resets
 │  └─ variables.css        # CSS custom properties
@@ -106,7 +104,6 @@ Build artifacts will be output to the `build/` directory.
 | **SampleWork**                | Uniform project cards grid with hover shadow.
 | **ContactSection**            | Image + contact details + dynamic social icons.
 | **Section**                   | Wrapper for full-screen sections with background variants.
-| **StackedSections**           | Enables sticky, overlapping scroll effect across `<Section>`s.
 
 ---
 
@@ -115,7 +112,6 @@ Build artifacts will be output to the `build/` directory.
 - **CSS Variables**: Defined in `src/styles/variables.css` for colors, spacing, typography, breakpoints.
 - **CSS Modules**: Scoped component styles in `*.module.css` files.
 - **Responsive**: Media queries adjust layouts for screens <768px.
-- **Sticky Sections**: Pure CSS layering using `position: sticky` and dynamic `z-index` for overlapping.
 
 ---
 
@@ -136,7 +132,6 @@ Import these files in `Home.jsx` (or your page) and pass them as props.
 
 ```jsx
 import React from 'react';
-import StackedSections from './components/StackedSections/StackedSections';
 import Section from './components/Section/Section';
 import HeroSection from './components/HeroSection/HeroSection';
 import AboutMe from './components/AboutMe/AboutMe';
@@ -152,7 +147,7 @@ import skillsData from '../data/skills';
 
 export default function Home() {
   return (
-    <StackedSections>
+    <Container>
       <Section variant="light">
         <HeroSection /* props */ />
       </Section>
@@ -176,7 +171,7 @@ export default function Home() {
       <Section variant="alt">
         <ContactSection {...contactInfo} />
       </Section>
-    </StackedSections>
+    <Container>
   );
 }
 ```
