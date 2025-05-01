@@ -67,8 +67,8 @@ src/
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/yourusername/portfolio-react.git
-cd portfolio-react
+git clone https://github.com/yourusername/portfolio.git
+cd portfolio
 npm install
 # or yarn install
 ```
