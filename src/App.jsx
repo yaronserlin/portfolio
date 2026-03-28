@@ -18,7 +18,6 @@
  * @returns {React.ReactElement} The complete application with routing, navigation, and footer
  */
 
-import './App.css'
 import './styles/custom.scss'
 import HomePage from './pages/HomePage'
 import Navigation from './components/Navigation';

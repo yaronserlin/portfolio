@@ -1,16 +1,43 @@
-# React + Vite
+# Yaron Serlin - Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to my personal portfolio repository! I am a Full Stack Developer and Computer Science student at the Open University, dedicated to building intelligent and efficient systems.
 
-Currently, two official plugins are available:
+## About the Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This portfolio showcases my professional background, skills, and projects. It provides an intuitive, interactive experience built with modern web technologies.
 
-## React Compiler
+### Technology Stack
+- **React.js** - UI Component Library
+- **Vite** - Build Tool & Development Server
+- **React-Bootstrap** - Responsive Layout components
+- **Sass (SCSS)** - Advanced CSS styling and variables
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Getting Started
 
-## Expanding the ESLint configuration
+To run this project locally, follow these simple steps:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yaronserlin/portfolio.git
+   cd portfolio
+   ```
+
+2. **Install dependencies:**
+   Make sure you have Node.js installed, then run:
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **View in browser:**
+   Open your browser and navigate to `http://localhost:5173` to see the site in action.
+
+## Contact Information
+
+- **Email:** yaron.serlin.dev@gmail.com
+- **LinkedIn:** [yaron-serlin](https://www.linkedin.com/in/yaron-serlin)
+- **GitHub:** [yaronserlin](https://github.com/yaronserlin)
