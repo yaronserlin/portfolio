@@ -23,32 +23,133 @@ export const fetchGitHubProjects = async () => {
         const repos = await response.json();
 
         // Filter and transform repositories
-        const projects = repos
+        let projects = repos
             .filter(repo => !repo.fork) // Exclude forked repositories
-            .map((repo, index) => ({
-                id: repo.id,
-                title: repo.name
-                    .split('-')
-                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(' '),
-                description: repo.description || 'A GitHub project',
-                technologies: extractTechnologies(repo.language, repo.topics),
-                url: repo.html_url,
-                liveUrl: extractLiveUrl(repo),
-                image: `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repo.name}/refs/heads/main/screenshot.png`,
-                // Videos and GIFs can be stored in /media or /assets folder
-                video: `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repo.name}/refs/heads/main/media/demo.mp4`,
-                gif: `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repo.name}/refs/heads/main/media/demo.gif`,
-                stars: repo.stargazers_count,
-                language: repo.language,
-            }))
+            .map((repo) => {
+                const projectObj = {
+                    id: repo.id,
+                    title: repo.name
+                        .split('-')
+                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                        .join(' '),
+                    description: repo.description || 'A GitHub project',
+                    technologies: extractTechnologies(repo.language, repo.topics),
+                    url: repo.html_url,
+                    liveUrl: extractLiveUrl(repo),
+                    // Set default media structure
+                    image: null,
+                    video: null,
+                    gif: null,
+                    stars: repo.stargazers_count,
+                    language: repo.language,
+                    languages: [repo.language], // Will be updated with full breakdown
+                    repoName: repo.name, // Store for later API calls
+                };
+
+                return projectObj;
+            })
             .sort((a, b) => b.stars - a.stars); // Sort by stars descending
+
+        // Concurrently fetch languages and check media for all projects
+        await Promise.all(projects.map(async (project) => {
+            // Fetch language breakdown
+            try {
+                const languages = await fetchLanguageBreakdown(project.repoName);
+                if (languages && languages.length > 0) {
+                    project.languages = languages;
+                }
+            } catch (err) {
+                // Keep default language on error
+            }
+
+            // Check media availability
+            try {
+                const mediaUrls = await checkMediaAvailability(project.repoName);
+                project.image = mediaUrls.image;
+                project.video = mediaUrls.video;
+                project.gif = mediaUrls.gif;
+            } catch (err) {
+                // Keep nulls on error
+            }
+        }));
 
         return projects;
     } catch (error) {
         console.error('Error fetching GitHub projects:', error);
         return [];
     }
+};
+
+/**
+ * Fetch language breakdown for a specific repository
+ * @param {string} repoName - Repository name
+ * @returns {Promise<Array>} Array of language names sorted by usage
+ */
+const fetchLanguageBreakdown = async (repoName) => {
+    try {
+        const response = await fetch(
+            `${GITHUB_API_URL}/repos/${GITHUB_USERNAME}/${repoName}/languages`
+        );
+
+        if (!response.ok) {
+            return []; // Return empty on failure
+        }
+
+        const languagesData = await response.json();
+        const total = Object.values(languagesData).reduce((sum, val) => sum + val, 0);
+        
+        if (total === 0) {
+            return [];
+        }
+
+        // Sort by most used language
+        const sortedLanguages = Object.entries(languagesData)
+            .map(([lang, bytes]) => ({ name: lang, bytes }))
+            .sort((a, b) => b.bytes - a.bytes);
+
+        // Return just the language names
+        return sortedLanguages.map(lang => lang.name);
+    } catch (error) {
+        console.error(`Error fetching languages for ${repoName}:`, error);
+        return [];
+    }
+};
+
+/**
+ * Check which media files are available for a given repository
+ * @param {string} repoName - Repository name
+ * @returns {Promise<Object>} Object containing valid URLs for image, video, and gif depending on presence
+ */
+const checkMediaAvailability = async (repoName) => {
+    const baseUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repoName}/refs/heads/main/media`;
+    
+    const mediaObj = {
+        image: null,
+        video: null,
+        gif: null
+    };
+
+    const checkUrl = async (url) => {
+        try {
+            const res = await fetch(url, { method: 'HEAD' });
+            return res.ok ? url : null;
+        } catch (e) {
+            return null;
+        }
+    };
+
+    // Parallel checks for media files
+    const [pngRes, mp4Res, gifRes] = await Promise.all([
+        checkUrl(`${baseUrl}/demo.png`),
+        checkUrl(`${baseUrl}/demo.mp4`),
+        checkUrl(`${baseUrl}/demo.gif`)
+    ]);
+
+    mediaObj.image = pngRes;
+    mediaObj.video = mp4Res;
+    mediaObj.gif = gifRes;
+
+    return mediaObj;
 };
 
 /**

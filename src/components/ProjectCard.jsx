@@ -37,6 +37,7 @@ import { FaPlay } from 'react-icons/fa';
 import TechBadge from './TechBadge';
 import OptimizedImage from './OptimizedImage';
 import GifViewer from './GifViewer';
+import LanguageBadge from './LanguageBadge';
 
 const ProjectCard = ({ project }) => {
   const [showGifModal, setShowGifModal] = useState(false);
@@ -152,11 +153,20 @@ const ProjectCard = ({ project }) => {
             {project.description}
           </Card.Text>
 
+          {/* Languages with Icons */}
+          {project.languages && project.languages.length > 0 && (
+            <div className="mb-3" style={{ display: 'flex', flexWrap: 'wrap' }}>
+              {project.languages.map((lang, index) => (
+                <LanguageBadge key={index} language={lang} />
+              ))}
+            </div>
+          )}
+          {/* 
           <div className="d-flex flex-wrap gap-2 mb-3">
             {project.technologies.map((tech, index) => (
               <TechBadge key={index} tech={tech} />
             ))}
-          </div>
+          </div> */}
 
           <div className="d-flex flex-column gap-2">
             <Button

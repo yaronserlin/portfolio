@@ -41,14 +41,7 @@ const HeroCTA = () => {
     };
 
     return (
-        <div
-            className="d-flex gap-3 mt-4"
-            style={{
-                '@media (max-width: 768px)': {
-                    flexDirection: 'column'
-                }
-            }}
-        >
+        <div className="d-flex flex-column flex-md-row gap-3 mt-4">
             <Button
                 variant="primary"
                 size="lg"
