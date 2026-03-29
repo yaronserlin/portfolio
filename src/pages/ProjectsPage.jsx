@@ -1,29 +1,5 @@
 /**
- * ProjectsPage Component - Portfolio Projects Showcase
- * 
- * This page displays all projects in the portfolio using a responsive grid layout.
- * Each project is presented as an interactive card with:
- * - Project thumbnail image
- * - Title and description
- * - Technology badges
- * - Links to GitHub repository and live demo (if available)
- * - Media viewer for project gifs/videos
- * 
- * Layout:
- * - Page header with title and subtitle
- * - Responsive grid of project cards (3 columns on desktop, 2 on tablet, 1 on mobile)
- * - Full viewport height with gradient background
- * 
- * Features:
- * - Loading state handling
- * - Interactive project cards with hover effects
- * - Modal viewer for project demos
- * - Fetches projects from GitHub API
- * 
- * @component
- * @param {Object} props - Component props
- * @param {Array} props.projects - Array of project objects
- * @returns {React.ReactElement} Projects showcase page with grid of project cards
+ * Preview: A gallery-style page listing the dynamically loaded suite of GitHub repository projects associated with the owner.
  */
 
 import { useContext } from "react";
@@ -32,6 +8,12 @@ import SectionHeader from "../components/SectionHeader";
 import ProjectGrid from "../components/ProjectGrid";
 import { PortfolioContext } from "../context/PortfolioContext";
 
+/**
+ * Handles the display logic for the projects iteration section, rendering loading states or grid listings based on application state context.
+ * @param {Object} props - The incoming properties.
+ * @param {Array<Object>} props.projects - An array filled with project instances harvested primarily from external hubs (GitHub).
+ * @returns {JSX.Element} The composed Projects page.
+ */
 const ProjectsPage = ({ projects }) => {
     const { isLoadingProjects } = useContext(PortfolioContext);
 

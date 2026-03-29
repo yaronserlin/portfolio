@@ -1,19 +1,24 @@
 /**
- * LanguageBadge Component
- * 
- * Displays a programming language with its official icon loaded dynamically from SimpleIcons.
- * This prevents the need to hardcode icons and colors for every new technology learned.
- * 
- * @param {Object} props
- * @param {string} props.language - The name of the programming language or technology
+ * Preview: A dynamic label component rendering brand icons for various software technologies utilizing SimpleIcons.
  */
+
 import React from 'react';
 import './LanguageBadge.css';
 
+/**
+ * Renders an inline visual pill containing the text name and official SVG logo of a programming language or tool.
+ * @param {Object} props - Accepted parameters.
+ * @param {string} props.language - Case-insensitive string matching known technology domains.
+ * @returns {JSX.Element|null} Stylized pill marker, or null if the string is falsy.
+ */
 const LanguageBadge = ({ language }) => {
     if (!language) return null;
 
-    // Helper to map technology names to accurate simple-icons slugs
+    /**
+     * Maps technology names to accurate simple-icons network slugs.
+     * @param {string} lang - Technology raw string.
+     * @returns {string} Sanitized slug identifier.
+     */
     const getSlug = (lang) => {
         const customMap = {
             'c++': 'cplusplus',

@@ -1,15 +1,5 @@
 /**
- * Application Entry Point - Portfolio Application Bootstrap
- * 
- * This is the main entry point for the React application. It initializes the React root,
- * sets up routing with React Router, and wraps the entire application with the PortfolioProvider
- * context to make portfolio data available throughout the component tree.
- * 
- * Component Hierarchy:
- * - React.StrictMode (development mode checks)
- * - BrowserRouter (client-side routing)
- * - PortfolioProvider (global state management)
- * - App (main application component)
+ * Preview: Entry point establishing the central DOM node layout and providing global React contexts.
  */
 
 import { StrictMode } from 'react'

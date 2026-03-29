@@ -1,21 +1,5 @@
 /**
- * Main Application Root Component
- * 
- * This is the primary application component that orchestrates the entire portfolio website.
- * It manages routing to different pages (Home, About, Projects, Contact) and provides
- * consistent layout with Navigation header and Footer.
- * 
- * The component retrieves portfolio data from the PortfolioContext and passes relevant
- * data to each page. All pages share the Navigation and Footer components for consistent UX.
- * 
- * Routes:
- * - / : HomePage - Hero section with introduction and CTA
- * - /about : AboutPage - Biography, skills, background, and interests
- * - /projects : ProjectsPage - Portfolio projects showcase
- * - /contact : ContactPage - Contact form and information
- * 
- * @component
- * @returns {React.ReactElement} The complete application with routing, navigation, and footer
+ * Preview: Global routing component organizing layout persistence and page connections through URL-based navigation.
  */
 
 import './styles/custom.scss'
@@ -29,6 +13,10 @@ import Footer from './components/Footer';
 import { useContext } from 'react';
 import { PortfolioContext } from './context/PortfolioContext';
 
+/**
+ * Aggregates site routes and global layout components like Header and Footer.
+ * @returns {JSX.Element} The rendered React Application.
+ */
 function App() {
 
   const { portfolioData } = useContext(PortfolioContext);
@@ -37,7 +25,7 @@ function App() {
     <>
       <Navigation />
 
-      <Routes  >
+      <Routes>
         <Route path="/" element={<HomePage personalInfo={portfolioData.personalInfo} />} errorElement={<h1>Error</h1>} />
         <Route path='/about' element={<AboutPage personalInfo={portfolioData.personalInfo} skills={portfolioData.skills} />} />
         <Route path='/contact' element={<ContactPage contactInfo={portfolioData.contactInfo} />} />
@@ -45,7 +33,6 @@ function App() {
       </Routes>
 
       <Footer />
-
     </>
   )
 }

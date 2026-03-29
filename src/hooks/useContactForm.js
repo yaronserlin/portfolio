@@ -1,42 +1,15 @@
 /**
- * useContactForm Hook - Contact Form State and Logic Management
- * 
- * This custom hook encapsulates all contact form functionality including:
- * - Form state management (name, email, subject, message)
- * - Form validation
- * - Email sending via EmailJS service
- * - Success/error handling and messaging
- * - Form reset functionality
- * 
- * Features:
- * - Automatic EmailJS initialization on component mount
- * - Form validation before submission
- * - Loading state during email sending
- * - Auto-hiding success messages after 5 seconds
- * - Error message display with retry capability
- * 
- * Environment Variables Required:
- * - VITE_EMAILJS_PUBLIC_KEY: EmailJS public key
- * - VITE_EMAILJS_SERVICE_ID: EmailJS service ID  
- * - VITE_EMAILJS_TEMPLATE_ID: EmailJS template ID
- * 
- * @hook
- * @returns {Object} Form state and handler functions
- * @returns {Object} .formData - Current form values (name, email, subject, message)
- * @returns {boolean} .submitted - Whether form was successfully submitted
- * @returns {string} .error - Error message if submission failed
- * @returns {boolean} .isLoading - Whether email is currently sending
- * @returns {Function} .handleChange - Handler for input field changes
- * @returns {Function} .handleSubmit - Handler for form submission with validation
- * @returns {Function} .resetForm - Reset form to initial state
- * @returns {Function} .setSubmitted - Manually set submitted state
- * @returns {Function} .setError - Manually set error message
+ * Preview: Custom React hook handling all state, validation, and submission logic for the underlying contact form via EmailJS.
  */
 
 import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { validateContactForm, getInitialFormState } from "../utils/formValidation";
 
+/**
+ * Manages the contact form state, error handling, and orchestrates the transmission of messages using EmailJS.
+ * @returns {Object} Methods and state properties for rendering and processing the form.
+ */
 const useContactForm = () => {
     const [formData, setFormData] = useState(getInitialFormState());
     const [submitted, setSubmitted] = useState(false);
@@ -48,8 +21,8 @@ const useContactForm = () => {
     }, []);
 
     /**
-     * Handle input field changes
-     * @param {Event} e - Input change event
+     * Updates form state progressively based on user input events.
+     * @param {import('react').ChangeEvent<HTMLInputElement | HTMLTextAreaElement>} e - The triggered input change event.
      */
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -61,8 +34,8 @@ const useContactForm = () => {
     };
 
     /**
-     * Handle form submission with validation and email sending
-     * @param {Event} e - Form submission event
+     * Rejects invalid payloads or initiates sending procedure using environment variables for the EmailJS service.
+     * @param {import('react').FormEvent<HTMLFormElement>} e - The form submission event.
      */
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -92,6 +65,7 @@ const useContactForm = () => {
             setFormData(getInitialFormState());
             setIsLoading(false);
 
+            // Hide the success message after five seconds automatically
             setTimeout(() => {
                 setSubmitted(false);
             }, 5000);
@@ -103,7 +77,7 @@ const useContactForm = () => {
     };
 
     /**
-     * Reset form to initial empty state
+     * Purges all current state data and restores the form's blank initial condition.
      */
     const resetForm = () => {
         setFormData(getInitialFormState());

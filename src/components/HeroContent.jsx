@@ -1,28 +1,13 @@
 /**
- * HeroContent Component - Hero Section Text and Info
- * 
- * Displays the main textual content in the hero section including:
- * - Portfolio owner's full name as large heading
- * - Professional title
- * - Short biography/about text
- * - Education/qualification information
- * 
- * Styling:
- * - Responsive text sizing using CSS clamp() for scaling
- * - Primary color for name heading
- * - Secondary color for professional title
- * - Left padding on larger screens for proper alignment
- * 
- * @component
- * @param {Object} props - Component props
- * @param {Object} props.personalInfo - Personal information object
- * @param {string} props.personalInfo.name - Full name
- * @param {string} props.personalInfo.title - Professional title
- * @param {string} props.personalInfo.about - Short biography text
- * @param {string} props.personalInfo.education - Education details
- * @returns {React.ReactElement} Hero content section with name, title, and bio
+ * Preview: Informational text element in the Hero section, extracting rendering identity data.
  */
 
+/**
+ * Renders the introductory profile data and formatted biography string in the top hero location.
+ * @param {Object} props - Render properties.
+ * @param {Object} props.personalInfo - Identity package with name, title, about, and education properties.
+ * @returns {JSX.Element} The composed textual subset of the hero banner.
+ */
 const HeroContent = ({ personalInfo }) => {
     return (
         <div className="ps-lg-4">

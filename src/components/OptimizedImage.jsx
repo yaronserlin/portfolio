@@ -1,36 +1,23 @@
 /**
- * OptimizedImage Component - Image Display with Lazy Loading and Fallback
- * 
- * An advanced image component that handles:
- * - Lazy loading for performance optimization
- * - Fallback images if primary fails to load
- * - Loading state with spinner
- * - Support for both static images and animated GIFs
- * - Error handling with fallback image
- * 
- * Features:
- * - Loading skeleton/spinner during image fetch
- * - Async decoding for GIFs to prevent jank
- * - Customizable styling via style prop
- * - Optional width and height with object-fit: cover
- * - Graceful fallback to alternate image on error
- * 
- * @component
- * @param {Object} props - Component props
- * @param {string} props.src - Primary image source URL
- * @param {string} props.alt - Alt text for accessibility (required)
- * @param {string} [props.fallbackSrc=null] - Fallback image URL if primary fails
- * @param {string} [props.className=""] - CSS classes for image element
- * @param {string|number} [props.width="100%"] - Image width
- * @param {string|number} [props.height="auto"] - Image height
- * @param {boolean} [props.isGif=false] - Whether image is a GIF (enables async decoding)
- * @param {string} [props.loading="lazy"] - Loading strategy (lazy, eager, auto)
- * @param {Object} [props.style={}] - Additional inline styles
- * @returns {React.ReactElement} Image container with loading state and fallback support
+ * Preview: Advanced imagery loader featuring loading states, resilient error fallbacks, and async decoding configurations.
  */
 
 import { useState } from "react";
 
+/**
+ * Safely renders imagery over sluggish network connections or absent files by implementing a loading layer and automated fallback mechanisms.
+ * @param {Object} props - Valid configuration properties.
+ * @param {string} props.src - Attempted target image path.
+ * @param {string} props.alt - Accessibility label.
+ * @param {string} [props.fallbackSrc=null] - Desired substitution image path if target loading fails.
+ * @param {string} [props.className=""] - Spaced styling class definitions.
+ * @param {string|number} [props.width="100%"] - CSS mapped width.
+ * @param {string|number} [props.height="auto"] - CSS mapped height dimension.
+ * @param {boolean} [props.isGif=false] - Triggers alternate decode timing to favor moving images.
+ * @param {string} [props.loading="lazy"] - E-commerce optimization mechanism flag.
+ * @param {Object} [props.style={}] - Raw JS styling to affix into HTML rendering.
+ * @returns {JSX.Element} Interactively loading image framework.
+ */
 const OptimizedImage = ({
     src,
     alt,

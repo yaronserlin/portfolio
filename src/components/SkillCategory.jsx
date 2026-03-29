@@ -1,30 +1,17 @@
 /**
- * SkillCategory Component - Skill Category Card Container
- * 
- * Displays a group of related skills within a styled card container.
- * Typically used for categories like Frontend, Backend, Tools, etc.
- * 
- * Layout:
- * - Category title as bold heading
- * - Skills displayed as flex items in a row
- * - Responsive grid: 4 columns on desktop, 1 on mobile
- * 
- * Styling:
- * - White background with subtle shadow
- * - Top border accent in primary color
- * - Rounded corners (12px)
- * - Hover effect: lifts upward with enhanced shadow
- * 
- * @component
- * @param {Object} props - Component props
- * @param {string} props.category - Category name (e.g., "Frontend", "Backend")
- * @param {Array} props.items - Array of skill objects with name property
- * @returns {React.ReactElement} Skill category card with skill items
+ * Preview: A styling bucket to visually group related skills (e.g., Frontend, Backend) within structural cards.
  */
 
 import { Col } from "react-bootstrap";
 import SkillItem from "./SkillItem";
 
+/**
+ * Implements a display card with an interactive hover effect, formatting an array of skill items appropriately.
+ * @param {Object} props - Element attributes.
+ * @param {string} props.category - The formatted name of this collection.
+ * @param {Array<Object>} props.items - Sequence of specific skill entities.
+ * @returns {JSX.Element} Grid column presenting categorized skill entities.
+ */
 const SkillCategory = ({ category, items }) => {
     return (
         <Col lg={4} md={6} className="mb-4">

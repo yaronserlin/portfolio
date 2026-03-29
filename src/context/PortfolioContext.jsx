@@ -1,3 +1,7 @@
+/**
+ * Preview: React Context provider that tracks app-wide data such as portfolio assets and GitHub data fetching state.
+ */
+
 import React, { createContext, useState, useEffect } from 'react';
 import { portfolioDb } from '../data/portfolioDetails';
 import { fetchGitHubProjects } from '../services/githubService';
@@ -5,29 +9,16 @@ import { fetchGitHubProjects } from '../services/githubService';
 export const PortfolioContext = createContext();
 
 /**
- * PortfolioProvider component - Context provider for portfolio data management
- * 
- * @component
- * @param {Object} props - Component props
- * @param {React.ReactNode} props.children - Child components to be wrapped by the provider
- * @returns {React.ReactElement} Provider component wrapping children with PortfolioContext
- * 
- * @description
- * Provides portfolio data and setter function to all child components through React Context.
- * Initializes portfolio state with data from portfolioDb and fetches projects from GitHub API.
- * Falls back to local projects if GitHub fetch fails.
- * 
- * @example
- * <PortfolioProvider>
- *   <App />
- * </PortfolioProvider>
+ * Wraps the app hierarchy to inject shared portfolio/project state.
+ * @param {Object} props - Standard React component properties.
+ * @param {React.ReactNode} props.children - Enclosed sub-components.
+ * @returns {JSX.Element} The Provider holding portfolio data properties.
  */
 export const PortfolioProvider = ({ children }) => {
 
     const [portfolioData, setPortfolioData] = useState(portfolioDb);
     const [isLoadingProjects, setIsLoadingProjects] = useState(true);
 
-    // Fetch GitHub projects on component mount
     useEffect(() => {
         const loadProjects = async () => {
             try {

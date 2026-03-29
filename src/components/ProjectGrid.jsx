@@ -1,29 +1,16 @@
 /**
- * ProjectGrid Component - Grid Layout for Projects Display
- * 
- * Displays projects in a responsive grid layout using ProjectCard components.
- * Each project is presented in its own responsive column.
- * 
- * Layout:
- * - 3 columns on large screens
- * - 2 columns on medium screens
- * - 1 column on small screens
- * - 4px gap between cards (Bootstrap g-4 class)
- * 
- * Features:
- * - Empty state message if no projects
- * - Responsive Bootstrap grid system
- * - Reusable ProjectCard component for each project
- * 
- * @component
- * @param {Object} props - Component props
- * @param {Array} props.projects - Array of project objects
- * @returns {React.ReactElement} Grid container with project cards
+ * Preview: A structured flex container managing the alignment and spacing of dynamically loaded repository cards.
  */
 
 import { Row, Col } from "react-bootstrap";
 import ProjectCard from "./ProjectCard";
 
+/**
+ * Automatically structures passed projects into a responsive sequence row.
+ * @param {Object} props - Target configurations.
+ * @param {Array<Object>} props.projects - Filtered list of Github data objects ready for framing.
+ * @returns {JSX.Element} Composed map iteration of ProjectCard modules.
+ */
 const ProjectGrid = ({ projects }) => {
     if (!projects || projects.length === 0) {
         return <div className="text-center py-5">No projects to display</div>;

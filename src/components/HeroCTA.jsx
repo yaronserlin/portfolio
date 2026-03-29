@@ -1,40 +1,26 @@
 /**
- * HeroCTA Component - Call-to-Action Buttons in Hero Section
- * 
- * Displays two primary action buttons for hero section CTAs:
- * - "View My Work" button: Navigates to Projects page
- * - "Get In Touch" button: Navigates to Contact page
- * 
- * Features:
- * - Primary and outline button variants
- * - Hover animation with upward translation
- * - Responsive flex layout (row on desktop, column on mobile)
- * - Large button sizing for prominence
- * - Navigation via React Router useNavigate hook
- * 
- * Interactions:
- * - Mouse hover: Buttons lift upward by 2px
- * - Click: Navigate to corresponding page
- * 
- * @component
- * @returns {React.ReactElement} CTA button container with navigation
+ * Preview: Primary action triggers driving initial user conversion rates from the main landing view.
  */
 
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Returns twin navigation anchors redirecting towards significant subpages like contact or project exhibits.
+ * @returns {JSX.Element} Bounded layout flex configuration hosting stylized buttons.
+ */
 const HeroCTA = () => {
     const navigate = useNavigate();
 
     /**
-     * Navigate to Projects page
+     * Pushes routing state to trigger navigation to the internal Projects path.
      */
     const handleViewWork = () => {
         navigate("/projects");
     };
 
     /**
-     * Navigate to Contact page
+     * Pushes routing state to trigger navigation to the internal Contact path.
      */
     const handleGetInTouch = () => {
         navigate("/contact");

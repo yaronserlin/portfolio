@@ -1,36 +1,14 @@
 /**
- * ContactForm Component - Contact Message Form with Validation
- * 
- * A fully-functional contact form that allows visitors to send messages directly.
- * Features form validation, email sending via EmailJS, and user feedback.
- * 
- * Form Fields:
- * - Name: Required text input
- * - Email: Required email input
- * - Subject: Required text input
- * - Message: Required textarea
- * 
- * Features:
- * - Client-side form validation via useContactForm hook
- * - Email sending using EmailJS service
- * - Success message display with auto-dismiss
- * - Error message display with dismissible alert
- * - Loading state during email transmission
- * - Form reset after successful submission
- * 
- * Styling:
- * - White background card with shadow
- * - Large form control styling
- * - Rounded corners and padding
- * - Bootstrap form styling
- * 
- * @component
- * @returns {React.ReactElement} Contact form with validation and email integration
+ * Preview: The contact mechanism interface enabling user messages via email bindings.
  */
 
-import { Form, Button, Alert, Container } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import useContactForm from "../hooks/useContactForm";
 
+/**
+ * Assembles the user-facing contact form fields, integrating the EmailJS submission hook and custom validation feedback UI.
+ * @returns {JSX.Element} A stylized form card.
+ */
 const ContactForm = () => {
     const { formData, submitted, error, isLoading, handleChange, handleSubmit, setSubmitted, setError } = useContactForm();
 

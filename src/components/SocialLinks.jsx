@@ -1,10 +1,17 @@
 /**
- * SocialLinks - Display social media links
- * Can be used in Contact page, Footer, and other places
+ * Preview: Shared cluster of external network hyperlinks resolving to specific contact routes like GitHub and LinkedIn.
  */
 
 import { FaGithub, FaLinkedin, FaFacebook } from 'react-icons/fa';
 
+/**
+ * Builds an inline group of social forwarding anchors, supporting either standard buttons or raw icon formats based on properties.
+ * @param {Object} props - Target configurations.
+ * @param {Object} props.contactInfo - Extracted collection containing Facebook, GitHub, and LinkedIn URL strings.
+ * @param {string} [props.variant="links"] - Display paradigm override ("buttons" vs "links").
+ * @param {string} [props.className=""] - Sibling structural classes injected onto the outer wrapper.
+ * @returns {JSX.Element} Interactive component redirecting outbound metrics.
+ */
 const SocialLinks = ({ contactInfo, variant = "links", className = "" }) => {
     if (variant === "buttons") {
         return (
@@ -46,7 +53,6 @@ const SocialLinks = ({ contactInfo, variant = "links", className = "" }) => {
         );
     }
 
-    // Render as simple links (icons only for footer) 
     return (
         <div className={`d-flex gap-3 align-items-center flex-wrap ${className}`}>
             {contactInfo.facebook && (

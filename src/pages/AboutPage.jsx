@@ -1,29 +1,5 @@
 /**
- * AboutPage Component - Detailed Personal & Professional Information
- * 
- * This page provides comprehensive information about the portfolio owner, including:
- * - Profile image and biography
- * - Professional title and background
- * - Education and qualification details
- * - Personal interests and hobbies
- * - Complete skills and technologies by category
- * 
- * Layout (from top to bottom):
- * - Row 1: Profile image (left) + Bio section (right)
- * - Row 2: Skills grid (full width)
- * - Row 3: Background info + Personal interests (full width)
- * 
- * Features:
- * - Responsive grid with proper mobile stacking
- * - 3D perspective effect on images
- * - Categorized skill display with icons
- * - Styled information boxes for background and interests
- * 
- * @component
- * @param {Object} props - Component props
- * @param {Object} props.personalInfo - Contains profile image, bio, title, education
- * @param {Array} props.skills - Array of skill category objects
- * @returns {React.ReactElement} About page with biography, background, and skills
+ * Preview: A detailed informational page grouping the author's biography, technical skills, background, and personal hobbies.
  */
 
 import { Container, Row, Col } from 'react-bootstrap';
@@ -33,6 +9,13 @@ import AboutInterests from '../components/AboutInterests';
 import HeroImage from '../components/HeroImage';
 import SkillCategory from '../components/SkillCategory';
 
+/**
+ * Renders an expansive view of the portfolio owner including life story, expertise mapping, academic history, and out-of-work passions.
+ * @param {Object} props - The component parameters.
+ * @param {Object} props.personalInfo - The author's biographical data, including the long bio string, interests array, and education.
+ * @param {Array<Object>} props.skills - Subdivided collections of technological proficiencies to map into standard UI groupings.
+ * @returns {JSX.Element} The composed About page layout.
+ */
 const AboutPage = ({ personalInfo, skills }) => {
     return (
         <section id="about" className="py-5 py-md-100" style={{
@@ -40,7 +23,6 @@ const AboutPage = ({ personalInfo, skills }) => {
             minHeight: 'auto'
         }}>
             <Container>
-                {/* Row 1: Profile Image (left) | Bio (right) */}
                 <Row className="align-items-center mb-5">
                     <Col lg={6} className="mb-4 mb-lg-0">
                         <div style={{ perspective: '1000px' }}>
@@ -54,7 +36,7 @@ const AboutPage = ({ personalInfo, skills }) => {
                         </div>
                     </Col>
                 </Row>
-                {/* Row 2: Skills section (full width) */}
+
                 <Row>
                     <Col xs={12}>
                         <h2 className="h3 fw-bold mb-5" style={{ color: 'var(--bs-dark)' }}>Skills & Technologies</h2>
@@ -69,14 +51,13 @@ const AboutPage = ({ personalInfo, skills }) => {
                         </Row>
                     </Col>
                 </Row>
-                {/* Row 3: Background section (full width) */}
+
                 <Row className="mb-5">
                     <Col xs={12}>
                         <AboutBackground education={personalInfo.education} title={personalInfo.title} />
                         <AboutInterests interests={personalInfo.interests} />
                     </Col>
                 </Row>
-
             </Container>
         </section>
     );

@@ -1,24 +1,14 @@
 /**
- * AboutBackground Component - Education and Title Information Display
- * 
- * Displays professional background information in a styled card including:
- * - Educational qualification
- * - Professional title/role
- * 
- * Styling:
- * - Semi-transparent white background with glass effect (backdrop-filter: blur)
- * - Left border accent in primary color
- * - Rounded corners and subtle shadow
- * - Hover effect with smooth transitions
- * - "Background" heading with primary color
- * 
- * @component
- * @param {Object} props - Component props
- * @param {string} props.education - Education/qualification details
- * @param {string} props.title - Professional title
- * @returns {React.ReactElement} Styled card with background education and title info
+ * Preview: Presentational display extracting educational and professional markers into a styled section block.
  */
 
+/**
+ * Generates an isolated box containing formal credentials applying the standard internal glassmorphic class structures.
+ * @param {Object} props - Sourced configurations.
+ * @param {string} props.education - Educational achievement strings.
+ * @param {string} props.title - Professional occupational role definition.
+ * @returns {JSX.Element} Simple display div with distinct border styles.
+ */
 const AboutBackground = ({ education, title }) => {
     return (
         <div style={{

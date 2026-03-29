@@ -1,17 +1,5 @@
 /**
- * Skill Utility Functions - Skill Display Helpers
- * 
- * Provides utility functions for consistent skill handling across components:
- * - Mapping skill ranks (1-5) to user-friendly labels
- * - Mapping skill ranks to Bootstrap color variants
- * - Converting skill ranks to progress bar percentages
- * 
- * Skill Rank System:
- * - 1 = Basic (20%)
- * - 2 = Beginner (40%)
- * - 3 = Intermediate (60%)
- * - 4 = Proficient (80%)
- * - 5 = Expert (100%)
+ * Preview: Helper functions for UI representation of skill ranks, translating numeric ranks into badges, progress sizes, and colors.
  */
 
 const RANK_LABELS = {
@@ -31,28 +19,29 @@ const RANK_COLORS = {
 };
 
 /**
- * Get the label text for a skill rank
- * @param {number} rank - Skill rank (1-5)
- * @returns {string} Rank label
+ * Returns the corresponding text label for a numerical skill rank.
+ * @param {number} rank - The skill rank from 1 to 5.
+ * @returns {string} The text label for the rank, or "Unknown" if invalid.
  */
 export const getRankLabel = (rank) => {
     return RANK_LABELS[rank] || "Unknown";
 };
 
 /**
- * Get the color variant for a skill rank
- * @param {number} rank - Skill rank (1-5)
- * @returns {string} Bootstrap color variant
+ * Returns a Bootstrap color variant string based on the given skill rank.
+ * @param {number} rank - The skill rank from 1 to 5.
+ * @returns {string} A Bootstrap color variant (e.g., 'success', 'info').
  */
 export const getRankColor = (rank) => {
     return RANK_COLORS[rank] || "secondary";
 };
 
 /**
- * Get progress bar width percentage based on rank
- * @param {number} rank - Skill rank (1-5)
- * @returns {number} Percentage (0-100)
+ * Calculates a percentage value corresponding to the numeric skill rank.
+ * @param {number} rank - The skill rank from 1 to 5.
+ * @returns {number} The calculated percentage (0 to 100).
  */
 export const getRankPercentage = (rank) => {
+    // Each rank increment represents a 20% increase
     return rank * 20;
 };

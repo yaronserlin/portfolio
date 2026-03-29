@@ -1,19 +1,5 @@
 /**
- * Footer Component - Application Footer
- * 
- * Displays the application footer with:
- * - Copyright notice for current year and portfolio owner name
- * - Social media links (GitHub, LinkedIn, Facebook) as icons
- * - Responsive grid layout with left-aligned copyright and right-aligned social links
- * 
- * Features:
- * - Dark background styling consistent with website theme
- * - Auto-updating year using current date
- * - Responsive design: stacked on mobile, side-by-side on larger screens
- * - Uses SocialLinks component with "links" variant for icon-only display
- * 
- * @component
- * @returns {React.ReactElement} Footer section with copyright and social links
+ * Preview: A static page terminal rendering the copyright banner and quick-access social links.
  */
 
 import { useContext } from "react";
@@ -21,6 +7,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import { PortfolioContext } from "../context/PortfolioContext";
 import SocialLinks from "./SocialLinks";
 
+/**
+ * Emits the universally shared application footer drawing data from the context provider.
+ * @returns {JSX.Element} Bottom-aligned persistent navigation and copyright component.
+ */
 const Footer = () => {
     const { portfolioData } = useContext(PortfolioContext);
     const currentYear = new Date().getFullYear();
@@ -47,6 +37,6 @@ const Footer = () => {
             </Container>
         </footer>
     );
-}
+};
 
 export default Footer;

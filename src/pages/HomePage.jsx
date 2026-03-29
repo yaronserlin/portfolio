@@ -1,24 +1,5 @@
 /**
- * HomePage Component - Hero/Landing Page
- * 
- * This is the main landing page displayed at the root route (/). It serves as the
- * hero section with an eye-catching introduction to the portfolio owner.
- * 
- * Layout:
- * - Left column: Large profile image with perspective 3D effect
- * - Right column: Hero content (name, title, bio) and call-to-action buttons
- * - Full viewport height with gradient background
- * - Responsive: Stacks vertically on mobile, side-by-side on desktop
- * 
- * Features:
- * - Background gradient for visual appeal
- * - Component composition with HeroImage, HeroContent, and HeroCTA
- * - Loading state handling
- * 
- * @component
- * @param {Object} props - Component props
- * @param {Object} props.personalInfo - Personal information from portfolio context
- * @returns {React.ReactElement} Hero section with introduction and CTAs
+ * Preview: The main entry page component displaying a visually engaging hero section for the portfolio owner.
  */
 
 import { Container, Row, Col } from 'react-bootstrap';
@@ -26,6 +7,12 @@ import HeroImage from '../components/HeroImage';
 import HeroContent from '../components/HeroContent';
 import HeroCTA from '../components/HeroCTA';
 
+/**
+ * Renders the introductory landing page consisting of a profile image, dynamic text content, and call-to-action buttons.
+ * @param {Object} props - The properties passed to the component.
+ * @param {Object} props.personalInfo - Author's foundational identity details such as name, title, and bio.
+ * @returns {JSX.Element} The composed Home page section.
+ */
 const HomePage = ({ personalInfo }) => {
     if (!personalInfo) {
         return <div>Loading...</div>;

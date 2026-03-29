@@ -1,20 +1,5 @@
 /**
- * Navigation Component - Responsive Navigation Bar
- * 
- * A sticky navigation bar displayed at the top of all pages. Features include:
- * - Portfolio owner's name as brand/logo
- * - Navigation links to main routes (About, Projects, Contact)
- * - Active route highlighting with underline animation
- * - Responsive hamburger menu on mobile devices
- * 
- * Styling:
- * - Sticky positioning using Bootstrap's sticky="top"
- * - Active link styling with primary color and bottom border
- * - Smooth transitions and hover effects
- * - Mobile-responsive with Bootstrap's navbar expand/collapse
- * 
- * @component
- * @returns {React.ReactElement} Sticky navigation bar with portfolio links
+ * Preview: Top-anchored routing bar maintaining uniform paths throughout the app and reacting to mobile viewport constraints.
  */
 
 import { useContext } from 'react';
@@ -22,14 +7,18 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import { PortfolioContext } from '../context/PortfolioContext';
 
+/**
+ * Presents a persistent routing bar referencing context-bound data values. Modifies sub-link states to represent active domains.
+ * @returns {JSX.Element} Floating Bootstrap header bar mapping main components.
+ */
 const Navigation = () => {
     const { portfolioData } = useContext(PortfolioContext);
     const location = useLocation();
 
     /**
-     * Check if a route is currently active
-     * @param {string} path - The route path to check
-     * @returns {boolean} True if current location matches the path
+     * Determines whether a given route matches the current application URL.
+     * @param {string} path - Assessed relative route layout mapping.
+     * @returns {boolean} Equality operator flag signifying presence on the target.
      */
     const isActive = (path) => location.pathname === path;
 
@@ -83,6 +72,6 @@ const Navigation = () => {
             </Container>
         </Navbar>
     );
-}
+};
 
 export default Navigation;

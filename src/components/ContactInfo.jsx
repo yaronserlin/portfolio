@@ -1,36 +1,15 @@
 /**
- * ContactInfo Component - Contact Information Display
- * 
- * Displays contact information and social media links in the contact page.
- * Includes:
- * - Email address with direct mailto link
- * - Social media buttons (GitHub, LinkedIn, Facebook)
- * - Helpful tip about response times
- * 
- * Layout:
- * - Contact Information heading
- * - Email section with labeled link
- * - Social Links section with button variants
- * - Tip box with response time information
- * 
- * Styling:
- * - Separated sections with borders
- * - Hover effects on email link
- * - Consistent color and typography
- * - Light background for tip box
- * 
- * @component
- * @param {Object} props - Component props
- * @param {Object} props.contactInfo - Contact information object
- * @param {string} props.contactInfo.email - Email address
- * @param {string} props.contactInfo.github - GitHub profile URL
- * @param {string} props.contactInfo.linkedin - LinkedIn profile URL
- * @param {string} props.contactInfo.facebook - Facebook profile URL
- * @returns {React.ReactElement} Contact information card with email and social links
+ * Preview: Centralized presentation layer rendering distinct clickable communication avenues and sub-text caveats.
  */
 
 import SocialLinks from "./SocialLinks";
 
+/**
+ * Wraps mailto execution links, external site redirect buttons, and response time copy into an integrated form column.
+ * @param {Object} props - Configuration settings.
+ * @param {Object} props.contactInfo - Mapped URL properties denoting external network identifiers mapping to current user.
+ * @returns {JSX.Element} Fully configured contact mechanism layout structure.
+ */
 const ContactInfo = ({ contactInfo }) => {
     return (
         <div>

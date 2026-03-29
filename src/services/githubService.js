@@ -1,14 +1,13 @@
 /**
- * GitHub API Service
- * Fetches public repositories and transforms them into portfolio project format
+ * Preview: API service connecting to GitHub to retrieve and format public repository data for the portfolio showcase.
  */
 
 const GITHUB_USERNAME = 'yaronserlin';
 const GITHUB_API_URL = 'https://api.github.com';
 
 /**
- * Fetch public repositories from GitHub
- * @returns {Promise<Array>} Array of transformed project objects
+ * Retrieves public repositories from GitHub and maps them to the project format.
+ * @returns {Promise<Array>} A list of formatted project objects sorted by stars.
  */
 export const fetchGitHubProjects = async () => {
     try {
@@ -22,9 +21,8 @@ export const fetchGitHubProjects = async () => {
 
         const repos = await response.json();
 
-        // Filter and transform repositories
         let projects = repos
-            .filter(repo => !repo.fork) // Exclude forked repositories
+            .filter(repo => !repo.fork)
             .map((repo) => {
                 const projectObj = {
                     id: repo.id,
@@ -36,40 +34,36 @@ export const fetchGitHubProjects = async () => {
                     technologies: extractTechnologies(repo.language, repo.topics),
                     url: repo.html_url,
                     liveUrl: extractLiveUrl(repo),
-                    // Set default media structure
                     image: null,
                     video: null,
                     gif: null,
                     stars: repo.stargazers_count,
                     language: repo.language,
-                    languages: [repo.language], // Will be updated with full breakdown
-                    repoName: repo.name, // Store for later API calls
+                    languages: [repo.language],
+                    repoName: repo.name,
                 };
 
                 return projectObj;
             })
-            .sort((a, b) => b.stars - a.stars); // Sort by stars descending
+            .sort((a, b) => b.stars - a.stars);
 
-        // Concurrently fetch languages and check media for all projects
         await Promise.all(projects.map(async (project) => {
-            // Fetch language breakdown
             try {
                 const languages = await fetchLanguageBreakdown(project.repoName);
                 if (languages && languages.length > 0) {
                     project.languages = languages;
                 }
             } catch (err) {
-                // Keep default language on error
+                // Ignore error and retain the primary language fallback
             }
 
-            // Check media availability
             try {
                 const mediaUrls = await checkMediaAvailability(project.repoName);
                 project.image = mediaUrls.image;
                 project.video = mediaUrls.video;
                 project.gif = mediaUrls.gif;
             } catch (err) {
-                // Keep nulls on error
+                // Ignore error and assume no media exists
             }
         }));
 
@@ -81,9 +75,9 @@ export const fetchGitHubProjects = async () => {
 };
 
 /**
- * Fetch language breakdown for a specific repository
- * @param {string} repoName - Repository name
- * @returns {Promise<Array>} Array of language names sorted by usage
+ * Retrieves the programming languages mapping used in a given repository.
+ * @param {string} repoName - The repository's name on GitHub.
+ * @returns {Promise<Array<string>>} List of dominant programming languages present in the repo.
  */
 const fetchLanguageBreakdown = async (repoName) => {
     try {
@@ -92,7 +86,7 @@ const fetchLanguageBreakdown = async (repoName) => {
         );
 
         if (!response.ok) {
-            return []; // Return empty on failure
+            return [];
         }
 
         const languagesData = await response.json();
@@ -102,12 +96,10 @@ const fetchLanguageBreakdown = async (repoName) => {
             return [];
         }
 
-        // Sort by most used language
         const sortedLanguages = Object.entries(languagesData)
             .map(([lang, bytes]) => ({ name: lang, bytes }))
             .sort((a, b) => b.bytes - a.bytes);
 
-        // Return just the language names
         return sortedLanguages.map(lang => lang.name);
     } catch (error) {
         console.error(`Error fetching languages for ${repoName}:`, error);
@@ -116,9 +108,9 @@ const fetchLanguageBreakdown = async (repoName) => {
 };
 
 /**
- * Check which media files are available for a given repository
- * @param {string} repoName - Repository name
- * @returns {Promise<Object>} Object containing valid URLs for image, video, and gif depending on presence
+ * Checks for the existence of common preview media assets in a targeted repo's main branch.
+ * @param {string} repoName - The repository's name on GitHub.
+ * @returns {Promise<{ image: string|null, video: string|null, gif: string|null }>} Accessible asset URLs.
  */
 const checkMediaAvailability = async (repoName) => {
     const baseUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repoName}/refs/heads/main/media`;
@@ -138,7 +130,6 @@ const checkMediaAvailability = async (repoName) => {
         }
     };
 
-    // Parallel checks for media files
     const [pngRes, jpgRes, mp4Res, movRes, webmRes, gifRes] = await Promise.all([
         checkUrl(`${baseUrl}/demo.png`),
         checkUrl(`${baseUrl}/demo.jpg`),
@@ -156,10 +147,10 @@ const checkMediaAvailability = async (repoName) => {
 };
 
 /**
- * Extract technologies from language and topics
- * @param {string} language - Primary language
- * @param {Array} topics - Repository topics
- * @returns {Array} Array of technology strings
+ * Maps GitHub languages and repository topics to standardized system skill tags.
+ * @param {string} language - The primary evaluated language.
+ * @param {Array<string>} topics - Repository topics provided by GitHub.
+ * @returns {Array<string>} Combined array of formalized technology tags.
  */
 const extractTechnologies = (language, topics = []) => {
     const technologies = [];
@@ -168,7 +159,6 @@ const extractTechnologies = (language, topics = []) => {
         technologies.push(language);
     }
 
-    // Map common topics to tech stack
     const topicMapping = {
         'react': 'React',
         'javascript': 'JavaScript',
@@ -203,16 +193,15 @@ const extractTechnologies = (language, topics = []) => {
 };
 
 /**
- * Extract live URL from repository (checks for gh-pages or homepage)
- * @param {Object} repo - Repository object
- * @returns {string|null} Live URL if available
+ * Extracts a functioning live preview URL from GitHub repo metadata if present.
+ * @param {Object} repo - The repository details object.
+ * @returns {string|null} Available live demo URL or null if missing.
  */
 const extractLiveUrl = (repo) => {
     if (repo.homepage && repo.homepage.trim()) {
         return repo.homepage;
     }
 
-    // Check if repo has GitHub Pages enabled
     if (repo.has_pages) {
         return `https://${GITHUB_USERNAME}.github.io/${repo.name}/`;
     }

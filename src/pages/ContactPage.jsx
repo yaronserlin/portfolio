@@ -1,26 +1,5 @@
 /**
- * ContactPage Component - Contact Information & Message Form
- * 
- * This page provides multiple ways to get in touch with the portfolio owner:
- * - Contact information display (email, phone)
- * - Social media links (GitHub, LinkedIn, Facebook)
- * - Contact form for direct message submission
- * 
- * Layout:
- * - Left column: Contact info with direct email link and social links
- * - Right column: Contact form with validation and EmailJS integration
- * - Responsive: Stacks vertically on mobile
- * 
- * Features:
- * - Client-side form validation
- * - Email sending via EmailJS service
- * - Success/error message feedback
- * - Loading state during submission
- * 
- * @component
- * @param {Object} props - Component props
- * @param {Object} props.contactInfo - Contact details including email and social links
- * @returns {React.ReactElement} Contact page with info and contact form
+ * Preview: Dedicated structural page that couples raw contact methods (address, social hooks) to a live input-driven messaging element.
  */
 
 import { Container, Row, Col } from 'react-bootstrap';
@@ -28,6 +7,12 @@ import SectionHeader from '../components/SectionHeader';
 import ContactInfo from '../components/ContactInfo';
 import ContactForm from '../components/ContactForm';
 
+/**
+ * Provides a split view presenting the user's hardcoded communication channels laterally beside an interactive mailing capability tool.
+ * @param {Object} props - The element properties.
+ * @param {Object} props.contactInfo - Collection of metadata indicating phone numbers, standard email domains, and networking hyperlinks.
+ * @returns {JSX.Element} The composed Contact page markup.
+ */
 const ContactPage = ({ contactInfo }) => {
     return (
         <section id="contact" className="py-5 py-md-100" style={{

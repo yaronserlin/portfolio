@@ -1,32 +1,19 @@
 /**
- * GifViewer Component - Modal for Viewing GIFs and Videos with Controls
- * 
- * A modal component for displaying project demos (GIFs or videos) with:
- * - Full-screen modal presentation
- * - Play/Pause controls for videos
- * - Playback speed adjustment (0.5x, 1x, 1.5x, 2x)
- * - Keyboard support (ESC to close)
- * - Dark theme styling for media focus
- * 
- * Features:
- * - Automatic video type detection (.mp4, .mov, .webm)
- * - Video controls only shown for actual videos, not GIFs
- * - Responsive media container with centered content
- * - Keyboard event listener for escape key
- * - Smooth transitions and professional styling
- * 
- * @component
- * @param {Object} props - Component props
- * @param {string} props.gifSrc - Source URL for GIF or video file
- * @param {string} props.title - Modal title (project name)
- * @param {Function} props.onClose - Callback when modal should close
- * @returns {React.ReactElement} Full-screen media viewer modal
+ * Preview: A high-level media overlay modal with speed controls specifically scaled for examining animated UI demonstrations.
  */
 
 import { useState, useRef, useEffect } from 'react';
 import { Modal, Button, ButtonGroup } from 'react-bootstrap';
 import { FaPlay, FaPause, FaTimes } from 'react-icons/fa';
 
+/**
+ * Triggers a blocking modal dialog injecting rich media files and video timeline manipulators for targeted UI inspection.
+ * @param {Object} props - View initialization values.
+ * @param {string} props.gifSrc - Direct file path evaluating as an animation source stream.
+ * @param {string} props.title - Modal semantic heading identifier.
+ * @param {Function} props.onClose - State teardown callback triggering unmount sequences.
+ * @returns {JSX.Element} Responsive overlay framework.
+ */
 const GifViewer = ({ gifSrc, title, onClose }) => {
     const [isPlaying, setIsPlaying] = useState(true);
     const [speed, setSpeed] = useState(1);
@@ -34,7 +21,7 @@ const GifViewer = ({ gifSrc, title, onClose }) => {
     const isVideo = gifSrc && (gifSrc.endsWith('.mp4') || gifSrc.endsWith('.mov') || gifSrc.endsWith('.webm'));
 
     /**
-     * Handle play/pause toggle for video playback
+     * Toggles play/pause state syncing DOM elements.
      */
     useEffect(() => {
         if (videoRef.current) {
@@ -48,7 +35,7 @@ const GifViewer = ({ gifSrc, title, onClose }) => {
     }, [isPlaying]);
 
     /**
-     * Handle playback speed changes
+     * Modifies current timeline speed when selected multipliers change.
      */
     useEffect(() => {
         if (videoRef.current) {
@@ -57,22 +44,22 @@ const GifViewer = ({ gifSrc, title, onClose }) => {
     }, [speed]);
 
     /**
-     * Toggle video play state
+     * Flips underlying playing boolean.
      */
     const handlePlayPause = () => {
         setIsPlaying(!isPlaying);
     };
 
     /**
-     * Change video playback speed
-     * @param {number} newSpeed - Speed multiplier (0.5, 1, 1.5, 2)
+     * Caches user selected multiplier speed.
+     * @param {number} newSpeed - Speed multiplier scalar (e.g., 0.5, 1, 1.5, 2).
      */
     const handleSpeedChange = (newSpeed) => {
         setSpeed(newSpeed);
     };
 
     /**
-     * Handle escape key press to close modal
+     * Subscribes to document keydown inputs destroying modal if escape matched.
      */
     useEffect(() => {
         const handleEscape = (e) => {

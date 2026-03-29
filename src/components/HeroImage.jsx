@@ -1,25 +1,15 @@
 /**
- * HeroImage Component - Hero Section Profile Image Display
- * 
- * Displays the profile image in the hero section with:
- * - Image scaling and shadow effects on hover
- * - Perspective 3D styling for visual depth
- * - Rounded corners (5% border-radius)
- * - Responsive sizing with maintained aspect ratio
- * 
- * Interactions:
- * - Mouse hover: Image scales up 2% with enhanced shadow
- * - Mouse leave: Image returns to original scale and shadow
- * - Smooth transitions for all effects
- * 
- * @component
- * @param {Object} props - Component props
- * @param {string} props.src - Image source URL
- * @returns {React.ReactElement} Profile image with hover effects
+ * Preview: A specialized wrapper for the ProfileImage adding a customized hover pop effect specific to the landing view.
  */
 
 import ProfileImage from "./ProfileImage";
 
+/**
+ * Returns an encapsulated standard wrapper around the base avatar rendering interactive zoom hover states.
+ * @param {Object} props - Extracted properties.
+ * @param {string} props.src - URI of the target image render.
+ * @returns {JSX.Element} Stylized Hero image frame.
+ */
 const HeroImage = ({ src }) => {
     return (
         <div>

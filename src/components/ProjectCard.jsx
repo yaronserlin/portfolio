@@ -1,34 +1,5 @@
 /**
- * ProjectCard Component - Individual Project Display Card
- * 
- * Displays a single project portfolio item with:
- * - Project thumbnail image with lazy loading and fallback
- * - Interactive play button overlay for videos/gifs
- * - Project title and description
- * - Technology badges showing tech stack
- * - Action buttons linking to GitHub and live demo (if available)
- * - Hover animations and image scaling effects
- * 
- * Features:
- * - Responsive card layout with hover lift effect
- * - Modal viewer for project videos/gifs with playback controls
- * - Lazy loading for project images
- * - Keyboard navigation support (ESC to close modal)
- * - Accessibility features (aria-labels, title attributes)
- * 
- * @component
- * @param {Object} props - Component props
- * @param {Object} props.project - Project data object
- * @param {string} props.project.id - Unique project identifier
- * @param {string} props.project.title - Project title
- * @param {string} props.project.description - Full project description
- * @param {string[]} props.project.technologies - Array of tech stack names
- * @param {string} props.project.image - Project thumbnail image URL
- * @param {string} props.project.url - GitHub repository URL
- * @param {string} props.project.liveUrl - Live demo URL (optional)
- * @param {string} props.project.video - Demo video path (optional)
- * @param {string} props.project.gif - Demo gif path (optional)
- * @returns {React.ReactElement} A styled project card with media viewer
+ * Preview: A detailed grid item rendering an individual portfolio entry with rich media support and layered interactive tags.
  */
 
 import { Card, Button } from 'react-bootstrap';
@@ -38,14 +9,20 @@ import OptimizedImage from './OptimizedImage';
 import GifViewer from './GifViewer';
 import LanguageBadge from './LanguageBadge';
 
+/**
+ * Returns a styled layout block aggregating nested child data into an actionable summary including links and hover overlays.
+ * @param {Object} props - Accepted component configurations.
+ * @param {Object} props.project - Associated structured Github application meta properties.
+ * @returns {JSX.Element} Interactive HTML block detailing the project.
+ */
 const ProjectCard = ({ project }) => {
   const [showGifModal, setShowGifModal] = useState(false);
   const mediaSource = project.video || project.gif;
   const hasMedia = mediaSource && mediaSource.trim() !== '';
 
   /**
-   * Handle play button click to open media viewer modal
-   * @param {React.MouseEvent} e - Click event
+   * Forces state execution triggering the underlying media modal dialog.
+   * @param {React.MouseEvent} e - Mouse click event intercept.
    */
   const handlePlayClick = (e) => {
     e.preventDefault();

@@ -1,22 +1,14 @@
 /**
- * AboutBio Component - Biography Display Section
- * 
- * Displays the portfolio owner's biography in two tiers:
- * - Short bio: Concise introduction (displayed as lead text)
- * - Long bio: Detailed biography with additional context
- * 
- * Styling:
- * - Lead text styling for short bio (larger font, line-height)
- * - Regular text for long bio
- * - Consistent color and line-height for readability
- * 
- * @component
- * @param {Object} props - Component props
- * @param {string} props.bio - Short biography text
- * @param {string} props.longBio - Detailed biography text
- * @returns {React.ReactElement} Biography section with intro and details
+ * Preview: An embedded subcomponent extracting textual biography variables into stylized standalone paragraphs.
  */
 
+/**
+ * Emits the pre-configured semantic narrative introduction found throughout broader identity pages.
+ * @param {Object} props - Injection configurations.
+ * @param {string} props.bio - Catchy hook text line typically serving as an initial summary.
+ * @param {string} props.longBio - Extended historical and experiential descriptive strings.
+ * @returns {JSX.Element} Flowing text node column structure.
+ */
 const AboutBio = ({ bio, longBio }) => {
     return (
         <div>

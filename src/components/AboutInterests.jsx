@@ -1,24 +1,13 @@
 /**
- * AboutInterests Component - Personal Interests and Hobbies Display
- * 
- * Displays a list of personal interests and hobbies with:
- * - Emoji icons for visual interest
- * - Smooth hover animations (translateX)
- * - Interactive list with hover color changes
- * - Interests are hardcoded but could be moved to data
- * 
- * Styling:
- * - Semi-transparent white background with glass effect
- * - Left border accent in secondary color
- * - Rounded corners and subtle shadow
- * - Hover effects on individual interest items
- * 
- * @component
- * @param {Object} props
- * @param {Array<string>} props.interests - Array of interest strings
- * @returns {React.ReactElement|null} Styled card with personal interests list
+ * Preview: Informational display looping an array of descriptive keywords identifying out-of-work passions.
  */
 
+/**
+ * Returns a stylized list rendering non-technical recreational domains defined within personal info configurations.
+ * @param {Object} props - Associated component properties.
+ * @param {Array<string>} props.interests - Extracted raw collection of string data representing interests.
+ * @returns {JSX.Element|null} Composed unordered list chunk, or nothing if empty.
+ */
 const AboutInterests = ({ interests = [] }) => {
     if (!interests || interests.length === 0) return null;
 
