@@ -97,7 +97,7 @@ const fetchLanguageBreakdown = async (repoName) => {
 
         const languagesData = await response.json();
         const total = Object.values(languagesData).reduce((sum, val) => sum + val, 0);
-        
+
         if (total === 0) {
             return [];
         }
@@ -122,7 +122,7 @@ const fetchLanguageBreakdown = async (repoName) => {
  */
 const checkMediaAvailability = async (repoName) => {
     const baseUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repoName}/refs/heads/main/media`;
-    
+
     const mediaObj = {
         image: null,
         video: null,
@@ -139,14 +139,17 @@ const checkMediaAvailability = async (repoName) => {
     };
 
     // Parallel checks for media files
-    const [pngRes, mp4Res, gifRes] = await Promise.all([
+    const [pngRes, jpgRes, mp4Res, movRes, webmRes, gifRes] = await Promise.all([
         checkUrl(`${baseUrl}/demo.png`),
+        checkUrl(`${baseUrl}/demo.jpg`),
         checkUrl(`${baseUrl}/demo.mp4`),
+        checkUrl(`${baseUrl}/demo.mov`),
+        checkUrl(`${baseUrl}/demo.webm`),
         checkUrl(`${baseUrl}/demo.gif`)
     ]);
 
-    mediaObj.image = pngRes;
-    mediaObj.video = mp4Res;
+    mediaObj.image = pngRes || jpgRes;
+    mediaObj.video = mp4Res || movRes || webmRes;
     mediaObj.gif = gifRes;
 
     return mediaObj;

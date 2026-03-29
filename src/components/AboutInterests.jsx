@@ -7,12 +7,6 @@
  * - Interactive list with hover color changes
  * - Interests are hardcoded but could be moved to data
  * 
- * Current Interests:
- * - 🌊 Diving & Ocean Exploration
- * - 🪁 Kitesurfing
- * - 💻 Full-Stack Web Development
- * - 🤖 Artificial Intelligence & Algorithms
- * 
  * Styling:
  * - Semi-transparent white background with glass effect
  * - Left border accent in secondary color
@@ -20,16 +14,13 @@
  * - Hover effects on individual interest items
  * 
  * @component
- * @returns {React.ReactElement} Styled card with personal interests list
+ * @param {Object} props
+ * @param {Array<string>} props.interests - Array of interest strings
+ * @returns {React.ReactElement|null} Styled card with personal interests list
  */
 
-const AboutInterests = () => {
-    const interests = [
-        "🌊 Diving & Ocean Exploration",
-        "🪁 Kitesurfing",
-        "💻 Full-Stack Web Development",
-        "🤖 Artificial Intelligence & Algorithms"
-    ];
+const AboutInterests = ({ interests = [] }) => {
+    if (!interests || interests.length === 0) return null;
 
     return (
         <div style={{

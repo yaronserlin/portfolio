@@ -17,18 +17,68 @@
  * uncommented from the projects array to make them visible.
  */
 import profileImg from '../assets/profile.png';
-import automataGif from '../assets/automata-editor.gif';
-import automataVid from '../assets/Automata-editor.mov';
 
 export const portfolioDb = {
+    // projects: [
+    //     // {
+    //     //     id: 1,
+    //     //     title: "Reversi (Othello) AI",
+    //     //     description: "A fully-featured Reversi game implementing minimax algorithm with alpha-beta pruning. Developed as a university project demonstrating AI decision-making and game tree traversal.",
+    //     //     technologies: ["Java", "AI Algorithms", "Game Development"],
+    //     //     url: "https://github.com/yaronserlin/reversi-ai",
+    //     //     liveUrl: null,
+    //     //     media: "https://raw.githubusercontent.com/yaronserlin/reversi-ai/refs/heads/main/screenshot.png"
+    //     // },
+
+    //     // {
+    //     //     id: 2,
+    //     //     title: "P2P File Sharing Application",
+    //     //     description: "A peer-to-peer file sharing system supporting direct connection between users. Implements socket programming and network protocols for efficient data transfer.",
+    //     //     technologies: ["Python", "Networking", "Socket Programming"],
+    //     //     url: "https://github.com/yaronserlin/p2p-file-sharing",
+    //     //     liveUrl: null,
+    //     //     media: "https://raw.githubusercontent.com/yaronserlin/p2p-file-sharing/refs/heads/main/screenshot.png"
+    //     // },
+    //     {
+    //         id: 1,
+    //         title: "Automata Visualization Tool123",
+    //         description: "Interactive web-based tool for drawing and visualizing finite automata and state machines. Helps computer science students understand automata theory concepts visually.",
+    //         technologies: ["React", "JavaScript", "Canvas API"],
+    //         url: "https://github.com/yaronserlin/automata-editor",
+    //         liveUrl: "https://yaronserlin.github.io/automata-editor/",
+    //         image: "https://raw.githubusercontent.com/yaronserlin/automata-editor/refs/heads/main/screenshot.png",
+    //         // gif: automataGif,
+    //         // video: automataVid  // Add your .mov or .mp4 here: "src/assets/automata-editor.mp4"
+    //     },
+    //     // {
+    //     //     id: 4,
+    //     //     title: "Code Project Visualizer",
+    //     //     description: "Full-stack tool that analyzes code repositories and generates visual maps of project structure. Useful for understanding large codebases and visualizing dependencies.",
+    //     //     technologies: ["React", "Node.js", "Express"],
+    //     //     url: "https://github.com/yaronserlin/code-visualizer",
+    //     //     liveUrl: null,
+    //     //     media: "https://raw.githubusercontent.com/yaronserlin/code-visualizer/refs/heads/main/screenshot.png"
+    //     // }
+    // ],
     personalInfo: {
         name: "Yaron Serlin",
-        title: "Full Stack Developer & Computer Science Student",
-        education: "Open University - B.Sc. Computer Science",
-        bio: "I'm a passionate software developer focused on creating intelligent, efficient systems. With expertise in full-stack web development and algorithmic problem-solving, I enjoy turning complex challenges into elegant solutions. Currently pursuing my degree in Computer Science while building real-world projects.",
-        longBio: "As a full-stack developer, I combine strong fundamentals in computer science with practical experience in modern web technologies. I'm particularly interested in building scalable applications, exploring AI algorithms, and creating tool applications that solve real problems. When I'm not coding, you'll find me diving the world's oceans or catching wind on a kite board.",
-        about: "Software developer passionate about building smart and efficient systems. Beyond coding, I'm also a certified Dive Master and a kitesurfing enthusiast.",
-        image: profileImg
+        title: "Full Stack Software Developer | B.Sc. Computer Science",
+        education: "Open University - B.Sc. Computer Science (Final Year)",
+
+        bio: "I'm a Full Stack Developer specializing in building intelligent, interactive web applications. Recently, I've developed complex tools ranging from full-stack file-sharing systems to visual finite automata simulators. Relocating to Melbourne, Australia in April 2026 on a Working Holiday Visa, I'm eager to bring my problem-solving skills to a dynamic tech team.",
+
+        longBio: "As a Full Stack Developer, I bridge the gap between strong theoretical computer science fundamentals and practical, modern web technologies. I thrive on creating tangible solutions to complex problems—whether that's architecting a client-server file-sharing platform with database integration, or building interactive UI tools to visually map programming code. I'm passionate about clean code, scalable architecture, and continuous learning. Beyond the screen, I am a certified Dive Master and an avid kitesurfer—pursuits that have taught me focus, adaptability, and how to perform under pressure. Fully visa-ready and arriving in Melbourne this April, I'm excited to dive into my next professional challenge.",
+
+        about: "Software developer with a knack for building scalable web applications and interactive visual tools. Certified Dive Master, kitesurfer, and soon-to-be Melbourne resident open to new opportunities.",
+
+        image: profileImg,
+
+        interests: [
+            "🌊 Diving & Ocean Exploration",
+            "🪁 Kitesurfing",
+            "💻 Full-Stack Web Development",
+            "🤖 Artificial Intelligence & Algorithms"
+        ]
     },
     skills: [
         {
@@ -36,8 +86,8 @@ export const portfolioDb = {
             items: [
                 { name: "React" },
                 { name: "JavaScript" },
-                { name: "HTML" },
-                { name: "CSS" },
+                { name: "HTML5" },
+                { name: "CSS3" },
                 { name: "Bootstrap" }
             ]
         },
@@ -48,7 +98,7 @@ export const portfolioDb = {
                 { name: "Express" },
                 { name: "MongoDB" },
                 { name: "SQL" },
-                { name: "REST API" },
+                { name: "REST APIs" },
                 { name: "Python" },
                 { name: "Java" },
                 { name: "JavaFX" }
@@ -57,54 +107,13 @@ export const portfolioDb = {
         {
             category: "Tools & Languages",
             items: [
-                { name: "Git" },
-                { name: "GitHub" },
+                { name: "Git & GitHub" },
                 { name: "Linux" },
+                { name: "Client-Server Architecture" },
                 { name: "C++" },
-                { name: "C" },
+                { name: "C" }
             ]
         }
-    ],
-    projects: [
-        // {
-        //     id: 1,
-        //     title: "Reversi (Othello) AI",
-        //     description: "A fully-featured Reversi game implementing minimax algorithm with alpha-beta pruning. Developed as a university project demonstrating AI decision-making and game tree traversal.",
-        //     technologies: ["Java", "AI Algorithms", "Game Development"],
-        //     url: "https://github.com/yaronserlin/reversi-ai",
-        //     liveUrl: null,
-        //     media: "https://raw.githubusercontent.com/yaronserlin/reversi-ai/refs/heads/main/screenshot.png"
-        // },
-
-        // {
-        //     id: 2,
-        //     title: "P2P File Sharing Application",
-        //     description: "A peer-to-peer file sharing system supporting direct connection between users. Implements socket programming and network protocols for efficient data transfer.",
-        //     technologies: ["Python", "Networking", "Socket Programming"],
-        //     url: "https://github.com/yaronserlin/p2p-file-sharing",
-        //     liveUrl: null,
-        //     media: "https://raw.githubusercontent.com/yaronserlin/p2p-file-sharing/refs/heads/main/screenshot.png"
-        // },
-        {
-            id: 1,
-            title: "Automata Visualization Tool123",
-            description: "Interactive web-based tool for drawing and visualizing finite automata and state machines. Helps computer science students understand automata theory concepts visually.",
-            technologies: ["React", "JavaScript", "Canvas API"],
-            url: "https://github.com/yaronserlin/automata-editor",
-            liveUrl: "https://yaronserlin.github.io/automata-editor/",
-            image: "https://raw.githubusercontent.com/yaronserlin/automata-editor/refs/heads/main/screenshot.png",
-            gif: automataGif,
-            video: automataVid  // Add your .mov or .mp4 here: "src/assets/automata-editor.mp4"
-        },
-        // {
-        //     id: 4,
-        //     title: "Code Project Visualizer",
-        //     description: "Full-stack tool that analyzes code repositories and generates visual maps of project structure. Useful for understanding large codebases and visualizing dependencies.",
-        //     technologies: ["React", "Node.js", "Express"],
-        //     url: "https://github.com/yaronserlin/code-visualizer",
-        //     liveUrl: null,
-        //     media: "https://raw.githubusercontent.com/yaronserlin/code-visualizer/refs/heads/main/screenshot.png"
-        // }
     ],
     contactInfo: {
         email: "yaron.serlin.dev@gmail.com",

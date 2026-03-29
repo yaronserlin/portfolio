@@ -1,96 +1,83 @@
-import React from 'react';
-import './LanguageBadge.css';
-import {
-    SiJavascript,
-    SiHtml5,
-    SiTypescript,
-    SiPython,
-    SiCplusplus,
-    SiC,
-    SiPhp,
-    SiRuby,
-    SiSwift,
-    SiGo,
-    SiRust,
-    SiReact,
-    SiDart,
-    SiBootstrap,
-    SiNodedotjs,
-    SiExpress,
-    SiMongodb
-} from 'react-icons/si';
-import {
-    FaTerminal,
-    FaJava,
-    FaCss3Alt,
-    FaDatabase,
-    FaNetworkWired,
-    FaGitAlt,
-    FaGithub,
-    FaMicrochip,
-    FaLinux
-} from 'react-icons/fa';
-import { TbBrandCSharp } from 'react-icons/tb';
-
-// Map languages to their official colors and React Icons
-const languageMap = {
-    'JavaScript': { icon: SiJavascript, color: '#f7df1e', text: 'black' },
-    'HTML': { icon: SiHtml5, color: '#e34f26', text: 'white' },
-    'CSS': { icon: FaCss3Alt, color: '#1572B6', text: 'white' },
-    'TypeScript': { icon: SiTypescript, color: '#3178C6', text: 'white' },
-    'Python': { icon: SiPython, color: '#3776AB', text: 'white' },
-    'Java': { icon: FaJava, color: '#007396', text: 'white' },
-    'C++': { icon: SiCplusplus, color: '#00599C', text: 'white' },
-    'C': { icon: SiC, color: '#A8B9CC', text: 'black' },
-    'C#': { icon: TbBrandCSharp, color: '#239120', text: 'white' },
-    'PHP': { icon: SiPhp, color: '#777BB4', text: 'white' },
-    'Ruby': { icon: SiRuby, color: '#CC342D', text: 'white' },
-    'Swift': { icon: SiSwift, color: '#F05138', text: 'white' },
-    'Go': { icon: SiGo, color: '#00ADD8', text: 'white' },
-    'Rust': { icon: SiRust, color: '#000000', text: 'white' },
-    'React': { icon: SiReact, color: '#61DAFB', text: 'black' },
-    'Dart': { icon: SiDart, color: '#0175C2', text: 'white' },
-    'Bootstrap': { icon: SiBootstrap, color: '#7952B3', text: 'white' },
-    'Node.js': { icon: SiNodedotjs, color: '#339933', text: 'white' },
-    'Express': { icon: SiExpress, color: '#000000', text: 'white' },
-    'MongoDB': { icon: SiMongodb, color: '#47A248', text: 'white' },
-    'SQL': { icon: FaDatabase, color: '#003B57', text: 'white' },
-    'REST API': { icon: FaNetworkWired, color: '#005571', text: 'white' },
-    'JavaFX': { icon: FaJava, color: '#007396', text: 'white' },
-    'Git': { icon: FaGitAlt, color: '#F05032', text: 'white' },
-    'GitHub': { icon: FaGithub, color: '#181717', text: 'white' },
-    'Assembly': { icon: FaMicrochip, color: '#5E6B7C', text: 'white' },
-    'Linux': { icon: FaLinux, color: '#FCC624', text: 'black' },
-    // Default fallback
-    'default': { icon: FaTerminal, color: '#6c757d', text: 'white' }
-};
-
 /**
  * LanguageBadge Component
  * 
- * Displays a programming language with its official icon and brand color.
+ * Displays a programming language with its official icon loaded dynamically from SimpleIcons.
+ * This prevents the need to hardcode icons and colors for every new technology learned.
  * 
  * @param {Object} props
- * @param {string} props.language - The name of the programming language
+ * @param {string} props.language - The name of the programming language or technology
  */
-const LanguageBadge = ({ language }) => {
-    // Find matching language config, case-insensitive, or fallback to default
-    const configKey = Object.keys(languageMap).find(
-        key => key.toLowerCase() === language?.toLowerCase()
-    ) || 'default';
+import React from 'react';
+import './LanguageBadge.css';
 
-    const { icon: Icon, color, text } = languageMap[configKey];
+const LanguageBadge = ({ language }) => {
+    if (!language) return null;
+
+    // Helper to map technology names to accurate simple-icons slugs
+    const getSlug = (lang) => {
+        const customMap = {
+            'c++': 'cplusplus',
+            'c#': 'csharp',
+            'node.js': 'nodedotjs',
+            'html5': 'html5',
+            'css3': 'css3',
+            'rest apis': 'fastapi', 
+            'git & github': 'github',
+            'client-server architecture': 'serverless',
+            'sql': 'mysql',
+            'mongodb': 'mongodb',
+            'java': 'openjdk',
+            'javafx': 'openjdk',
+            'mac': 'apple',
+            'linux': 'linux',
+            'react': 'react',
+            'javascript': 'javascript',
+            'express': 'express',
+            'bootstrap': 'bootstrap'
+        };
+        const lower = lang.toLowerCase();
+        if (customMap[lower]) return customMap[lower];
+        // Strip out non-alphanumeric characters for standard slugs
+        return lower.replace(/[^a-z0-9]/g, '');
+    };
+
+    const slug = getSlug(language);
 
     return (
         <span
-            className="badge language-badge"
+            className="badge language-badge d-inline-flex align-items-center gap-2 m-1"
             style={{
-                '--badge-bg': color,
-                '--badge-color': text,
-                '--badge-border': text === 'black' ? '1px solid rgba(0,0,0,0.1)' : '1px solid transparent'
+                background: 'rgba(255, 255, 255, 0.95)',
+                color: '#333',
+                border: '1px solid rgba(0,0,0,0.1)',
+                padding: '0.5rem 0.75rem',
+                borderRadius: '8px',
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                boxShadow: '0 2px 4px rgba(0,0,0,0.02)',
+                transition: 'all 0.2s ease',
+                cursor: 'default'
+            }}
+            onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 4px 8px rgba(0,0,0,0.05)';
+            }}
+            onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 2px 4px rgba(0,0,0,0.02)';
             }}
         >
-            <Icon className="badge-icon" />
+            <img 
+                src={`https://cdn.simpleicons.org/${slug}`}
+                alt=""
+                width="16"
+                height="16"
+                style={{ objectFit: 'contain' }}
+                onError={(e) => {
+                    // Hide the image immediately if there's no matching icon
+                    e.target.style.display = 'none';
+                }}
+            />
             {language}
         </span>
     );

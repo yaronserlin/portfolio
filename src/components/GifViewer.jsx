@@ -92,14 +92,14 @@ const GifViewer = ({ gifSrc, title, onClose }) => {
             centered
             size="lg"
             className="gif-viewer-modal"
-            style={{ '--bs-modal-bg': 'rgba(20, 20, 20, 0.98)' }}
+            style={{ '--bs-modal-bg': 'rgba(255, 255, 255, 0.98)' }}
         >
-            <Modal.Header closeButton className="bg-dark text-white border-secondary">
+            <Modal.Header closeButton className="bg-white text-dark border-bottom">
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
 
             <Modal.Body
-                className="bg-dark text-white d-flex flex-column align-items-center"
+                className="bg-white text-dark d-flex flex-column align-items-center"
                 style={{ padding: '1.5rem' }}
             >
                 {/* Media Container */}
@@ -111,8 +111,8 @@ const GifViewer = ({ gifSrc, title, onClose }) => {
                         alignItems: 'center',
                         justifyContent: 'center',
                         borderRadius: '12px',
-                        background: 'linear-gradient(135deg, rgba(2, 62, 138, 0.2) 0%, rgba(0, 180, 216, 0.2) 100%)',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        background: 'linear-gradient(135deg, rgba(2, 62, 138, 0.05) 0%, rgba(0, 180, 216, 0.05) 100%)',
+                        border: '1px solid rgba(0, 0, 0, 0.1)',
                         overflow: 'auto',
                         marginBottom: '1rem'
                     }}
@@ -139,7 +139,7 @@ const GifViewer = ({ gifSrc, title, onClose }) => {
                     <div className="d-flex gap-3 align-items-center flex-wrap justify-content-center">
                         {/* Play/Pause Button */}
                         <Button
-                            variant={isPlaying ? 'secondary' : 'success'}
+                            variant={isPlaying ? 'outline-dark' : 'success'}
                             size="sm"
                             onClick={handlePlayPause}
                             title={isPlaying ? 'Pause' : 'Play'}
@@ -153,7 +153,7 @@ const GifViewer = ({ gifSrc, title, onClose }) => {
                             {[0.5, 1, 1.5, 2].map((s) => (
                                 <Button
                                     key={s}
-                                    variant={speed === s ? 'primary' : 'secondary'}
+                                    variant={speed === s ? 'primary' : 'outline-dark'}
                                     onClick={() => handleSpeedChange(s)}
                                     title={`${s}x speed`}
                                 >
@@ -165,7 +165,7 @@ const GifViewer = ({ gifSrc, title, onClose }) => {
                 )}
             </Modal.Body>
 
-            <Modal.Footer className="bg-dark border-secondary">
+            <Modal.Footer className="bg-white border-top">
                 <small className="text-muted w-100">Press ESC to close</small>
             </Modal.Footer>
         </Modal>

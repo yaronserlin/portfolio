@@ -34,7 +34,6 @@
 import { Card, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { FaPlay } from 'react-icons/fa';
-import TechBadge from './TechBadge';
 import OptimizedImage from './OptimizedImage';
 import GifViewer from './GifViewer';
 import LanguageBadge from './LanguageBadge';

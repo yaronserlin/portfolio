@@ -27,7 +27,6 @@
  */
 
 import { Container, Row, Col } from 'react-bootstrap';
-import ProfileImage from '../components/ProfileImage';
 import AboutBio from '../components/AboutBio';
 import AboutBackground from '../components/AboutBackground';
 import AboutInterests from '../components/AboutInterests';
@@ -74,7 +73,7 @@ const AboutPage = ({ personalInfo, skills }) => {
                 <Row className="mb-5">
                     <Col xs={12}>
                         <AboutBackground education={personalInfo.education} title={personalInfo.title} />
-                        <AboutInterests />
+                        <AboutInterests interests={personalInfo.interests} />
                     </Col>
                 </Row>
 
