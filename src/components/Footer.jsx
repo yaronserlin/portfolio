@@ -1,5 +1,5 @@
 /**
- * Preview: A static page terminal rendering the copyright banner and quick-access social links.
+ * PREVIEW: Persistent footer component showing copyright information and social links.
  */
 
 import { useContext } from "react";
@@ -8,8 +8,10 @@ import { PortfolioContext } from "../context/PortfolioContext";
 import SocialLinks from "./SocialLinks";
 
 /**
- * Emits the universally shared application footer drawing data from the context provider.
- * @returns {JSX.Element} Bottom-aligned persistent navigation and copyright component.
+ * Renders the global footer attached to the bottom of the page, drawing its metadata directly
+ * from the portfolio context payload.
+ * 
+ * @returns {JSX.Element} The rendered application footer.
  */
 const Footer = () => {
     const { portfolioData } = useContext(PortfolioContext);

@@ -1,40 +1,40 @@
 /**
- * Preview: Global routing component organizing layout persistence and page connections through URL-based navigation.
+ * PREVIEW: Main application component handling routing and layout structure.
  */
 
-import './styles/custom.scss'
-import HomePage from './pages/HomePage'
-import Navigation from './components/Navigation';
+import './styles/custom.scss';
 import { Route, Routes } from 'react-router-dom';
-import AboutPage from './pages/AboutPage';
-import ContactPage from './pages/ContactPage';
-import ProjectsPage from './pages/ProjectsPage';
-import Footer from './components/Footer';
 import { useContext } from 'react';
 import { PortfolioContext } from './context/PortfolioContext';
 
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import ProjectsPage from './pages/ProjectsPage';
+import Navigation from './components/Navigation';
+import Footer from './components/Footer';
+
 /**
- * Aggregates site routes and global layout components like Header and Footer.
- * @returns {JSX.Element} The rendered React Application.
+ * Root component that defines the application's layout and routing configuration.
+ * Consumes global portfolio data from context to pass as props down to individual pages.
+ * 
+ * @returns {JSX.Element} The rendered React application.
  */
 function App() {
-
   const { portfolioData } = useContext(PortfolioContext);
 
   return (
     <>
       <Navigation />
-
       <Routes>
-        <Route path="/" element={<HomePage personalInfo={portfolioData.personalInfo} />} errorElement={<h1>Error</h1>} />
-        <Route path='/about' element={<AboutPage personalInfo={portfolioData.personalInfo} skills={portfolioData.skills} />} />
-        <Route path='/contact' element={<ContactPage contactInfo={portfolioData.contactInfo} />} />
-        <Route path='/projects' element={<ProjectsPage projects={portfolioData.projects} />} />
+        <Route path="/" element={<HomePage personalInfo={portfolioData.personalInfo} />} />
+        <Route path="/about" element={<AboutPage personalInfo={portfolioData.personalInfo} skills={portfolioData.skills} />} />
+        <Route path="/contact" element={<ContactPage contactInfo={portfolioData.contactInfo} />} />
+        <Route path="/projects" element={<ProjectsPage projects={portfolioData.projects} />} />
       </Routes>
-
       <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

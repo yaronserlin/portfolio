@@ -1,13 +1,15 @@
 /**
- * Preview: API service connecting to GitHub to retrieve and format public repository data for the portfolio showcase.
+ * PREVIEW: Data fetching service abstraction communicating directly with the GitHub API.
  */
 
 const GITHUB_USERNAME = 'yaronserlin';
 const GITHUB_API_URL = 'https://api.github.com';
 
 /**
- * Retrieves public repositories from GitHub and maps them to the project format.
- * @returns {Promise<Array>} A list of formatted project objects sorted by stars.
+ * Accesses user's public repositories endpoint, parses raw REST payloads into normalized
+ * local project object schemes, and initiates parallel language/media asset checks.
+ * 
+ * @returns {Promise<Array>} Asynchronous promise resolving to a sorted array of mapped project objects.
  */
 export const fetchGitHubProjects = async () => {
     try {
@@ -21,6 +23,7 @@ export const fetchGitHubProjects = async () => {
 
         const repos = await response.json();
 
+        // Standardize base project configurations excluding forks and transforming titles
         let projects = repos
             .filter(repo => !repo.fork)
             .map((repo) => {
@@ -47,14 +50,15 @@ export const fetchGitHubProjects = async () => {
             })
             .sort((a, b) => b.stars - a.stars);
 
+        // Fetch extensive linguistic metrics and direct media links sequentially
         await Promise.all(projects.map(async (project) => {
             try {
                 const languages = await fetchLanguageBreakdown(project.repoName);
                 if (languages && languages.length > 0) {
                     project.languages = languages;
                 }
-            } catch (err) {
-                // Ignore error and retain the primary language fallback
+            } catch {
+                // Silently swallow specific secondary metric failures
             }
 
             try {
@@ -62,8 +66,8 @@ export const fetchGitHubProjects = async () => {
                 project.image = mediaUrls.image;
                 project.video = mediaUrls.video;
                 project.gif = mediaUrls.gif;
-            } catch (err) {
-                // Ignore error and assume no media exists
+            } catch {
+                // Ignore missing visual media implementations
             }
         }));
 
@@ -75,9 +79,10 @@ export const fetchGitHubProjects = async () => {
 };
 
 /**
- * Retrieves the programming languages mapping used in a given repository.
- * @param {string} repoName - The repository's name on GitHub.
- * @returns {Promise<Array<string>>} List of dominant programming languages present in the repo.
+ * Calls upon a specific repository's exact language split payload indicating precise byte mappings.
+ * 
+ * @param {string} repoName - Target github repository identifier.
+ * @returns {Promise<Array<string>>} List array containing named language properties.
  */
 const fetchLanguageBreakdown = async (repoName) => {
     try {
@@ -96,6 +101,7 @@ const fetchLanguageBreakdown = async (repoName) => {
             return [];
         }
 
+        // Isolate map descriptors by converting byte sizes into hierarchical ranking tuples
         const sortedLanguages = Object.entries(languagesData)
             .map(([lang, bytes]) => ({ name: lang, bytes }))
             .sort((a, b) => b.bytes - a.bytes);
@@ -108,9 +114,10 @@ const fetchLanguageBreakdown = async (repoName) => {
 };
 
 /**
- * Checks for the existence of common preview media assets in a targeted repo's main branch.
- * @param {string} repoName - The repository's name on GitHub.
- * @returns {Promise<{ image: string|null, video: string|null, gif: string|null }>} Accessible asset URLs.
+ * Validates existence of predefined rich media preview strings mapping exclusively inside target repo `main` branches.
+ * 
+ * @param {string} repoName - Valid GitHub repository reference.
+ * @returns {Promise<{ image: string|null, video: string|null, gif: string|null }>} Accessible media URL endpoints mapping.
  */
 const checkMediaAvailability = async (repoName) => {
     const baseUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repoName}/refs/heads/main/media`;
@@ -121,15 +128,19 @@ const checkMediaAvailability = async (repoName) => {
         gif: null
     };
 
+    /**
+     * Executes minimal HEAD request bypassing excessive content payloads.
+     */
     const checkUrl = async (url) => {
         try {
             const res = await fetch(url, { method: 'HEAD' });
             return res.ok ? url : null;
-        } catch (e) {
+        } catch {
             return null;
         }
     };
 
+    // Parallel fetch validation
     const [pngRes, jpgRes, mp4Res, movRes, webmRes, gifRes] = await Promise.all([
         checkUrl(`${baseUrl}/demo.png`),
         checkUrl(`${baseUrl}/demo.jpg`),
@@ -147,10 +158,11 @@ const checkMediaAvailability = async (repoName) => {
 };
 
 /**
- * Maps GitHub languages and repository topics to standardized system skill tags.
- * @param {string} language - The primary evaluated language.
- * @param {Array<string>} topics - Repository topics provided by GitHub.
- * @returns {Array<string>} Combined array of formalized technology tags.
+ * Evaluates available GitHub metadata (primary lang, topical identifiers) returning standard internal formatting configurations.
+ * 
+ * @param {string} language - Repository's natively identified majority domain language.
+ * @param {Array<string>} topics - Additional repo level metadata arrays supplied by users manually on GitHub UI.
+ * @returns {Array<string>} Filtered set mapping internal equivalents strings.
  */
 const extractTechnologies = (language, topics = []) => {
     const technologies = [];
@@ -193,9 +205,10 @@ const extractTechnologies = (language, topics = []) => {
 };
 
 /**
- * Extracts a functioning live preview URL from GitHub repo metadata if present.
- * @param {Object} repo - The repository details object.
- * @returns {string|null} Available live demo URL or null if missing.
+ * Inspects parsed repository data looking for viable linked live application instances.
+ * 
+ * @param {Object} repo - Validated github application domain properties object.
+ * @returns {string|null} Full domain locator string if verifiable, or explicitly null.
  */
 const extractLiveUrl = (repo) => {
     if (repo.homepage && repo.homepage.trim()) {

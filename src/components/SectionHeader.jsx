@@ -1,14 +1,16 @@
 /**
- * Preview: Semantic styling wrapper standardizing title hierarchy definitions across core portfolio pages.
+ * PREVIEW: Extracted header text component for uniformly styling section titles across pages.
  */
 
 /**
- * Configures standard formatting for page anchors and descriptive subtext sections.
- * @param {Object} props - Configuration payloads.
- * @param {string} props.title - Primary massive display label.
- * @param {string} [props.subtitle] - Contextual lead narrative content for subtitles.
- * @param {string} [props.className=""] - External visual modifiers appended to outmost container.
- * @returns {JSX.Element} A centered HTML header grouping structure.
+ * Renders a standardized block containing a large primary title and an optional 
+ * muted descriptive subtitle underneath.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {string} props.title - The main heading text.
+ * @param {string} [props.subtitle] - The optional secondary accompanying text.
+ * @param {string} [props.className=""] - Additional CSS classes applied to the root container.
+ * @returns {JSX.Element} The rendered section header block.
  */
 const SectionHeader = ({ title, subtitle, className = "" }) => {
     return (

@@ -1,5 +1,5 @@
 /**
- * Preview: Custom React hook handling all state, validation, and submission logic for the underlying contact form via EmailJS.
+ * PREVIEW: Custom React hook encapsulating state management and API dispatch logic for the ContactForm.
  */
 
 import { useState, useEffect } from "react";
@@ -7,8 +7,9 @@ import emailjs from "@emailjs/browser";
 import { validateContactForm, getInitialFormState } from "../utils/formValidation";
 
 /**
- * Manages the contact form state, error handling, and orchestrates the transmission of messages using EmailJS.
- * @returns {Object} Methods and state properties for rendering and processing the form.
+ * Orchestrates form data collection, validation, and communication with the EmailJS service.
+ * 
+ * @returns {Object} A collection of state variables and handler functions to be consumed by the UI component.
  */
 const useContactForm = () => {
     const [formData, setFormData] = useState(getInitialFormState());
@@ -16,13 +17,15 @@ const useContactForm = () => {
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
+    // Initialize the third-party EmailJS library on mount using securely injected environment variables
     useEffect(() => {
         emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
     }, []);
 
     /**
-     * Updates form state progressively based on user input events.
-     * @param {import('react').ChangeEvent<HTMLInputElement | HTMLTextAreaElement>} e - The triggered input change event.
+     * Propagates changes from controlled inputs to the local form state while clearing previous errors.
+     * 
+     * @param {import('react').ChangeEvent<HTMLInputElement | HTMLTextAreaElement>} e - The input change event.
      */
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -34,12 +37,14 @@ const useContactForm = () => {
     };
 
     /**
-     * Rejects invalid payloads or initiates sending procedure using environment variables for the EmailJS service.
+     * Intercepts standard form submissions, performs final validations, and transmits data.
+     * 
      * @param {import('react').FormEvent<HTMLFormElement>} e - The form submission event.
      */
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Enforce validation constraints prior to network requests
         const { isValid, error: validationError } = validateContactForm(formData);
         if (!isValid) {
             setError(validationError);
@@ -61,11 +66,11 @@ const useContactForm = () => {
                 }
             );
 
+            // On success, reset the form and temporarily reveal the success banner
             setSubmitted(true);
             setFormData(getInitialFormState());
             setIsLoading(false);
 
-            // Hide the success message after five seconds automatically
             setTimeout(() => {
                 setSubmitted(false);
             }, 5000);
@@ -77,7 +82,7 @@ const useContactForm = () => {
     };
 
     /**
-     * Purges all current state data and restores the form's blank initial condition.
+     * Hard resets all tracked state variables back to their baseline defaults.
      */
     const resetForm = () => {
         setFormData(getInitialFormState());

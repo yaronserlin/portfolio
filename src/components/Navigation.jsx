@@ -1,5 +1,5 @@
 /**
- * Preview: Top-anchored routing bar maintaining uniform paths throughout the app and reacting to mobile viewport constraints.
+ * PREVIEW: Main navigation bar component that tracks current route state and provides links to application pages.
  */
 
 import { useContext } from 'react';
@@ -8,17 +8,20 @@ import { Link, useLocation } from 'react-router-dom';
 import { PortfolioContext } from '../context/PortfolioContext';
 
 /**
- * Presents a persistent routing bar referencing context-bound data values. Modifies sub-link states to represent active domains.
- * @returns {JSX.Element} Floating Bootstrap header bar mapping main components.
+ * Renders the top navigation bar. Uses React Router's location hook to highlight the currently
+ * active page to give users immediate feedback about their location within the app.
+ * 
+ * @returns {JSX.Element} The rendered navigation menu.
  */
 const Navigation = () => {
     const { portfolioData } = useContext(PortfolioContext);
     const location = useLocation();
 
     /**
-     * Determines whether a given route matches the current application URL.
-     * @param {string} path - Assessed relative route layout mapping.
-     * @returns {boolean} Equality operator flag signifying presence on the target.
+     * Helper function to determine if the navigation link matches the current browser URL path.
+     * 
+     * @param {string} path - The relative path to check against the current location.
+     * @returns {boolean} True if the route matches, otherwise false.
      */
     const isActive = (path) => location.pathname === path;
 

@@ -1,22 +1,24 @@
 /**
- * Preview: Advanced imagery loader featuring loading states, resilient error fallbacks, and async decoding configurations.
+ * PREVIEW: Robust image wrapper component providing built-in loading spinners, error fallback mechanisms, and lazy loading strategies.
  */
 
 import { useState } from "react";
 
 /**
- * Safely renders imagery over sluggish network connections or absent files by implementing a loading layer and automated fallback mechanisms.
- * @param {Object} props - Valid configuration properties.
- * @param {string} props.src - Attempted target image path.
- * @param {string} props.alt - Accessibility label.
- * @param {string} [props.fallbackSrc=null] - Desired substitution image path if target loading fails.
- * @param {string} [props.className=""] - Spaced styling class definitions.
- * @param {string|number} [props.width="100%"] - CSS mapped width.
- * @param {string|number} [props.height="auto"] - CSS mapped height dimension.
- * @param {boolean} [props.isGif=false] - Triggers alternate decode timing to favor moving images.
- * @param {string} [props.loading="lazy"] - E-commerce optimization mechanism flag.
- * @param {Object} [props.style={}] - Raw JS styling to affix into HTML rendering.
- * @returns {JSX.Element} Interactively loading image framework.
+ * Safely renders images by handling network delays and broken source links gracefully. 
+ * Shows a loading spinner while the image downloads and swaps to a fallback image if rendering fails.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {string} props.src - The primary image source URL/path.
+ * @param {string} props.alt - Accessibility description.
+ * @param {string} [props.fallbackSrc=null] - Optional fallback image if the primary fails.
+ * @param {string} [props.className=""] - Custom CSS classes.
+ * @param {string|number} [props.width="100%"] - Rendered image width.
+ * @param {string|number} [props.height="auto"] - Rendered image height.
+ * @param {boolean} [props.isGif=false] - If true, changes the decoding strategy to support animations better.
+ * @param {string} [props.loading="lazy"] - Determines native browser loading behavior.
+ * @param {Object} [props.style={}] - Inline CSS styles.
+ * @returns {JSX.Element} The rendered image container with loading and error boundaries.
  */
 const OptimizedImage = ({
     src,
@@ -32,15 +34,22 @@ const OptimizedImage = ({
     const [imageError, setImageError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
+    /**
+     * Resolves loading state once the native img element successfully parses the source byte stream.
+     */
     const handleImageLoad = () => {
         setIsLoading(false);
     };
 
+    /**
+     * Catches network fetch errors or 404s, falling back to an alternate image source if provided.
+     */
     const handleImageError = () => {
         setImageError(true);
         setIsLoading(false);
     };
 
+    // Determine the final source URL based on current component state
     const displaySrc = imageError && fallbackSrc ? fallbackSrc : src;
 
     return (
@@ -73,6 +82,8 @@ const OptimizedImage = ({
                 loading={loading}
                 decoding={isGif ? "async" : "auto"}
             />
+            
+            {/* Overlay loading spinner while original media is in transit */}
             {isLoading && (
                 <div
                     style={{

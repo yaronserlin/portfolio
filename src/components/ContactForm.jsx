@@ -1,15 +1,18 @@
 /**
- * Preview: The contact mechanism interface enabling user messages via email bindings.
+ * PREVIEW: Interactive form component allowing users to send direct messages.
  */
 
 import { Form, Button, Alert } from "react-bootstrap";
 import useContactForm from "../hooks/useContactForm";
 
 /**
- * Assembles the user-facing contact form fields, integrating the EmailJS submission hook and custom validation feedback UI.
- * @returns {JSX.Element} A stylized form card.
+ * Renders the integrated contact form, utilizing a custom hook to manage validation, state, 
+ * and API submission handling (e.g., via EmailJS).
+ * 
+ * @returns {JSX.Element} The rendered form interface.
  */
 const ContactForm = () => {
+    // Extract state and handler methods from the contact form hook
     const { formData, submitted, error, isLoading, handleChange, handleSubmit, setSubmitted, setError } = useContactForm();
 
     return (

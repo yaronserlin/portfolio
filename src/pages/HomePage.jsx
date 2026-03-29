@@ -1,5 +1,5 @@
 /**
- * Preview: The main entry page component displaying a visually engaging hero section for the portfolio owner.
+ * PREVIEW: Landing page component displaying the introductory section and call-to-actions.
  */
 
 import { Container, Row, Col } from 'react-bootstrap';
@@ -8,12 +8,14 @@ import HeroContent from '../components/HeroContent';
 import HeroCTA from '../components/HeroCTA';
 
 /**
- * Renders the introductory landing page consisting of a profile image, dynamic text content, and call-to-action buttons.
- * @param {Object} props - The properties passed to the component.
- * @param {Object} props.personalInfo - Author's foundational identity details such as name, title, and bio.
- * @returns {JSX.Element} The composed Home page section.
+ * Renders the home page with a split layout: profile image on one side, text and buttons on the other.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {Object} props.personalInfo - Author's personal details like name and bio.
+ * @returns {JSX.Element} The rendered home page section.
  */
 const HomePage = ({ personalInfo }) => {
+    // Initial loading guard to prevent rendering errors if data isn't ready
     if (!personalInfo) {
         return <div>Loading...</div>;
     }

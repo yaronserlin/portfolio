@@ -1,15 +1,16 @@
 /**
- * Preview: Primitive presentation wrapper standardizing borders and outlines for static user avatars.
+ * PREVIEW: Simple abstraction component for the primary profile avatar rendering.
  */
 
 /**
- * Abstracts standard Bootstrap stylistic utility classes for standard profile icons.
- * @param {Object} props - Accepted parameters.
- * @param {string} props.src - Valid URL or path to desired image.
- * @param {string} [props.alt="Profile"] - Fallback accessibility text.
- * @param {string} [props.className="img-fluid rounded-lg shadow-lg"] - Space-separated HTML class string.
- * @param {Object} [props...] - Any spreading remaining properties assigned to the DOM `<img>` element.
- * @returns {JSX.Element} Configured accessible image node.
+ * Renders a standardized profile image with default styling utility classes applied.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {string} props.src - The source URL for the profile image.
+ * @param {string} [props.alt="Profile"] - Accessibility alt text.
+ * @param {string} [props.className="img-fluid rounded-lg shadow-lg"] - Custom CSS classes injected over the defaults.
+ * @param {Object} [props...] - Any additional props to merge onto the underlying img element.
+ * @returns {JSX.Element} The rendered image element.
  */
 const ProfileImage = ({ src, alt = "Profile", className = "img-fluid rounded-lg shadow-lg", ...props }) => {
     return (

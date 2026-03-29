@@ -1,5 +1,5 @@
 /**
- * Preview: A detailed informational page grouping the author's biography, technical skills, background, and personal hobbies.
+ * PREVIEW: Comprehensive page displaying the author's biography, skills, education, and interests.
  */
 
 import { Container, Row, Col } from 'react-bootstrap';
@@ -10,11 +10,12 @@ import HeroImage from '../components/HeroImage';
 import SkillCategory from '../components/SkillCategory';
 
 /**
- * Renders an expansive view of the portfolio owner including life story, expertise mapping, academic history, and out-of-work passions.
- * @param {Object} props - The component parameters.
- * @param {Object} props.personalInfo - The author's biographical data, including the long bio string, interests array, and education.
- * @param {Array<Object>} props.skills - Subdivided collections of technological proficiencies to map into standard UI groupings.
- * @returns {JSX.Element} The composed About page layout.
+ * Renders the about page layout, grouping various informational components logically.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {Object} props.personalInfo - Author's biographical and educational details.
+ * @param {Array<Object>} props.skills - Grouped arrays of technical skills.
+ * @returns {JSX.Element} The rendered about page section.
  */
 const AboutPage = ({ personalInfo, skills }) => {
     return (

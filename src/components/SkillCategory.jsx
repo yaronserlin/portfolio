@@ -1,16 +1,17 @@
 /**
- * Preview: A styling bucket to visually group related skills (e.g., Frontend, Backend) within structural cards.
+ * PREVIEW: Card component grouping related language and technology badges into logical domains.
  */
 
 import { Col } from "react-bootstrap";
 import SkillItem from "./SkillItem";
 
 /**
- * Implements a display card with an interactive hover effect, formatting an array of skill items appropriately.
- * @param {Object} props - Element attributes.
- * @param {string} props.category - The formatted name of this collection.
- * @param {Array<Object>} props.items - Sequence of specific skill entities.
- * @returns {JSX.Element} Grid column presenting categorized skill entities.
+ * Renders an elevated interactive card containing a mapped array of specific technical skills.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {string} props.category - The conceptual bucket name (e.g., "Frontend", "Backend").
+ * @param {Array<Object>} props.items - Array of individual skill data objects.
+ * @returns {JSX.Element} The rendered skill category column.
  */
 const SkillCategory = ({ category, items }) => {
     return (

@@ -1,17 +1,20 @@
 /**
- * Preview: A structured flex container managing the alignment and spacing of dynamically loaded repository cards.
+ * PREVIEW: Auto-arranging grid layer managing the presentation context of numerous project cards.
  */
 
 import { Row, Col } from "react-bootstrap";
 import ProjectCard from "./ProjectCard";
 
 /**
- * Automatically structures passed projects into a responsive sequence row.
- * @param {Object} props - Target configurations.
- * @param {Array<Object>} props.projects - Filtered list of Github data objects ready for framing.
- * @returns {JSX.Element} Composed map iteration of ProjectCard modules.
+ * Loops over provided architectural project instances mapping them into responsive col blocks
+ * bound tightly to Bootstrap's grid specifications.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {Array<Object>} props.projects - Array of project definitions supplied via Github.
+ * @returns {JSX.Element} The rendered project grid boundary.
  */
 const ProjectGrid = ({ projects }) => {
+    // Guard against empty datasets to prevent rendering empty structural wrappers
     if (!projects || projects.length === 0) {
         return <div className="text-center py-5">No projects to display</div>;
     }

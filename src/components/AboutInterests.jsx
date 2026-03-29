@@ -1,14 +1,17 @@
 /**
- * Preview: Informational display looping an array of descriptive keywords identifying out-of-work passions.
+ * PREVIEW: Component listing the author's out-of-work passions and interests.
  */
 
 /**
- * Returns a stylized list rendering non-technical recreational domains defined within personal info configurations.
- * @param {Object} props - Associated component properties.
- * @param {Array<string>} props.interests - Extracted raw collection of string data representing interests.
- * @returns {JSX.Element|null} Composed unordered list chunk, or nothing if empty.
+ * Renders an interactive unordered list mapping string-based hobbies and interests.
+ * Includes hover animations for visual engagement.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {Array<string>} props.interests - Array of strings representing personal interests.
+ * @returns {JSX.Element|null} The rendered interests block, or null if no interests are provided.
  */
 const AboutInterests = ({ interests = [] }) => {
+    // Guard clause: Return early if there's nothing to render
     if (!interests || interests.length === 0) return null;
 
     return (

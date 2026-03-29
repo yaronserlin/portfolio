@@ -1,14 +1,15 @@
 /**
- * Preview: Structural wrapper bridging the domain skill objects to the presentation LanguageBadge.
+ * PREVIEW: Singular encapsulation wrapper abstracting the skill object translation logic away from the badge renderer.
  */
 
 import LanguageBadge from './LanguageBadge';
 
 /**
- * Defers rendering logic to the LanguageBadge system for singular technologies.
- * @param {Object} props - Expected attributes.
- * @param {Object} props.skill - Evaluated skill entity containing identity info.
- * @returns {JSX.Element} Wrapped visual badge for the extracted skill name.
+ * Extracts the literal skill name from the complex object payload to render standard LanguageBadges.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {Object} props.skill - Evaluated object containing the technology identifier mapped to `.name`.
+ * @returns {JSX.Element} The rendered technology tag interface.
  */
 const SkillItem = ({ skill }) => {
     return (

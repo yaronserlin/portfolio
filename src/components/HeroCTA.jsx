@@ -1,30 +1,28 @@
 /**
- * Preview: Primary action triggers driving initial user conversion rates from the main landing view.
+ * PREVIEW: Dual-action call-to-action button group for the home page hero section.
  */
 
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 /**
- * Returns twin navigation anchors redirecting towards significant subpages like contact or project exhibits.
- * @returns {JSX.Element} Bounded layout flex configuration hosting stylized buttons.
+ * Renders the primary navigation actions from the landing view, routing the user
+ * towards either the projects gallery or the contact form.
+ * 
+ * @returns {JSX.Element} The rendered call-to-action button group.
  */
 const HeroCTA = () => {
     const navigate = useNavigate();
 
     /**
-     * Pushes routing state to trigger navigation to the internal Projects path.
+     * Navigates the user to the projects showcase page.
      */
-    const handleViewWork = () => {
-        navigate("/projects");
-    };
+    const handleViewWork = () => navigate("/projects");
 
     /**
-     * Pushes routing state to trigger navigation to the internal Contact path.
+     * Navigates the user to the contact information page.
      */
-    const handleGetInTouch = () => {
-        navigate("/contact");
-    };
+    const handleGetInTouch = () => navigate("/contact");
 
     return (
         <div className="d-flex flex-column flex-md-row gap-3 mt-4">
@@ -38,12 +36,8 @@ const HeroCTA = () => {
                     fontSize: '1rem',
                     transition: 'all 0.3s ease'
                 }}
-                onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                }}
+                onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
             >
                 View My Work
             </Button>

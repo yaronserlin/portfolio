@@ -1,13 +1,14 @@
 /**
- * Preview: An embedded subcomponent extracting textual biography variables into stylized standalone paragraphs.
+ * PREVIEW: Component that renders the author's biography text sections.
  */
 
 /**
- * Emits the pre-configured semantic narrative introduction found throughout broader identity pages.
- * @param {Object} props - Injection configurations.
- * @param {string} props.bio - Catchy hook text line typically serving as an initial summary.
- * @param {string} props.longBio - Extended historical and experiential descriptive strings.
- * @returns {JSX.Element} Flowing text node column structure.
+ * Displays both the short highlight hook and the extensive introductory biography text.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {string} props.bio - A short summarizing description about the author.
+ * @param {string} props.longBio - The full elaborate personal story.
+ * @returns {JSX.Element} The rendered biography paragraphs.
  */
 const AboutBio = ({ bio, longBio }) => {
     return (

@@ -1,18 +1,21 @@
 /**
- * Preview: Shared cluster of external network hyperlinks resolving to specific contact routes like GitHub and LinkedIn.
+ * PREVIEW: Consolidated element orchestrating rendering of various social profiles as either buttons or icon anchors.
  */
 
 import { FaGithub, FaLinkedin, FaFacebook } from 'react-icons/fa';
 
 /**
- * Builds an inline group of social forwarding anchors, supporting either standard buttons or raw icon formats based on properties.
- * @param {Object} props - Target configurations.
- * @param {Object} props.contactInfo - Extracted collection containing Facebook, GitHub, and LinkedIn URL strings.
- * @param {string} [props.variant="links"] - Display paradigm override ("buttons" vs "links").
- * @param {string} [props.className=""] - Sibling structural classes injected onto the outer wrapper.
- * @returns {JSX.Element} Interactive component redirecting outbound metrics.
+ * Builds an interactive list grouping external developer profiles based on the provided configuration payload.
+ * Supports rendering visually distinct variants for different container locations (e.g., forms vs footers).
+ * 
+ * @param {Object} props - Component properties.
+ * @param {Object} props.contactInfo - Extracted collection housing profile URLs.
+ * @param {string} [props.variant="links"] - Visual indicator controlling render style ("buttons" | "links").
+ * @param {string} [props.className=""] - External visual modifiers appended to the outmost wrapping node.
+ * @returns {JSX.Element} The correctly styled social connection links.
  */
 const SocialLinks = ({ contactInfo, variant = "links", className = "" }) => {
+    // Condition handling the prominent "Solid Button" styling format
     if (variant === "buttons") {
         return (
             <div className={`d-flex gap-2 flex-wrap ${className}`}>
@@ -53,6 +56,7 @@ const SocialLinks = ({ contactInfo, variant = "links", className = "" }) => {
         );
     }
 
+    // Default return handling the "Icon Only" footer-styled layout
     return (
         <div className={`d-flex gap-3 align-items-center flex-wrap ${className}`}>
             {contactInfo.facebook && (

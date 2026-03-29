@@ -1,17 +1,19 @@
 /**
- * Preview: Provides validation constraints and default state initialization for the contact form fields.
+ * PREVIEW: Utility module providing centralized validation logic for the contact form.
  */
 
 /**
- * Validates the contact form payload to ensure all necessary fields contain properly formatted data.
- * @param {Object} formData - The current state of the contact form.
- * @param {string} formData.name - The name provided by the user.
- * @param {string} formData.email - The email provided by the user.
- * @param {string} formData.subject - The subject of the message.
- * @param {string} formData.message - The body of the message.
- * @returns {{ isValid: boolean, error: string }} An object containing validation status and an error message if applicable.
+ * Validates the contact form fields to ensure all required data is present and properly formatted.
+ * 
+ * @param {Object} formData - The current state object derived from the contact form.
+ * @param {string} formData.name - The sender's name.
+ * @param {string} formData.email - The sender's email address.
+ * @param {string} formData.subject - The message subject.
+ * @param {string} formData.message - The message body.
+ * @returns {{ isValid: boolean, error: string }} An object signaling success or containing a localized error string.
  */
 export const validateContactForm = (formData) => {
+    // Validate required fields and basic email formatting
     if (!formData.name?.trim()) {
         return { isValid: false, error: "Please enter your name" };
     }
@@ -32,12 +34,14 @@ export const validateContactForm = (formData) => {
         return { isValid: false, error: "Please enter your message" };
     }
 
+    // Return valid state when all checks pass
     return { isValid: true, error: "" };
 };
 
 /**
- * Initializes and returns a blank contact form state.
- * @returns {{ name: string, email: string, subject: string, message: string }} An empty form data object.
+ * Generates an empty default state object for initializing or resetting the contact form.
+ * 
+ * @returns {{ name: string, email: string, subject: string, message: string }} An empty form model.
  */
 export const getInitialFormState = () => ({
     name: "",

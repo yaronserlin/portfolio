@@ -1,12 +1,13 @@
 /**
- * Preview: Informational text element in the Hero section, extracting rendering identity data.
+ * PREVIEW: Textual introduction component rendering the author's primary headline and biography hook.
  */
 
 /**
- * Renders the introductory profile data and formatted biography string in the top hero location.
- * @param {Object} props - Render properties.
- * @param {Object} props.personalInfo - Identity package with name, title, about, and education properties.
- * @returns {JSX.Element} The composed textual subset of the hero banner.
+ * Displays the core user identity text inside the hero banner layout.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {Object} props.personalInfo - Author's foundational data.
+ * @returns {JSX.Element} The rendered textual content for the hero section.
  */
 const HeroContent = ({ personalInfo }) => {
     return (

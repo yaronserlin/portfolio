@@ -1,23 +1,28 @@
 /**
- * Preview: A dynamic label component rendering brand icons for various software technologies utilizing SimpleIcons.
+ * PREVIEW: Dynamic pill component rendering technology names alongside their official brand icons.
  */
 
 import React from 'react';
 import './LanguageBadge.css';
 
 /**
- * Renders an inline visual pill containing the text name and official SVG logo of a programming language or tool.
- * @param {Object} props - Accepted parameters.
- * @param {string} props.language - Case-insensitive string matching known technology domains.
- * @returns {JSX.Element|null} Stylized pill marker, or null if the string is falsy.
+ * Displays an inline badge representing a programming language or tool. It automatically fetches
+ * the corresponding brand SVG from simple-icons based on the provided name.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {string} props.language - The name of the technology or language to display.
+ * @returns {JSX.Element|null} The rendered badge, or null if no language string is provided.
  */
 const LanguageBadge = ({ language }) => {
+    // Guard clause: prevent rendering empty badges
     if (!language) return null;
 
     /**
-     * Maps technology names to accurate simple-icons network slugs.
-     * @param {string} lang - Technology raw string.
-     * @returns {string} Sanitized slug identifier.
+     * Resolves the technology name to a valid simple-icons URL slug.
+     * Incorporates custom overrides for edge-case tool names that don't match simple normalization.
+     * 
+     * @param {string} lang - The raw technology name.
+     * @returns {string} The normalized simple-icons slug.
      */
     const getSlug = (lang) => {
         const customMap = {
@@ -41,8 +46,11 @@ const LanguageBadge = ({ language }) => {
             'bootstrap': 'bootstrap'
         };
         const lower = lang.toLowerCase();
+        
+        // Return explicit override if it exists
         if (customMap[lower]) return customMap[lower];
-        // Strip out non-alphanumeric characters for standard slugs
+        
+        // Fallback to generic stripping for standard slugs
         return lower.replace(/[^a-z0-9]/g, '');
     };
 
@@ -79,7 +87,7 @@ const LanguageBadge = ({ language }) => {
                 height="16"
                 style={{ objectFit: 'contain' }}
                 onError={(e) => {
-                    // Hide the image immediately if there's no matching icon
+                    // Fail gracefully by hiding the broken image icon
                     e.target.style.display = 'none';
                 }}
             />

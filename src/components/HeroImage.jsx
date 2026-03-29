@@ -1,14 +1,15 @@
 /**
- * Preview: A specialized wrapper for the ProfileImage adding a customized hover pop effect specific to the landing view.
+ * PREVIEW: Specialized wrapper for the profile image adding a prominent hero-specific hover effect.
  */
 
 import ProfileImage from "./ProfileImage";
 
 /**
- * Returns an encapsulated standard wrapper around the base avatar rendering interactive zoom hover states.
- * @param {Object} props - Extracted properties.
- * @param {string} props.src - URI of the target image render.
- * @returns {JSX.Element} Stylized Hero image frame.
+ * Renders the author's avatar with an interactive zooming box-shadow effect to anchor the visual weight of the landing page.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {string} props.src - Valid URL or path pointing to the developer's profile image.
+ * @returns {JSX.Element} The rendered interactive profile image.
  */
 const HeroImage = ({ src }) => {
     return (

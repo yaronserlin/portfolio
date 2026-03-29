@@ -1,5 +1,5 @@
 /**
- * Preview: Dedicated structural page that couples raw contact methods (address, social hooks) to a live input-driven messaging element.
+ * PREVIEW: Contact page presenting social links and a direct messaging form.
  */
 
 import { Container, Row, Col } from 'react-bootstrap';
@@ -8,10 +8,12 @@ import ContactInfo from '../components/ContactInfo';
 import ContactForm from '../components/ContactForm';
 
 /**
- * Provides a split view presenting the user's hardcoded communication channels laterally beside an interactive mailing capability tool.
- * @param {Object} props - The element properties.
- * @param {Object} props.contactInfo - Collection of metadata indicating phone numbers, standard email domains, and networking hyperlinks.
- * @returns {JSX.Element} The composed Contact page markup.
+ * Renders the communication hub of the portfolio, combining static contact information
+ * alongside an interactive user message submission form.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {Object} props.contactInfo - Author's contact details (email, phone, social links).
+ * @returns {JSX.Element} The rendered contact page.
  */
 const ContactPage = ({ contactInfo }) => {
     return (

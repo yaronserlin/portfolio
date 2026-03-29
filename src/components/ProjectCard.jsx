@@ -1,5 +1,5 @@
 /**
- * Preview: A detailed grid item rendering an individual portfolio entry with rich media support and layered interactive tags.
+ * PREVIEW: Complex card component presenting an individual project's details, media gallery, and live links.
  */
 
 import { Card, Button } from 'react-bootstrap';
@@ -10,10 +10,12 @@ import GifViewer from './GifViewer';
 import LanguageBadge from './LanguageBadge';
 
 /**
- * Returns a styled layout block aggregating nested child data into an actionable summary including links and hover overlays.
- * @param {Object} props - Accepted component configurations.
- * @param {Object} props.project - Associated structured Github application meta properties.
- * @returns {JSX.Element} Interactive HTML block detailing the project.
+ * Renders an interactive card for a single project. Provides dynamic media playback capabilities
+ * via a modal dialog for embedded video or GIF demonstrations.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {Object} props.project - The underlying data object defining the project schema.
+ * @returns {JSX.Element} The rendered project card interface.
  */
 const ProjectCard = ({ project }) => {
   const [showGifModal, setShowGifModal] = useState(false);
@@ -21,8 +23,9 @@ const ProjectCard = ({ project }) => {
   const hasMedia = mediaSource && mediaSource.trim() !== '';
 
   /**
-   * Forces state execution triggering the underlying media modal dialog.
-   * @param {React.MouseEvent} e - Mouse click event intercept.
+   * Opens the media viewer modal overlay.
+   * 
+   * @param {React.MouseEvent} e - The bound click event trigger.
    */
   const handlePlayClick = (e) => {
     e.preventDefault();
@@ -39,18 +42,20 @@ const ProjectCard = ({ project }) => {
           transition: 'all 0.3s ease'
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'translateY(-8px)';
-          e.currentTarget.style.boxShadow = '0 12px 24px rgba(0, 0, 0, 0.15)';
-          e.currentTarget.querySelector('.project-image').style.transform = 'scale(1.05)';
-          const overlay = e.currentTarget.querySelector('.play-overlay');
-          if (overlay) overlay.style.opacity = '1';
+            // Apply lifting shadow and scale effect to card elements
+            e.currentTarget.style.transform = 'translateY(-8px)';
+            e.currentTarget.style.boxShadow = '0 12px 24px rgba(0, 0, 0, 0.15)';
+            e.currentTarget.querySelector('.project-image').style.transform = 'scale(1.05)';
+            const overlay = e.currentTarget.querySelector('.play-overlay');
+            if (overlay) overlay.style.opacity = '1';
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'translateY(0)';
-          e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.06)';
-          e.currentTarget.querySelector('.project-image').style.transform = 'scale(1)';
-          const overlay = e.currentTarget.querySelector('.play-overlay');
-          if (overlay) overlay.style.opacity = '0';
+            // Revert visual states back to origin
+            e.currentTarget.style.transform = 'translateY(0)';
+            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.06)';
+            e.currentTarget.querySelector('.project-image').style.transform = 'scale(1)';
+            const overlay = e.currentTarget.querySelector('.play-overlay');
+            if (overlay) overlay.style.opacity = '0';
         }}
       >
         <div
@@ -75,7 +80,6 @@ const ProjectCard = ({ project }) => {
             }}
           />
 
-          {/* Play Icon Overlay */}
           {hasMedia && (
             <button
               className="play-overlay"
@@ -129,7 +133,6 @@ const ProjectCard = ({ project }) => {
             {project.description}
           </Card.Text>
 
-          {/* Languages with Icons */}
           {project.languages && project.languages.length > 0 && (
             <div className="mb-3" style={{ display: 'flex', flexWrap: 'wrap' }}>
               {project.languages.map((lang, index) => (
@@ -137,12 +140,6 @@ const ProjectCard = ({ project }) => {
               ))}
             </div>
           )}
-          {/* 
-          <div className="d-flex flex-wrap gap-2 mb-3">
-            {project.technologies.map((tech, index) => (
-              <TechBadge key={index} tech={tech} />
-            ))}
-          </div> */}
 
           <div className="d-flex flex-column gap-2">
             <Button
@@ -171,7 +168,6 @@ const ProjectCard = ({ project }) => {
         </Card.Body>
       </Card>
 
-      {/* Media Viewer Modal (Video or GIF) */}
       {showGifModal && mediaSource && (
         <GifViewer
           gifSrc={mediaSource}

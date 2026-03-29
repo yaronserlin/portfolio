@@ -1,14 +1,15 @@
 /**
- * Preview: Centralized presentation layer rendering distinct clickable communication avenues and sub-text caveats.
+ * PREVIEW: Component displaying direct contact links and socially integrated profile buttons.
  */
 
 import SocialLinks from "./SocialLinks";
 
 /**
- * Wraps mailto execution links, external site redirect buttons, and response time copy into an integrated form column.
- * @param {Object} props - Configuration settings.
- * @param {Object} props.contactInfo - Mapped URL properties denoting external network identifiers mapping to current user.
- * @returns {JSX.Element} Fully configured contact mechanism layout structure.
+ * Renders static contact information including a clickable email address and social network connectors.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {Object} props.contactInfo - Author's contact information object.
+ * @returns {JSX.Element} The rendered contact info block.
  */
 const ContactInfo = ({ contactInfo }) => {
     return (

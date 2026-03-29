@@ -1,33 +1,36 @@
 /**
- * Preview: A high-level media overlay modal with speed controls specifically scaled for examining animated UI demonstrations.
+ * PREVIEW: Modal component providing animated media (GIF/Video) playback capabilities with speed controls.
  */
 
 import { useState, useRef, useEffect } from 'react';
 import { Modal, Button, ButtonGroup } from 'react-bootstrap';
-import { FaPlay, FaPause, FaTimes } from 'react-icons/fa';
+import { FaPlay, FaPause } from 'react-icons/fa';
 
 /**
- * Triggers a blocking modal dialog injecting rich media files and video timeline manipulators for targeted UI inspection.
- * @param {Object} props - View initialization values.
- * @param {string} props.gifSrc - Direct file path evaluating as an animation source stream.
- * @param {string} props.title - Modal semantic heading identifier.
- * @param {Function} props.onClose - State teardown callback triggering unmount sequences.
- * @returns {JSX.Element} Responsive overlay framework.
+ * Renders a full-screen modal allowing users to inspect rich media files. Provides custom
+ * player controls for video formats to toggle playback speed and pause/play states.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {string} props.gifSrc - The source URL or path of the media file.
+ * @param {string} props.title - Title header of the media modal.
+ * @param {Function} props.onClose - Triggered callback to unmount or hide the modal.
+ * @returns {JSX.Element} The rendered media modal interface.
  */
 const GifViewer = ({ gifSrc, title, onClose }) => {
     const [isPlaying, setIsPlaying] = useState(true);
     const [speed, setSpeed] = useState(1);
     const videoRef = useRef(null);
+
+    // Determines if media should be treated as a video file requiring explicit HTML5 playback handling
     const isVideo = gifSrc && (gifSrc.endsWith('.mp4') || gifSrc.endsWith('.mov') || gifSrc.endsWith('.webm'));
 
     /**
-     * Toggles play/pause state syncing DOM elements.
+     * Synchronizes local state changes to real DOM actions on the video element.
      */
     useEffect(() => {
         if (videoRef.current) {
             if (isPlaying) {
-                videoRef.current.play().catch(() => {
-                });
+                videoRef.current.play().catch(() => {});
             } else {
                 videoRef.current.pause();
             }
@@ -35,7 +38,7 @@ const GifViewer = ({ gifSrc, title, onClose }) => {
     }, [isPlaying]);
 
     /**
-     * Modifies current timeline speed when selected multipliers change.
+     * Synchronizes playback rate state mapping it back to the video ref.
      */
     useEffect(() => {
         if (videoRef.current) {
@@ -44,22 +47,22 @@ const GifViewer = ({ gifSrc, title, onClose }) => {
     }, [speed]);
 
     /**
-     * Flips underlying playing boolean.
+     * Toggles boolean media state.
      */
     const handlePlayPause = () => {
         setIsPlaying(!isPlaying);
     };
 
     /**
-     * Caches user selected multiplier speed.
-     * @param {number} newSpeed - Speed multiplier scalar (e.g., 0.5, 1, 1.5, 2).
+     * Mutates the speed scaler state.
+     * @param {number} newSpeed - Target playback multiplier.
      */
     const handleSpeedChange = (newSpeed) => {
         setSpeed(newSpeed);
     };
 
     /**
-     * Subscribes to document keydown inputs destroying modal if escape matched.
+     * Allows closing the modal directly via the Escape key shortcut.
      */
     useEffect(() => {
         const handleEscape = (e) => {
@@ -89,7 +92,7 @@ const GifViewer = ({ gifSrc, title, onClose }) => {
                 className="bg-white text-dark d-flex flex-column align-items-center"
                 style={{ padding: '1.5rem' }}
             >
-                {/* Media Container */}
+                {/* Visual rendering container bounding size dimensions */}
                 <div
                     style={{
                         maxWidth: '100%',
@@ -121,10 +124,9 @@ const GifViewer = ({ gifSrc, title, onClose }) => {
                     )}
                 </div>
 
-                {/* Controls - Only show for videos */}
+                {/* Optional HTML5 Video control interface toolbar overlaid beneath the container */}
                 {isVideo && (
                     <div className="d-flex gap-3 align-items-center flex-wrap justify-content-center">
-                        {/* Play/Pause Button */}
                         <Button
                             variant={isPlaying ? 'outline-dark' : 'success'}
                             size="sm"
@@ -135,7 +137,6 @@ const GifViewer = ({ gifSrc, title, onClose }) => {
                             {isPlaying ? ' Pause' : ' Play'}
                         </Button>
 
-                        {/* Speed Controls */}
                         <ButtonGroup size="sm">
                             {[0.5, 1, 1.5, 2].map((s) => (
                                 <Button

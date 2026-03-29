@@ -1,13 +1,14 @@
 /**
- * Preview: Presentational display extracting educational and professional markers into a styled section block.
+ * PREVIEW: Component displaying the author's educational background and job title.
  */
 
 /**
- * Generates an isolated box containing formal credentials applying the standard internal glassmorphic class structures.
- * @param {Object} props - Sourced configurations.
- * @param {string} props.education - Educational achievement strings.
- * @param {string} props.title - Professional occupational role definition.
- * @returns {JSX.Element} Simple display div with distinct border styles.
+ * Renders a styled informational block highlighting academic credentials and current role.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {string} props.education - Highest educational degree or institution details.
+ * @param {string} props.title - Current professional job title.
+ * @returns {JSX.Element} The rendered background information block.
  */
 const AboutBackground = ({ education, title }) => {
     return (

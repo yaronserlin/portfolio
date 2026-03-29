@@ -1,5 +1,5 @@
 /**
- * Preview: Structured export containing hardcoded personal information, skills, and fallback project objects.
+ * PREVIEW: Static configuration database defining the foundational personal profile constants.
  */
 
 import profileImg from '../assets/profile.png';

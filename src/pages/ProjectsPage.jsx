@@ -1,5 +1,5 @@
 /**
- * Preview: A gallery-style page listing the dynamically loaded suite of GitHub repository projects associated with the owner.
+ * PREVIEW: Projects gallery page displaying a grid of the author's work, including loading states.
  */
 
 import { useContext } from "react";
@@ -9,14 +9,17 @@ import ProjectGrid from "../components/ProjectGrid";
 import { PortfolioContext } from "../context/PortfolioContext";
 
 /**
- * Handles the display logic for the projects iteration section, rendering loading states or grid listings based on application state context.
- * @param {Object} props - The incoming properties.
- * @param {Array<Object>} props.projects - An array filled with project instances harvested primarily from external hubs (GitHub).
- * @returns {JSX.Element} The composed Projects page.
+ * Renders the portfolio projects section. Integrates with the global context to check
+ * data-fetching state, displaying either a loading spinner or the populated grid of repositories.
+ * 
+ * @param {Object} props - Component properties.
+ * @param {Array<Object>} props.projects - Array of project data objects to display.
+ * @returns {JSX.Element} The rendered projects page.
  */
 const ProjectsPage = ({ projects }) => {
     const { isLoadingProjects } = useContext(PortfolioContext);
 
+    // Provide a loading state overlay while fetching repository data
     if (isLoadingProjects) {
         return (
             <Container
@@ -37,6 +40,7 @@ const ProjectsPage = ({ projects }) => {
         );
     }
 
+    // Guard clause for empty project list scenarios
     if (!projects || projects.length === 0) {
         return (
             <Container
