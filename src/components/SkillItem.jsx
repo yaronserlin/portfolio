@@ -19,22 +19,11 @@
  * @returns {React.ReactElement} Skill item with icon and name
  */
 
-import { getSkillIcon } from "../utils/skillIcons";
+import LanguageBadge from './LanguageBadge';
 
 const SkillItem = ({ skill }) => {
-    const IconComponent = getSkillIcon(skill.name);
-
     return (
-        <div className="skill-item">
-            <div className="skill-icon-wrapper">
-                {IconComponent ? (
-                    <IconComponent className="skill-icon" title={skill.name} />
-                ) : (
-                    <div className="skill-icon-placeholder">{skill.name.charAt(0)}</div>
-                )}
-            </div>
-            <span className="skill-name">{skill.name}</span>
-        </div>
+        <LanguageBadge language={skill.name} />
     );
 };
 

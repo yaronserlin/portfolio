@@ -36,7 +36,8 @@ export const portfolioDb = {
             items: [
                 { name: "React" },
                 { name: "JavaScript" },
-                { name: "HTML/CSS" },
+                { name: "HTML" },
+                { name: "CSS" },
                 { name: "Bootstrap" }
             ]
         },
@@ -44,16 +45,23 @@ export const portfolioDb = {
             category: "Backend",
             items: [
                 { name: "Node.js" },
+                { name: "Express" },
+                { name: "MongoDB" },
+                { name: "SQL" },
+                { name: "REST API" },
                 { name: "Python" },
-                { name: "Java" }
+                { name: "Java" },
+                { name: "JavaFX" }
             ]
         },
         {
             category: "Tools & Languages",
             items: [
-                { name: "Git & Version Control" },
+                { name: "Git" },
+                { name: "GitHub" },
+                { name: "Linux" },
                 { name: "C++" },
-                { name: "C" }
+                { name: "C" },
             ]
         }
     ],

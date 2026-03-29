@@ -13,9 +13,23 @@ import {
     SiGo,
     SiRust,
     SiReact,
-    SiDart
+    SiDart,
+    SiBootstrap,
+    SiNodedotjs,
+    SiExpress,
+    SiMongodb
 } from 'react-icons/si';
-import { FaTerminal, FaJava, FaCss3Alt } from 'react-icons/fa';
+import {
+    FaTerminal,
+    FaJava,
+    FaCss3Alt,
+    FaDatabase,
+    FaNetworkWired,
+    FaGitAlt,
+    FaGithub,
+    FaMicrochip,
+    FaLinux
+} from 'react-icons/fa';
 import { TbBrandCSharp } from 'react-icons/tb';
 
 // Map languages to their official colors and React Icons
@@ -36,6 +50,17 @@ const languageMap = {
     'Rust': { icon: SiRust, color: '#000000', text: 'white' },
     'React': { icon: SiReact, color: '#61DAFB', text: 'black' },
     'Dart': { icon: SiDart, color: '#0175C2', text: 'white' },
+    'Bootstrap': { icon: SiBootstrap, color: '#7952B3', text: 'white' },
+    'Node.js': { icon: SiNodedotjs, color: '#339933', text: 'white' },
+    'Express': { icon: SiExpress, color: '#000000', text: 'white' },
+    'MongoDB': { icon: SiMongodb, color: '#47A248', text: 'white' },
+    'SQL': { icon: FaDatabase, color: '#003B57', text: 'white' },
+    'REST API': { icon: FaNetworkWired, color: '#005571', text: 'white' },
+    'JavaFX': { icon: FaJava, color: '#007396', text: 'white' },
+    'Git': { icon: FaGitAlt, color: '#F05032', text: 'white' },
+    'GitHub': { icon: FaGithub, color: '#181717', text: 'white' },
+    'Assembly': { icon: FaMicrochip, color: '#5E6B7C', text: 'white' },
+    'Linux': { icon: FaLinux, color: '#FCC624', text: 'black' },
     // Default fallback
     'default': { icon: FaTerminal, color: '#6c757d', text: 'white' }
 };
