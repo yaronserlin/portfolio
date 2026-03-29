@@ -1,46 +1,29 @@
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+/**
+ * Application Entry Point - Portfolio Application Bootstrap
+ * 
+ * This is the main entry point for the React application. It initializes the React root,
+ * sets up routing with React Router, and wraps the entire application with the PortfolioProvider
+ * context to make portfolio data available throughout the component tree.
+ * 
+ * Component Hierarchy:
+ * - React.StrictMode (development mode checks)
+ * - BrowserRouter (client-side routing)
+ * - PortfolioProvider (global state management)
+ * - App (main application component)
+ */
 
-
-import './styles/index.css';
-import './styles/variables.css';
-import './styles/themes.css';
-
-import App from './App.jsx'
-
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom';
+import App from './App.jsx'
+import { PortfolioProvider } from './context/PortfolioContext.jsx'
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router";
-
-import Home from './pages/Home.jsx';
-// import AboutMe from './pages/AboutMe.jsx';
-// import Projects from './pages/Projects.jsx';
-// import Contact from './pages/Contact.jsx';
-// import ProjectDetails from './pages/ProjectDetails.jsx';
-import { StrictMode } from 'react';
-
-let router = createBrowserRouter([
-  {
-    path: "/",
-    Component: App,
-    children: [
-      { path: '/', Component: Home },
-      // { path: '/about', Component: AboutMe },
-      // { path: '/projects', Component: Projects },
-      // { path: '/contact', Component: Contact },
-      // { path: '/projects/:projectId', Component: ProjectDetails }
-
-    ]
-  },
-]);
-
-createRoot(root).render(
+createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
-);
+    <BrowserRouter>
+      <PortfolioProvider>
+        <App />
+      </PortfolioProvider>
+    </BrowserRouter>
+  </StrictMode>,
+)
