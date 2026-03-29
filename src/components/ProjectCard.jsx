@@ -42,27 +42,29 @@ const ProjectCard = ({ project }) => {
           transition: 'all 0.3s ease'
         }}
         onMouseEnter={(e) => {
-            // Apply lifting shadow and scale effect to card elements
-            e.currentTarget.style.transform = 'translateY(-8px)';
-            e.currentTarget.style.boxShadow = '0 12px 24px rgba(0, 0, 0, 0.15)';
-            e.currentTarget.querySelector('.project-image').style.transform = 'scale(1.05)';
-            const overlay = e.currentTarget.querySelector('.play-overlay');
-            if (overlay) overlay.style.opacity = '1';
+          // Apply lifting shadow and scale effect to card elements
+          e.currentTarget.style.transform = 'translateY(-8px)';
+          e.currentTarget.style.boxShadow = '0 12px 24px rgba(0, 0, 0, 0.15)';
+          e.currentTarget.querySelector('.project-image').style.transform = 'scale(1.05)';
+          const overlay = e.currentTarget.querySelector('.play-overlay');
+          if (overlay) overlay.style.opacity = '1';
         }}
         onMouseLeave={(e) => {
-            // Revert visual states back to origin
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.06)';
-            e.currentTarget.querySelector('.project-image').style.transform = 'scale(1)';
-            const overlay = e.currentTarget.querySelector('.play-overlay');
-            if (overlay) overlay.style.opacity = '0';
+          // Revert visual states back to origin
+          e.currentTarget.style.transform = 'translateY(0)';
+          e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.06)';
+          e.currentTarget.querySelector('.project-image').style.transform = 'scale(1)';
+          const overlay = e.currentTarget.querySelector('.play-overlay');
+          if (overlay) overlay.style.opacity = '0';
         }}
       >
+
         <div
           style={{
             position: 'relative',
             overflow: 'hidden',
-            height: '200px'
+            height: '200px',
+            padding: '20px'
           }}
         >
           <OptimizedImage
