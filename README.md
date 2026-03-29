@@ -42,6 +42,20 @@ portfolio/
 │   └── main.jsx            # Application entry point
 ```
 
+## ⚙️ Local Setup (For Reviewers)
+
+If you wish to run this repository locally to test the application or review the codebase in action:
+
+1. **Clone & Install**: `git clone` the repository and run `npm install`.
+2. **Configure Environment Variables:**
+   Create a `.env` file in the root directory and add your EmailJS configuration. Use the following template if you wish to test the contact form:
+   ```env
+   VITE_EMAILJS_PUBLIC_KEY=your_public_key
+   VITE_EMAILJS_SERVICE_ID=your_service_id
+   VITE_EMAILJS_TEMPLATE_ID=your_template_id
+   ```
+3. **Run**: Execute `npm run dev` to launch the local Vite development server.
+
 ## 👨‍💻 About Me
 
 I'm a Full Stack Developer passionate about solving complex problems through clean architecture and continuous learning. I specialize in building intelligent, interactive web applications and thrive in dynamic team environments. 
