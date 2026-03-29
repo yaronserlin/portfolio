@@ -44,6 +44,7 @@ export const fetchGitHubProjects = async () => {
                     language: repo.language,
                     languages: [repo.language],
                     repoName: repo.name,
+                    defaultBranch: repo.default_branch,
                 };
 
                 return projectObj;
@@ -62,7 +63,7 @@ export const fetchGitHubProjects = async () => {
             }
 
             try {
-                const mediaUrls = await checkMediaAvailability(project.repoName);
+                const mediaUrls = await checkMediaAvailability(project.repoName, project.defaultBranch);
                 project.image = mediaUrls.image;
                 project.video = mediaUrls.video;
                 project.gif = mediaUrls.gif;
@@ -119,8 +120,8 @@ const fetchLanguageBreakdown = async (repoName) => {
  * @param {string} repoName - Valid GitHub repository reference.
  * @returns {Promise<{ image: string|null, video: string|null, gif: string|null }>} Accessible media URL endpoints mapping.
  */
-const checkMediaAvailability = async (repoName) => {
-    const baseUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repoName}/refs/heads/main/media`;
+const checkMediaAvailability = async (repoName, defaultBranch = 'main') => {
+    const baseUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repoName}/refs/heads/${defaultBranch}/media`;
 
     const mediaObj = {
         image: null,
