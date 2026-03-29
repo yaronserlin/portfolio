@@ -1,100 +1,50 @@
-# Yaron Serlin - Full Stack Developer Portfolio
+# Yaron Serlin - Personal Developer Portfolio
 
-Welcome to the source code for my personal developer portfolio! This project showcases my skills, experience, and the software projects I've built. The application is built using modern web development practices with React, Bootstrap, and Vite.
+Welcome to the source code of my personal developer portfolio. This repository serves as both the codebase for my live portfolio website and a practical demonstration of my technical skills, coding standards, and architectural approach to modern web development.
 
-## 🚀 Live Demo
-
-[Visit My Portfolio](https://yaronserlin.github.io/portfolio) *(Update link to your deployed Render/GitHub Pages URL)*
+**Note:** This repository is intended for my personal use and as a work example for recruiters, hiring managers, and peers.
 
 ## 🛠️ Technology Stack
+
+This project is built using modern, industry-standard web technologies:
 
 - **Framework**: [React 19](https://react.dev/)
 - **Build Tool**: [Vite](https://vitejs.dev/)
 - **Styling**: [Bootstrap 5](https://getbootstrap.com/) & [React-Bootstrap](https://react-bootstrap.github.io/)
 - **Routing**: [React Router DOM v7](https://reactrouter.com/)
-- **Icons**: [React Icons](https://react-icons.github.io/react-icons/)
-- **Email Service**: [EmailJS](https://www.emailjs.com/)
+- **External Integration**: GitHub REST API (for dynamic project fetching) & EmailJS (for serverless contact forms)
 
-## 📂 Project Structure
+## 🏗️ Architecture & Best Practices
+
+In building this portfolio, I prioritized clean, maintainable, and scalable code. Key highlights of my approach include:
+
+- **Modular Components**: The UI is broken down into small, highly reusable React components (e.g., `ProjectCard`, `SkillCategory`, `OptimizedImage`).
+- **Global State Management**: Utilizing the React Context API (`PortfolioContext`) to efficiently manage and distribute application state, including dynamically fetched GitHub repository metadata.
+- **Custom Hooks**: Encapsulating complex, stateful logic (such as form validation and EmailJS network requests in `useContactForm.js`) to keep UI components pure and focused strictly on the view layer.
+- **Comprehensive Documentation**: The entire codebase adheres strictly to professional commenting standards, including root-level Preview comments, comprehensive JSDoc typings for all functions/components, and intentional inline logic documentation.
+- **Robust Error Handling & Fallbacks**: Implementing loading states, safe fallback images, and utilizing a local failover database if the external GitHub API is unreachable or rate-limited.
+
+## 📂 Codebase Navigation
+
+If you are reviewing my code, here is a quick overview of the application's structure:
 
 ```text
 portfolio/
-├── public/                 # Static assets
 ├── src/
-│   ├── assets/             # Images, icons, and localized media
-│   ├── components/         # Reusable UI components (Nav, Footer, Cards, etc.)
-│   ├── context/            # React Context providers (PortfolioContext)
-│   ├── data/               # Hardcoded fallback data and configuration
-│   ├── hooks/              # Custom React hooks (useContactForm)
-│   ├── pages/              # Route-level page components
-│   ├── services/           # External API integrations (GitHub Service)
-│   ├── utils/              # Helper functions and validators
-│   ├── App.jsx             # Main application layout and routing
+│   ├── components/         # Reusable presentation and layout components
+│   ├── context/            # Application-wide React Context providers
+│   ├── data/               # Static fallback data configurations
+│   ├── hooks/              # Custom React hooks for abstracted logic
+│   ├── pages/              # Top-level route definitions (Home, About, Projects, Contact)
+│   ├── services/           # External API fetching logic (GitHub endpoints)
+│   ├── utils/              # Helper functions, form validators, etc.
+│   ├── App.jsx             # Main application layout and router wrapper
 │   └── main.jsx            # Application entry point
-├── .env.example            # Example environment variables required for EmailJS
-├── index.html              # HTML template
-├── package.json            # Project dependencies and scripts
-└── vite.config.js          # Vite bundler configuration
 ```
 
-## ⚙️ Installation & Setup
+## 👨‍💻 About Me
 
-To run this project locally on your machine, follow these steps:
+I'm a Full Stack Developer passionate about solving complex problems through clean architecture and continuous learning. I specialize in building intelligent, interactive web applications and thrive in dynamic team environments. 
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yaronserlin/portfolio.git
-   cd portfolio
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Configure Environment Variables:**
-   Create a `.env` file in the root directory and add your EmailJS configuration. Use the following template if you wish to test the contact form:
-   ```env
-   VITE_EMAILJS_PUBLIC_KEY=your_public_key
-   VITE_EMAILJS_SERVICE_ID=your_service_id
-   VITE_EMAILJS_TEMPLATE_ID=your_template_id
-   ```
-
-4. **Start the development server:**
-   ```bash
-   npm run dev
-   ```
-   The application will be available at `http://localhost:5173`.
-
-## 📦 Building for Production
-
-To create a production-ready build, run:
-```bash
-npm run build
-```
-The optimized files will be generated in the `dist` folder. You can preview the production build locally using:
-```bash
-npm run preview
-```
-
-## ☁️ Deployment
-
-This project is configured optimally for zero-config deployments on platforms like **Render**, **Vercel**, or **Netlify**.
-
-**Recommended Deployment Settings (Render.com / Vercel):**
-- **Build Command:** `npm run build`
-- **Publish Directory:** `dist`
-- **Environment Variables:** Make sure to inject your `VITE_EMAILJS_*` keys into your hosting provider's dashboard so the contact form works in production.
-
-## 📝 Code Quality & Documentation
-
-All components, hooks, and utilities are thoroughly documented using standardized JSDoc comments to ensure long-term maintainability. 
-
-## 👨‍💻 Author
-
-**Yaron Serlin**
-- [LinkedIn](https://www.linkedin.com/in/yaron-serlin)
-- [GitHub](https://github.com/yaronserlin)
-
----
-*If you find this repository helpful, feel free to give it a ⭐!*
+- [LinkedIn Profile](https://www.linkedin.com/in/yaron-serlin)
+- [GitHub Profile](https://github.com/yaronserlin)
