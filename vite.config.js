@@ -7,8 +7,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        // השתקת האזהרות המיושנות שמגיעות מספריות חיצוניות כמו בוטסטראפ
-        silenceDeprecations: ['color-functions', 'global-builtin', 'import', 'mixed-decls'],
+        // Silence deprecation warnings from external libraries like bootstrap
+        silenceDeprecations: ['color-functions', 'global-builtin', 'import', 'if-function'],
       },
     },
   },

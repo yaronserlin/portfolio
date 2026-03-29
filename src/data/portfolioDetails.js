@@ -16,6 +16,9 @@
  * Note: Currently active projects are displayed. Archived projects can be
  * uncommented from the projects array to make them visible.
  */
+import profileImg from '../assets/profile.png';
+import automataGif from '../assets/automata-editor.gif';
+import automataVid from '../assets/Automata-editor.mov';
 
 export const portfolioDb = {
     personalInfo: {
@@ -25,7 +28,7 @@ export const portfolioDb = {
         bio: "I'm a passionate software developer focused on creating intelligent, efficient systems. With expertise in full-stack web development and algorithmic problem-solving, I enjoy turning complex challenges into elegant solutions. Currently pursuing my degree in Computer Science while building real-world projects.",
         longBio: "As a full-stack developer, I combine strong fundamentals in computer science with practical experience in modern web technologies. I'm particularly interested in building scalable applications, exploring AI algorithms, and creating tool applications that solve real problems. When I'm not coding, you'll find me diving the world's oceans or catching wind on a kite board.",
         about: "Software developer passionate about building smart and efficient systems. Beyond coding, I'm also a certified Dive Master and a kitesurfing enthusiast.",
-        image: "src/assets/profile.png"
+        image: profileImg
     },
     skills: [
         {
@@ -82,8 +85,8 @@ export const portfolioDb = {
             url: "https://github.com/yaronserlin/automata-editor",
             liveUrl: "https://yaronserlin.github.io/automata-editor/",
             image: "https://raw.githubusercontent.com/yaronserlin/automata-editor/refs/heads/main/screenshot.png",
-            gif: "src/assets/automata-editor.gif",
-            video: "src/assets/Automata-editor.mov"  // Add your .mov or .mp4 here: "src/assets/automata-editor.mp4"
+            gif: automataGif,
+            video: automataVid  // Add your .mov or .mp4 here: "src/assets/automata-editor.mp4"
         },
         // {
         //     id: 4,
