@@ -2,7 +2,7 @@
  * PREVIEW: Static configuration database defining the foundational personal profile constants.
  */
 
-import profileImg from '../assets/profile.png';
+import profileImg from '../assets/profile.jpg';
 
 export const portfolioDb = {
     personalInfo: {
