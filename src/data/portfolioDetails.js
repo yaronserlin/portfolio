@@ -64,7 +64,7 @@ export const portfolioDb = {
         email: "yaron.serlin.dev@gmail.com",
         phone: "+972-54-257-0203",
         facebook: "https://www.facebook.com/yaron.serlin",
-        linkedin: "https://www.linkedin.com/in/yaron-serlin",
+        linkedin: "https://www.linkedin.com/in/yaronserlin",
         github: "https://github.com/yaronserlin"
     }
 };
