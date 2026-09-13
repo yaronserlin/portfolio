@@ -17,20 +17,10 @@ const SkillCategory = ({ category, items }) => {
     return (
         <Col lg={4} md={6} className="mb-4">
             <div
-                className="h-100 p-5 bg-white rounded"
+                className="h-100 p-5 bg-white rounded skill-category-card"
                 style={{
                     borderRadius: '12px',
-                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)',
-                    borderTop: '4px solid var(--bs-primary)',
-                    transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-                }}
-                onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-4px)';
-                    e.currentTarget.style.boxShadow = '0 12px 24px rgba(0, 0, 0, 0.12)';
-                }}
-                onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.06)';
+                    borderTop: '4px solid var(--bs-primary)'
                 }}
             >
                 <h2 className="h4 mb-4 fw-bold text-primary">

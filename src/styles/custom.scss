@@ -25,3 +25,114 @@ $body-bg: #f8f9fa; // לבן-אפרפר נקי (עדיף על לבן בוהק ש
 $body-color: #2b2d42; // אפור כהה מאוד (קריא ורך יותר משחור מוחלט)
 
 @import "bootstrap/scss/bootstrap";
+
+// Hover/focus effects extracted from inline JS event handlers so keyboard-focused
+// elements get the same visual feedback as mouse hover (:focus-visible / :focus-within).
+
+.project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+.project-card:hover,
+.project-card:focus-within {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+.project-card:hover .project-image,
+.project-card:focus-within .project-image {
+  transform: scale(1.05);
+}
+.project-card:hover .play-overlay,
+.project-card:focus-within .play-overlay,
+.play-overlay:focus-visible {
+  opacity: 1;
+}
+
+.play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: rgba(0, 180, 216, 0.9);
+  border: 2px solid white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 0;
+  z-index: 10;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  padding: 0;
+  color: white;
+  font-size: 1.1rem;
+}
+.play-overlay:hover,
+.play-overlay:focus-visible {
+  background: rgba(2, 62, 138, 0.95);
+  transform: translate(-50%, -50%) scale(1.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.skill-category-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+.skill-category-card:hover,
+.skill-category-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.social-icon-link {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+}
+.social-icon-link:hover,
+.social-icon-link:focus-visible {
+  color: var(--bs-secondary);
+  transform: translateY(-2px);
+}
+
+.contact-email-link {
+  color: var(--bs-body-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.contact-email-link:hover,
+.contact-email-link:focus-visible {
+  color: var(--bs-secondary);
+  text-decoration: underline;
+}
+
+.btn-lift {
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+.btn-lift:hover,
+.btn-lift:focus-visible {
+  transform: translateY(-2px);
+}
+
+.hero-image {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.hero-image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 40px rgba(2, 62, 138, 0.2);
+}
+
+.interest-item {
+  color: var(--bs-body-color);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.interest-item:hover {
+  transform: translateX(8px);
+  color: var(--bs-primary);
+}

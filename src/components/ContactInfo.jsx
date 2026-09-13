@@ -35,20 +35,10 @@ const ContactInfo = ({ contactInfo }) => {
                 </h3>
                 <a
                     href={`mailto:${contactInfo.email}`}
+                    className="contact-email-link"
                     style={{
-                        color: 'var(--bs-body-color)',
-                        textDecoration: 'none',
                         fontSize: '1.125rem',
-                        fontWeight: '500',
-                        transition: 'color 0.3s ease'
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.color = 'var(--bs-secondary)';
-                        e.currentTarget.style.textDecoration = 'underline';
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.color = 'var(--bs-body-color)';
-                        e.currentTarget.style.textDecoration = 'none';
+                        fontWeight: '500'
                     }}
                 >
                     {contactInfo.email}

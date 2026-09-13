@@ -30,14 +30,11 @@ const HeroCTA = () => {
                 variant="primary"
                 size="lg"
                 onClick={handleViewWork}
-                className="fw-bold"
+                className="fw-bold btn-lift"
                 style={{
                     padding: '0.75rem 2rem',
-                    fontSize: '1rem',
-                    transition: 'all 0.3s ease'
+                    fontSize: '1rem'
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-                onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
             >
                 View My Work
             </Button>
@@ -45,24 +42,11 @@ const HeroCTA = () => {
                 variant="outline-primary"
                 size="lg"
                 onClick={handleGetInTouch}
-                className="fw-bold"
+                className="fw-bold btn-lift"
                 style={{
                     padding: '0.75rem 2rem',
                     fontSize: '1rem',
-                    border: '2px solid var(--bs-primary)',
-                    transition: 'all 0.3s ease'
-                }}
-                onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.background = 'var(--bs-primary)';
-                    e.currentTarget.style.borderColor = 'var(--bs-primary)';
-                    e.currentTarget.style.color = 'white';
-                }}
-                onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.borderColor = 'var(--bs-primary)';
-                    e.currentTarget.style.color = 'var(--bs-primary)';
+                    border: '2px solid var(--bs-primary)'
                 }}
             >
                 Get in Touch

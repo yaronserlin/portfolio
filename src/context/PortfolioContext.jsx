@@ -4,7 +4,7 @@
 
 import React, { createContext, useState, useEffect } from 'react';
 import { portfolioDb } from '../data/portfolioDetails';
-import { fetchGitHubProjects } from '../services/githubService';
+import { fetchGitHubProjects, deriveSkillsFromProjects, categorizeSkill } from '../services/githubService';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const PortfolioContext = createContext();
@@ -31,16 +31,35 @@ export const PortfolioProvider = ({ children }) => {
                 const gitHubProjects = await fetchGitHubProjects();
 
                 if (gitHubProjects.length > 0) {
-                    setPortfolioData(prev => ({
-                        ...prev,
-                        projects: gitHubProjects
-                    }));
-                } else {
-                    console.log('Using local projects as fallback');
+                    setPortfolioData(prev => {
+                        const existingSkillNames = prev.skills.flatMap(
+                            group => group.items.map(item => item.name)
+                        );
+                        const discoveredSkills = deriveSkillsFromProjects(gitHubProjects, existingSkillNames);
+
+                        const skills = discoveredSkills.length > 0
+                            ? prev.skills.map(group => ({
+                                ...group,
+                                items: [
+                                    ...group.items,
+                                    ...discoveredSkills
+                                        .filter(name => categorizeSkill(name) === group.category)
+                                        .map(name => ({ name }))
+                                ]
+                            }))
+                            : prev.skills;
+
+                        return {
+                            ...prev,
+                            projects: gitHubProjects,
+                            skills
+                        };
+                    });
                 }
             } catch (error) {
-                console.error('Error loading GitHub projects:', error);
-                console.log('Using local projects as fallback');
+                if (import.meta.env.DEV) {
+                    console.error('Error loading GitHub projects, using local fallback:', error);
+                }
             } finally {
                 // Ensure the loading overlay dismisses regardless of fetch success/failure
                 setIsLoadingProjects(false);

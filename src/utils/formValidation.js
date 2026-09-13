@@ -22,7 +22,7 @@ export const validateContactForm = (formData) => {
         return { isValid: false, error: "Please enter your email address" };
     }
 
-    if (!formData.email.includes("@") || !formData.email.includes(".")) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
         return { isValid: false, error: "Please enter a valid email address" };
     }
 
@@ -47,5 +47,6 @@ export const getInitialFormState = () => ({
     name: "",
     email: "",
     subject: "",
-    message: ""
+    message: "",
+    honeypot: ""
 });

@@ -35,6 +35,22 @@ const ContactForm = () => {
             )}
 
             <Form onSubmit={handleSubmit}>
+                <Form.Group
+                    style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}
+                    aria-hidden="true"
+                >
+                    <Form.Label htmlFor="honeypot-field">Leave this field empty</Form.Label>
+                    <Form.Control
+                        type="text"
+                        id="honeypot-field"
+                        name="honeypot"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={formData.honeypot}
+                        onChange={handleChange}
+                    />
+                </Form.Group>
+
                 <Form.Group className="mb-3">
                     <Form.Label className="fw-bold">Name</Form.Label>
                     <Form.Control
@@ -98,10 +114,6 @@ const ContactForm = () => {
                     {isLoading ? "Sending..." : "Send Message"}
                 </Button>
             </Form>
-
-            <p className="text-muted text-center mt-3 small">
-                We'll never share your email. Unsubscribe at any time.
-            </p>
         </div>
     );
 };

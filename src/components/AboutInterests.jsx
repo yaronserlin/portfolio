@@ -29,21 +29,11 @@ const AboutInterests = ({ interests = [] }) => {
                 {interests.map((interest, index) => (
                     <li
                         key={index}
-                        className="mb-2"
+                        className="mb-2 interest-item"
                         style={{
                             fontSize: '1rem',
-                            color: 'var(--bs-body-color)',
                             paddingLeft: '0.5rem',
-                            transition: 'transform 0.2s ease, color 0.2s ease',
                             cursor: 'pointer'
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.transform = 'translateX(8px)';
-                            e.currentTarget.style.color = 'var(--bs-primary)';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.transform = 'translateX(0)';
-                            e.currentTarget.style.color = 'var(--bs-body-color)';
                         }}
                     >
                         {interest}

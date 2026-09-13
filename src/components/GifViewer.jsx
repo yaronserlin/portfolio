@@ -61,20 +61,6 @@ const GifViewer = ({ gifSrc, title, onClose }) => {
         setSpeed(newSpeed);
     };
 
-    /**
-     * Allows closing the modal directly via the Escape key shortcut.
-     */
-    useEffect(() => {
-        const handleEscape = (e) => {
-            if (e.key === 'Escape') {
-                onClose();
-            }
-        };
-
-        window.addEventListener('keydown', handleEscape);
-        return () => window.removeEventListener('keydown', handleEscape);
-    }, [onClose]);
-
     return (
         <Modal
             show={true}

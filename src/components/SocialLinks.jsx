@@ -65,20 +65,7 @@ const SocialLinks = ({ contactInfo, variant = "links", className = "" }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     title="Facebook"
-                    style={{
-                        color: 'rgba(255, 255, 255, 0.8)',
-                        textDecoration: 'none',
-                        fontSize: '1.25rem',
-                        transition: 'all 0.3s ease'
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.color = 'var(--bs-secondary)';
-                        e.currentTarget.style.transform = 'translateY(-2px)';
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
-                        e.currentTarget.style.transform = 'translateY(0)';
-                    }}
+                    className="social-icon-link"
                 >
                     <FaFacebook />
                 </a>
@@ -90,20 +77,7 @@ const SocialLinks = ({ contactInfo, variant = "links", className = "" }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     title="GitHub"
-                    style={{
-                        color: 'rgba(255, 255, 255, 0.8)',
-                        textDecoration: 'none',
-                        fontSize: '1.25rem',
-                        transition: 'all 0.3s ease'
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.color = 'var(--bs-secondary)';
-                        e.currentTarget.style.transform = 'translateY(-2px)';
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
-                        e.currentTarget.style.transform = 'translateY(0)';
-                    }}
+                    className="social-icon-link"
                 >
                     <FaGithub />
                 </a>
@@ -115,20 +89,7 @@ const SocialLinks = ({ contactInfo, variant = "links", className = "" }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     title="LinkedIn"
-                    style={{
-                        color: 'rgba(255, 255, 255, 0.8)',
-                        textDecoration: 'none',
-                        fontSize: '1.25rem',
-                        transition: 'all 0.3s ease'
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.color = 'var(--bs-secondary)';
-                        e.currentTarget.style.transform = 'translateY(-2px)';
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.color = 'rgba(255, 255, 255, 0.8)';
-                        e.currentTarget.style.transform = 'translateY(0)';
-                    }}
+                    className="social-icon-link"
                 >
                     <FaLinkedin />
                 </a>

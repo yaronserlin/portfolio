@@ -31,8 +31,18 @@ const OptimizedImage = ({
     loading = "lazy",
     style = {}
 }) => {
-    const [imageError, setImageError] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    const [trackedSrc, setTrackedSrc] = useState(src);
+    const [imageError, setImageError] = useState(!src);
+    const [isLoading, setIsLoading] = useState(Boolean(src));
+
+    // A missing/empty src never fires a native load or error event, so it has to be
+    // treated as an immediate error to reach the fallback instead of spinning forever.
+    // Adjusting state during render (rather than in an effect) avoids an extra commit.
+    if (src !== trackedSrc) {
+        setTrackedSrc(src);
+        setImageError(!src);
+        setIsLoading(Boolean(src));
+    }
 
     /**
      * Resolves loading state once the native img element successfully parses the source byte stream.

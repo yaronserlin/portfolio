@@ -44,6 +44,15 @@ const useContactForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Honeypot field: real visitors never fill this in, so treat a filled value as a bot
+        // submission and pretend success without actually sending anything.
+        if (formData.honeypot) {
+            setSubmitted(true);
+            setFormData(getInitialFormState());
+            setTimeout(() => setSubmitted(false), 5000);
+            return;
+        }
+
         // Enforce validation constraints prior to network requests
         const { isValid, error: validationError } = validateContactForm(formData);
         if (!isValid) {
@@ -75,7 +84,9 @@ const useContactForm = () => {
                 setSubmitted(false);
             }, 5000);
         } catch (emailError) {
-            console.error("Email send error:", emailError);
+            if (import.meta.env.DEV) {
+                console.error("Email send error:", emailError);
+            }
             setIsLoading(false);
             setError("Failed to send message. Please try again or contact me directly via email.");
         }
