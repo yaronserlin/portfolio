@@ -4,6 +4,20 @@ Welcome to the source code of my personal developer portfolio. This repository s
 
 **Note:** This repository is intended for my personal use and as a work example for recruiters, hiring managers, and peers.
 
+## 👋 What Is This, in Plain Terms?
+
+This is the code behind my personal portfolio website — the online page where I show who I am,
+what I've built, and how to reach me. You don't need any coding background to make sense of it:
+
+- **About** – a bit about me and my background.
+- **Projects** – a live list of my public projects, pulled automatically from my GitHub profile.
+- **Skills** – the tools and technologies I work with.
+- **Contact** – a form to send me a message directly from the site.
+
+If you just want to look around the finished site, you don't need to do anything with this
+repository at all — it's simply where the site's code lives. Everything below this point is
+technical detail for developers who want to inspect, run, or build on the code itself.
+
 ## 🛠️ Technology Stack
 
 This project is built using modern, industry-standard web technologies:
