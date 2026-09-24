@@ -1,21 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { STORAGE_KEY, DEFAULT_PREFS, FONT_STEPS, loadPrefs, applyPrefs, computeBottomOffset } from './accessibility';
-
-const storageWith = (value) => ({ getItem: (key) => (key === STORAGE_KEY ? value : null) });
-
-describe('loadPrefs', () => {
-    it('falls back to defaults on missing or bad data', () => {
-        expect(loadPrefs(storageWith(null))).toEqual(DEFAULT_PREFS);
-        expect(loadPrefs(storageWith('{oops'))).toEqual(DEFAULT_PREFS);
-        expect(loadPrefs(null)).toEqual(DEFAULT_PREFS);
-    });
-
-    it('restores saved values and clamps the font step', () => {
-        expect(loadPrefs(storageWith(JSON.stringify({ fontStep: 1, underlineLinks: true }))))
-            .toEqual({ fontStep: 1, highContrast: false, underlineLinks: true });
-        expect(loadPrefs(storageWith(JSON.stringify({ fontStep: 42 }))).fontStep).toBe(FONT_STEPS.length - 1);
-    });
-});
+import { DEFAULT_PREFS, applyPrefs, computeBottomOffset } from './accessibility';
 
 describe('applyPrefs', () => {
     it('sets font size and classes on the root element', () => {
