@@ -7,6 +7,18 @@ const GITHUB_API_URL = 'https://api.github.com';
 const CACHE_KEY = 'github-projects-cache-v1';
 const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes
 
+// Repos that are not projects (profile README, GitHub Pages profile site) and should never
+// appear as project cards.
+const EXCLUDED_REPOS = new Set(['yaronserlin', 'yaronserlin.github.io']);
+
+// Headline projects, shown first in this order. Everything else follows, sorted by stars.
+const FEATURED_REPOS = ['MaintenanceSystemApp', 'cook-sync', 'ShareAndCopy', 'automata-editor'];
+
+const featuredRank = (repoName) => {
+    const index = FEATURED_REPOS.indexOf(repoName);
+    return index === -1 ? FEATURED_REPOS.length : index;
+};
+
 const logError = (...args) => {
     if (import.meta.env.DEV) {
         console.error(...args);
@@ -51,11 +63,11 @@ const writeCache = (projects) => {
  * app's internal project shape, ready for later language/media enrichment.
  *
  * @param {Array<Object>} repos - Raw repository payloads from the GitHub REST API.
- * @returns {Array<Object>} Mapped project objects sorted by star count, descending.
+ * @returns {Array<Object>} Mapped project objects: featured repos first, then by star count, descending.
  */
 const mapReposToProjects = (repos) => {
     return repos
-        .filter(repo => !repo.fork)
+        .filter(repo => !repo.fork && !EXCLUDED_REPOS.has(repo.name))
         .map((repo) => ({
             id: repo.id,
             title: repo.name
@@ -75,7 +87,7 @@ const mapReposToProjects = (repos) => {
             repoName: repo.name,
             defaultBranch: repo.default_branch,
         }))
-        .sort((a, b) => b.stars - a.stars);
+        .sort((a, b) => (featuredRank(a.repoName) - featuredRank(b.repoName)) || (b.stars - a.stars));
 };
 
 /**
@@ -264,9 +276,10 @@ export const extractTechnologies = (language, topics = []) => {
     return technologies.length > 0 ? technologies : ['GitHub'];
 };
 
-// Fallback technology tag assigned by extractTechnologies when a repo has no recognized
-// language/topic; it's a placeholder, not an actual skill, so it's excluded from discovery.
-const SKILL_DISCOVERY_IGNORE_LIST = new Set(['github']);
+// "github" is the fallback tag extractTechnologies assigns when a repo has no recognized
+// language/topic; it's a placeholder, not an actual skill. The rest are raw GitHub language
+// names that duplicate the curated list (HTML5/CSS3) or are build files, not skills.
+const SKILL_DISCOVERY_IGNORE_LIST = new Set(['github', 'html', 'css', 'scss', 'shell', 'dockerfile']);
 
 /**
  * Aggregates the technologies/languages already attached to fetched GitHub projects into a
