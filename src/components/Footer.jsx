@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { PortfolioContext } from "../context/PortfolioContext";
 import SocialLinks from "./SocialLinks";
+import { Link } from "react-router-dom";
 
 /**
  * Renders the global footer attached to the bottom of the page, drawing its metadata directly
@@ -30,6 +31,10 @@ const Footer = () => {
                     <Col md={6} className="mb-3 mb-md-0">
                         <p className="mb-0" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
                             <strong style={{ color: 'var(--bs-secondary)' }}>© {currentYear} {portfolioData.personalInfo.name}.</strong> All rights reserved.
+                        </p>
+                        <p className="mb-0 mt-1 small">
+                            <Link to="/privacy" className="text-light text-decoration-none me-3" style={{ opacity: 0.85 }}>Privacy Policy</Link>
+                            <Link to="/accessibility" className="text-light text-decoration-none" style={{ opacity: 0.85 }}>Accessibility</Link>
                         </p>
                     </Col>
                     <Col md={6} className="text-md-end">
