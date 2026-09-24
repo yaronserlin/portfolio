@@ -55,7 +55,7 @@ const ProjectsPage = ({ projects }) => {
             >
                 <SectionHeader
                     title="Projects"
-                    subtitle="Showcasing my recent work and portfolio"
+                    subtitle="Four full products I built solo - web, mobile and backend. Pick one to see screenshots and details."
                 />
                 <div className="text-center py-5">
                     <p className="text-muted">No projects available at the moment.</p>
@@ -77,7 +77,7 @@ const ProjectsPage = ({ projects }) => {
         >
             <SectionHeader
                 title="Projects"
-                subtitle="Showcasing my recent work and portfolio"
+                subtitle="Four full products I built solo - web, mobile and backend. Pick one to see screenshots and details."
             />
 
             <ProjectGrid projects={projects} />
