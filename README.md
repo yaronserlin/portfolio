@@ -72,7 +72,7 @@ If you wish to run this repository locally to test the application or review the
 
 ## 👨‍💻 About Me
 
-I'm a Full Stack Developer passionate about solving complex problems through clean architecture and continuous learning. I specialize in building intelligent, interactive web applications and thrive in dynamic team environments. 
+I'm a junior full-stack developer (React, Node.js, Java & Spring Boot) and a Computer Science student at the Open University of Israel (expected July 2027), looking for an entry-level remote developer role.
 
-- [LinkedIn Profile](https://www.linkedin.com/in/yaron-serlin)
+- [LinkedIn Profile](https://www.linkedin.com/in/yaronserlin)
 - [GitHub Profile](https://github.com/yaronserlin)
