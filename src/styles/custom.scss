@@ -254,3 +254,12 @@ $body-color: #2b2d42; // אפור כהה מאוד (קריא ורך יותר מש
     height: 280px !important;
   }
 }
+
+/* Accessibility menu (src/components/AccessibilityMenu.jsx) */
+.a11y-high-contrast body {
+  filter: contrast(1.25);
+}
+
+.a11y-underline-links a {
+  text-decoration: underline !important;
+}
