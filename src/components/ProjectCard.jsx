@@ -5,10 +5,10 @@
 import { Card, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { FaPlay } from 'react-icons/fa';
-import OptimizedImage from './OptimizedImage';
+import ImageCarousel from './ImageCarousel';
 import GifViewer from './GifViewer';
 import LanguageBadge from './LanguageBadge';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 /**
  * Renders an interactive card for a single project. The whole card opens the project's own page;
@@ -20,6 +20,8 @@ import { Link } from 'react-router-dom';
  */
 const ProjectCard = ({ project }) => {
   const [showGifModal, setShowGifModal] = useState(false);
+  const navigate = useNavigate();
+  const gallery = project.images?.length ? project.images : (project.image ? [{ src: project.image, alt: '' }] : []);
   const mediaSource = project.video || project.gif;
   const hasMedia = mediaSource && mediaSource.trim() !== '';
 
@@ -51,19 +53,12 @@ const ProjectCard = ({ project }) => {
             padding: '20px'
           }}
         >
-          {project.image ? (
-            <OptimizedImage
-              src={project.image}
-              alt={`${project.title} screenshot`}
-              className="project-image"
-              loading="lazy"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'contain',
-                transition: 'transform 0.3s ease',
-                background: 'linear-gradient(135deg, rgba(2, 62, 138, 0.1) 0%, rgba(0, 180, 216, 0.1) 100%)'
-              }}
+          {gallery.length > 0 ? (
+            <ImageCarousel
+              images={gallery}
+              title={project.title}
+              className="project-card-carousel"
+              onImageClick={() => navigate(`/projects/${project.repoName}`)}
             />
           ) : (
             <div
