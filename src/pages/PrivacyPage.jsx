@@ -15,7 +15,7 @@ const sections = [
     },
     {
         heading: '2. What Information Is Collected',
-        content: `This site collects no analytics, uses no cookies, and stores nothing in your browser. The only personal information processed is what you choose to send through the contact form: your name, email address, subject, and message content.`
+        content: `This site collects no analytics and uses no cookies. The only thing it stores in your browser is your accessibility menu settings (text size, contrast, and link underlining), saved in local storage on your own device and never sent anywhere. You can clear them with the menu's Reset button or by clearing your browser's site data. The only personal information processed is what you choose to send through the contact form: your name, email address, subject, and message content.`
     },
     {
         heading: '3. How the Contact Form Works',
