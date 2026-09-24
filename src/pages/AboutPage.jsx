@@ -7,6 +7,7 @@ import AboutBio from '../components/AboutBio';
 import AboutBackground from '../components/AboutBackground';
 import AboutInterests from '../components/AboutInterests';
 import HeroImage from '../components/HeroImage';
+import DownloadCVButton from '../components/DownloadCVButton';
 import SkillCategory from '../components/SkillCategory';
 
 /**
@@ -34,6 +35,7 @@ const AboutPage = ({ personalInfo, skills }) => {
                         <div>
                             <h1 className="display-5 fw-bold mb-3" style={{ color: 'var(--bs-dark)' }}>About Me</h1>
                             <AboutBio bio={personalInfo.bio} longBio={personalInfo.longBio} />
+                            <DownloadCVButton className="mt-3" />
                         </div>
                     </Col>
                 </Row>
