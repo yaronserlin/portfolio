@@ -196,3 +196,54 @@ $body-color: #2b2d42; // אפור כהה מאוד (קריא ורך יותר מש
     }
   }
 }
+
+// Image carousel (project cards and project pages)
+.image-carousel {
+  position: relative;
+  z-index: 2; // above the card's stretched link so arrows and swipe work
+  background: linear-gradient(135deg, rgba(2, 62, 138, 0.08) 0%, rgba(0, 180, 216, 0.08) 100%);
+  border-radius: 8px;
+  overflow: hidden;
+
+  .carousel, .carousel-inner, .carousel-item { height: 100%; }
+
+  .carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .carousel-control-prev, .carousel-control-next {
+    width: 2.25rem;
+    opacity: 0.85;
+  }
+
+  .carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    background-size: 55% 55%;
+    width: 1.9rem;
+    height: 1.9rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .carousel-indicators {
+    margin-bottom: 0.35rem;
+    [data-bs-target] { width: 8px; height: 8px; border-radius: 50%; background-color: #023e8a; border: 0; }
+  }
+}
+
+.image-carousel-counter {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 3;
+  font-size: 0.75rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+}
+
+.project-detail-carousel { background: #fff; }
