@@ -104,6 +104,12 @@ const ContactForm = () => {
                     />
                 </Form.Group>
 
+                <p className="text-secondary small mb-3">
+                    Submitting this form constitutes consent to process the details above
+                    for the purpose of replying to your inquiry, as described in the{' '}
+                    <a href="/privacy" target="_blank" rel="noreferrer">Privacy Policy</a>.
+                    The form is delivered via EmailJS, a third-party email service.
+                </p>
                 <Button
                     variant="primary"
                     type="submit"
