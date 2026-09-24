@@ -1,5 +1,5 @@
 /**
- * PREVIEW: Page for a single project - description, stack, links, screenshots and the full README,
+ * PREVIEW: Page for a single project - description, stack, links, a screenshot carousel and the full README,
  * all pulled live from the project's GitHub repository.
  */
 
@@ -7,7 +7,8 @@ import { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { PortfolioContext } from '../context/PortfolioContext';
-import { fetchProjectReadme } from '../services/githubService';
+import { buildGallery, fetchProjectReadme } from '../services/githubService';
+import ImageCarousel from '../components/ImageCarousel';
 import LanguageBadge from '../components/LanguageBadge';
 
 const pageStyle = {
@@ -68,8 +69,7 @@ const ProjectDetailPage = ({ projects }) => {
         );
     }
 
-    const screenshots = readme?.images || [];
-    const gallery = screenshots.length > 0 ? screenshots : (project.image ? [{ src: project.image, alt: project.title }] : []);
+    const gallery = buildGallery(project.image, readme?.images?.length ? readme.images : project.images);
 
     return (
         <Container as="section" className="min-vh-100 py-5 project-detail" style={pageStyle}>
@@ -95,30 +95,18 @@ const ProjectDetailPage = ({ projects }) => {
                         </Button>
                     </div>
                 </Col>
-                {gallery[0] && (
+                {gallery.length > 0 && (
                     <Col lg={5}>
-                        <a href={gallery[0].src} target="_blank" rel="noopener noreferrer">
-                            <img src={gallery[0].src} alt={gallery[0].alt || `${project.title} screenshot`} className="img-fluid rounded shadow-sm project-hero-image" />
-                        </a>
+                        <ImageCarousel
+                            images={gallery}
+                            title={project.title}
+                            height="440px"
+                            className="project-detail-carousel rounded shadow-sm"
+                            onImageClick={(i) => window.open(gallery[i].src, '_blank', 'noopener')}
+                        />
                     </Col>
                 )}
             </Row>
-
-            {gallery.length > 1 && (
-                <>
-                    <h2 className="h4 fw-bold mb-3">Screenshots</h2>
-                    <Row className="g-3 mb-5">
-                        {gallery.slice(1).map(img => (
-                            <Col key={img.src} xs={6} md={4} lg={3}>
-                                <a href={img.src} target="_blank" rel="noopener noreferrer" className="d-block project-thumb">
-                                    <img src={img.src} alt={img.alt || `${project.title} screenshot`} loading="lazy" className="w-100 h-100 rounded shadow-sm" />
-                                </a>
-                                {img.alt && <div className="small text-muted mt-1">{img.alt}</div>}
-                            </Col>
-                        ))}
-                    </Row>
-                </>
-            )}
 
             <h2 className="h4 fw-bold mb-3">About this project</h2>
             {readmeState === 'loading' && (
