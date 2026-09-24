@@ -57,10 +57,6 @@ const PrivacyPage = () => {
                         <p className="text-secondary" style={{ whiteSpace: 'pre-line', lineHeight: 1.8 }}>{s.content}</p>
                     </div>
                 ))}
-                <p className="text-secondary small mt-4">
-                    This document was prepared as a technical drafting aid and does not constitute legal advice;
-                    review by a qualified lawyer is recommended.
-                </p>
             </Container>
         </section>
     );
