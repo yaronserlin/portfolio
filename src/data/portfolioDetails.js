@@ -7,14 +7,14 @@ import profileImg from '../assets/profile.jpg';
 export const portfolioDb = {
     personalInfo: {
         name: "Yaron Serlin",
-        title: "Full Stack Software Developer | B.Sc. Computer Science",
-        education: "Open University - B.Sc. Computer Science (Final Year)",
+        title: "Junior Full-Stack Developer | React, Node.js, Java & Spring Boot",
+        education: "Open University of Israel - B.Sc. Computer Science (in progress, expected July 2027)",
 
-        bio: "I'm a Full Stack Developer specializing in building intelligent, interactive web applications. Recently, I've developed complex tools ranging from full-stack file-sharing systems to visual finite automata simulators. Now based in Melbourne, Australia on a Working Holiday Visa, I'm eager to bring my problem-solving skills to a dynamic tech team.",
+        bio: "Junior full-stack developer who builds complete products solo, from the database to the deployed app. My projects include a multi-tenant maintenance management system (React, Node.js, MongoDB), an Android recipe app with a Spring Boot API, a device-to-device file transfer PWA and a visual automata editor. Based in Israel / Australia and looking for an entry-level remote developer role.",
 
-        longBio: "As a Full Stack Developer, I bridge the gap between strong theoretical computer science fundamentals and practical, modern web technologies. I thrive on creating tangible solutions to complex problems—whether that's architecting a client-server file-sharing platform with database integration, or building interactive UI tools to visually map programming code. I'm passionate about clean code, scalable architecture, and continuous learning. Beyond the screen, I am a certified Dive Master and an avid kitesurfer—pursuits that have taught me focus, adaptability, and how to perform under pressure. Now living in Melbourne on a Working Holiday Visa, I'm excited to dive into my next professional challenge.",
+        longBio: "I'm a Computer Science student at the Open University of Israel (expected July 2027) and a junior full-stack developer. I like building things end to end: designing the data model, writing the API, building the UI, adding tests and shipping it. My main stack is React and Node.js on the web, and Java with Spring Boot on the backend and Android. Before software I worked as an agricultural mechanic and fabricator and served as a UAV pilot and operator in the IDF reserves - work that taught me to troubleshoot under pressure and finish what I start. Outside work I'm a certified Dive Master and a kitesurfer.",
 
-        about: "Software developer with a knack for building scalable web applications and interactive visual tools. Certified Dive Master, kitesurfer, and current Melbourne resident open to new opportunities.",
+        about: "Junior full-stack developer (React, Node.js, Java & Spring Boot) building complete web and mobile apps. Computer Science student at the Open University of Israel. Based in Israel / Australia, open to remote roles.",
 
         image: profileImg,
 
@@ -33,7 +33,9 @@ export const portfolioDb = {
                 { name: "JavaScript" },
                 { name: "HTML5" },
                 { name: "CSS3" },
-                { name: "Bootstrap" }
+                { name: "Material UI" },
+                { name: "Bootstrap" },
+                { name: "PWA" }
             ]
         },
         {
@@ -41,27 +43,29 @@ export const portfolioDb = {
             items: [
                 { name: "Node.js" },
                 { name: "Express" },
-                { name: "MongoDB" },
-                { name: "SQL" },
-                { name: "REST APIs" },
-                { name: "Python" },
                 { name: "Java" },
-                { name: "JavaFX" }
+                { name: "Spring Boot" },
+                { name: "REST APIs" },
+                { name: "JWT Auth" },
+                { name: "MongoDB" },
+                { name: "MySQL" },
+                { name: "Redis" }
             ]
         },
         {
             category: "Tools & Languages",
             items: [
                 { name: "Git & GitHub" },
-                { name: "Linux" },
-                { name: "Client-Server Architecture" },
-                { name: "C++" },
-                { name: "C" }
+                { name: "Docker" },
+                { name: "GitHub Actions" },
+                { name: "Jest" },
+                { name: "Android (Java)" },
+                { name: "Linux" }
             ]
         }
     ],
     contactInfo: {
-        email: "yaron.serlin.dev@gmail.com",
+        email: "yaronsserlin@gmail.com",
         phone: "+972-54-257-0203",
         facebook: "https://www.facebook.com/yaron.serlin",
         linkedin: "https://www.linkedin.com/in/yaronserlin",
