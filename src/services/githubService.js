@@ -4,12 +4,13 @@
 
 const GITHUB_USERNAME = 'yaronserlin';
 const GITHUB_API_URL = 'https://api.github.com';
-const CACHE_KEY = 'github-projects-cache-v1';
+const CACHE_KEY = 'github-projects-cache-v2';
+const README_CACHE_PREFIX = 'github-readme-cache-v1:';
 const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes
 
-// Repos that are not projects (profile README, GitHub Pages profile site) and should never
+// Repos that are not projects (profile README, GitHub Pages profile site, this site) and should never
 // appear as project cards.
-const EXCLUDED_REPOS = new Set(['yaronserlin', 'yaronserlin.github.io']);
+const EXCLUDED_REPOS = new Set(['yaronserlin', 'yaronserlin.github.io', 'portfolio']);
 
 // Headline projects, shown first in this order. Everything else follows, sorted by stars.
 const FEATURED_REPOS = ['MaintenanceSystemApp', 'cook-sync', 'ShareAndCopy', 'automata-editor'];
@@ -113,6 +114,16 @@ const enrichProject = async (project) => {
         project.gif = mediaUrls.gif;
     } catch {
         // Ignore missing visual media implementations
+    }
+
+    // No media/demo.* file: use the first screenshot from the repo's README instead.
+    if (!project.image) {
+        try {
+            const readme = await fetchProjectReadme(project.repoName, project.defaultBranch);
+            project.image = readme?.images[0]?.src || null;
+        } catch {
+            // No README image either; the card shows its placeholder
+        }
     }
 };
 
@@ -243,31 +254,53 @@ export const extractTechnologies = (language, topics = []) => {
         technologies.push(language);
     }
 
+    // Display names for repo topics, in the order they should appear (main stack first).
+    // Topics not listed here (domain words like "cmms" or "recipe-app") are not shown as tags.
     const topicMapping = {
         'react': 'React',
-        'javascript': 'JavaScript',
-        'typescript': 'TypeScript',
         'nodejs': 'Node.js',
-        'python': 'Python',
-        'java': 'Java',
-        'web': 'Web Development',
-        'api': 'REST API',
-        'database': 'Database',
-        'mongodb': 'MongoDB',
-        'postgresql': 'PostgreSQL',
         'express': 'Express',
+        'java': 'Java',
+        'spring-boot': 'Spring Boot',
+        'android': 'Android',
+        'android-app': 'Android',
+        'typescript': 'TypeScript',
+        'javascript': 'JavaScript',
+        'python': 'Python',
+        'mongodb': 'MongoDB',
+        'mysql': 'MySQL',
+        'postgresql': 'PostgreSQL',
+        'redis': 'Redis',
+        'socket-io': 'Socket.IO',
+        'material-ui': 'Material UI',
+        'vite': 'Vite',
+        'bootstrap': 'Bootstrap',
+        'progressive-web-app': 'PWA',
+        'pwa': 'PWA',
+        'jwt-authentication': 'JWT',
+        'rest-api': 'REST API',
+        'api': 'REST API',
+        'docker': 'Docker',
+        'github-actions': 'GitHub Actions',
+        'flyway': 'Flyway',
+        'retrofit': 'Retrofit',
+        'mvvm': 'MVVM',
+        'svg': 'SVG',
+        'katex': 'KaTeX',
+        'latex': 'LaTeX',
+        'tikz': 'TikZ',
         'vue': 'Vue.js',
         'angular': 'Angular',
+        'web': 'Web Development',
+        'database': 'Database',
         'html': 'HTML',
         'css': 'CSS',
-        'bootstrap': 'Bootstrap',
-        'docker': 'Docker',
     };
 
     if (Array.isArray(topics)) {
-        topics.forEach(topic => {
-            const mappedTech = topicMapping[topic.toLowerCase()];
-            if (mappedTech && !technologies.includes(mappedTech)) {
+        const topicSet = new Set(topics.map(topic => String(topic).toLowerCase()));
+        Object.entries(topicMapping).forEach(([topic, mappedTech]) => {
+            if (topicSet.has(topic) && !technologies.includes(mappedTech)) {
                 technologies.push(mappedTech);
             }
         });
@@ -359,4 +392,96 @@ export const extractLiveUrl = (repo) => {
     }
 
     return null;
+};
+
+const BADGE_OR_ICON_PATTERN = /(shields\.io|badge\.svg|\/badge\b|\/badges?\/|logo|qr|icon)/i;
+
+/**
+ * Turns a README-relative path into an absolute URL: raw file URLs for images,
+ * github.com blob URLs for links.
+ */
+const toAbsoluteRepoUrl = (value, repoName, branch, isImage) => {
+    if (!value || /^(https?:|mailto:|data:|#)/i.test(value)) return value;
+    const path = value.replace(/^\.?\//, '');
+    return isImage
+        ? `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repoName}/${branch}/${path}`
+        : `https://github.com/${GITHUB_USERNAME}/${repoName}/blob/${branch}/${path}`;
+};
+
+/**
+ * Cleans GitHub-rendered README HTML for display on this site: resolves relative image and
+ * link paths against the repo, opens links in a new tab, and strips anything executable.
+ * Also returns the README's screenshots (badges, logos and QR codes skipped) for galleries.
+ *
+ * @param {string} html - README HTML from the GitHub API.
+ * @param {string} repoName - Repository name.
+ * @param {string} [branch='main'] - Default branch.
+ * @returns {{ html: string, images: Array<{src: string, alt: string}> }}
+ */
+export const processReadmeHtml = (html, repoName, branch = 'main') => {
+    const doc = new DOMParser().parseFromString(html || '', 'text/html');
+
+    doc.querySelectorAll('script, iframe, object, embed, style, form').forEach(el => el.remove());
+    doc.querySelectorAll('*').forEach((el) => {
+        [...el.attributes].forEach((attr) => {
+            if (/^on/i.test(attr.name)) el.removeAttribute(attr.name);
+        });
+    });
+
+    const images = [];
+    doc.querySelectorAll('img').forEach((img) => {
+        const src = toAbsoluteRepoUrl(img.getAttribute('src'), repoName, branch, true);
+        img.setAttribute('src', src);
+        img.setAttribute('loading', 'lazy');
+        const canonical = img.getAttribute('data-canonical-src') || src;
+        if (!BADGE_OR_ICON_PATTERN.test(canonical) && !images.some(i => i.src === src)) {
+            images.push({ src, alt: img.getAttribute('alt') || '' });
+        }
+    });
+
+    doc.querySelectorAll('a[href]').forEach((a) => {
+        const href = a.getAttribute('href');
+        if (href.startsWith('#')) return;
+        a.setAttribute('href', toAbsoluteRepoUrl(href, repoName, branch, false));
+        a.setAttribute('target', '_blank');
+        a.setAttribute('rel', 'noopener noreferrer');
+    });
+
+    return { html: doc.body.innerHTML, images };
+};
+
+/**
+ * Fetches a repo's README as GitHub-rendered HTML and prepares it for display.
+ * Cached in sessionStorage so opening a project page again costs no API call.
+ *
+ * @param {string} repoName - Repository name.
+ * @param {string} [branch='main'] - Default branch, used to resolve relative paths.
+ * @returns {Promise<{ html: string, images: Array<{src: string, alt: string}> }|null>}
+ */
+export const fetchProjectReadme = async (repoName, branch = 'main') => {
+    const cacheKey = `${README_CACHE_PREFIX}${repoName}`;
+    try {
+        const cached = JSON.parse(sessionStorage.getItem(cacheKey));
+        if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) return cached.data;
+    } catch {
+        // Unreadable cache entry; fetch again
+    }
+
+    try {
+        const response = await fetch(`${GITHUB_API_URL}/repos/${GITHUB_USERNAME}/${repoName}/readme`, {
+            headers: { Accept: 'application/vnd.github.html+json' }
+        });
+        if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
+
+        const data = processReadmeHtml(await response.text(), repoName, branch);
+        try {
+            sessionStorage.setItem(cacheKey, JSON.stringify({ timestamp: Date.now(), data }));
+        } catch {
+            // Storage full or unavailable; caching is best-effort
+        }
+        return data;
+    } catch (error) {
+        logError(`Error fetching README for ${repoName}:`, error);
+        return null;
+    }
 };
