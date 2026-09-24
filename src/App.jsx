@@ -12,6 +12,8 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
+import PrivacyPage from './pages/PrivacyPage';
+import AccessibilityPage from './pages/AccessibilityPage';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 
@@ -33,6 +35,8 @@ function App() {
         <Route path="/contact" element={<ContactPage contactInfo={portfolioData.contactInfo} />} />
         <Route path="/projects" element={<ProjectsPage projects={portfolioData.projects} />} />
         <Route path="/projects/:repoName" element={<ProjectDetailPage projects={portfolioData.projects} />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/accessibility" element={<AccessibilityPage />} />
       </Routes>
       <Footer />
     </>
