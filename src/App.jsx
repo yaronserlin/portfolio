@@ -11,6 +11,7 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import ProjectsPage from './pages/ProjectsPage';
+import ProjectDetailPage from './pages/ProjectDetailPage';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 
@@ -31,6 +32,7 @@ function App() {
         <Route path="/about" element={<AboutPage personalInfo={portfolioData.personalInfo} skills={portfolioData.skills} />} />
         <Route path="/contact" element={<ContactPage contactInfo={portfolioData.contactInfo} />} />
         <Route path="/projects" element={<ProjectsPage projects={portfolioData.projects} />} />
+        <Route path="/projects/:repoName" element={<ProjectDetailPage projects={portfolioData.projects} />} />
       </Routes>
       <Footer />
     </>
