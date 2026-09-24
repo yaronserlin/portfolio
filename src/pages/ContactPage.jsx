@@ -6,6 +6,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import SectionHeader from '../components/SectionHeader';
 import ContactInfo from '../components/ContactInfo';
 import ContactForm from '../components/ContactForm';
+import DownloadCVButton from '../components/DownloadCVButton';
 
 /**
  * Renders the communication hub of the portfolio, combining static contact information
@@ -30,6 +31,9 @@ const ContactPage = ({ contactInfo }) => {
                 <Row>
                     <Col lg={6} className="mb-4 mb-lg-0">
                         <ContactInfo contactInfo={contactInfo} />
+                        <div className="mt-4">
+                            <DownloadCVButton />
+                        </div>
                     </Col>
 
                     <Col lg={6}>
