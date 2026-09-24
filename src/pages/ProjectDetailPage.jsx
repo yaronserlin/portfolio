@@ -100,7 +100,6 @@ const ProjectDetailPage = ({ projects }) => {
                         <ImageCarousel
                             images={gallery}
                             title={project.title}
-                            height="440px"
                             className="project-detail-carousel rounded shadow-sm"
                             onImageClick={(i) => window.open(gallery[i].src, '_blank', 'noopener')}
                         />
