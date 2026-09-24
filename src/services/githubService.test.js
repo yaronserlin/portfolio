@@ -76,6 +76,28 @@ describe('fetchGitHubProjects', () => {
         expect(projects[0].title).toBe('High Stars');
     });
 
+    it('drops non-project repos and lists featured projects first', async () => {
+        fetch.mockImplementation((url) => {
+            if (url.includes('/repos?')) {
+                return Promise.resolve({
+                    ok: true,
+                    json: () => Promise.resolve([
+                        { id: 1, name: 'side-project', fork: false, stargazers_count: 50, default_branch: 'main' },
+                        { id: 2, name: 'yaronserlin.github.io', fork: false, stargazers_count: 0, default_branch: 'main' },
+                        { id: 3, name: 'yaronserlin', fork: false, stargazers_count: 0, default_branch: 'main' },
+                        { id: 4, name: 'automata-editor', fork: false, stargazers_count: 0, default_branch: 'main' },
+                        { id: 5, name: 'MaintenanceSystemApp', fork: false, stargazers_count: 0, default_branch: 'main' }
+                    ])
+                });
+            }
+            return Promise.resolve({ ok: false, status: 404, json: () => Promise.resolve({}) });
+        });
+
+        const projects = await fetchGitHubProjects();
+
+        expect(projects.map(p => p.repoName)).toEqual(['MaintenanceSystemApp', 'automata-editor', 'side-project']);
+    });
+
     it('returns an empty array when the repo list request fails', async () => {
         fetch.mockResolvedValue({ ok: false, status: 500 });
 
@@ -120,11 +142,17 @@ describe('fetchGitHubProjects', () => {
 describe('deriveSkillsFromProjects', () => {
     it('collects unique technologies and languages across all projects', () => {
         const projects = [
-            { technologies: ['React', 'JavaScript'], languages: ['JavaScript', 'CSS'] },
+            { technologies: ['React', 'JavaScript'], languages: ['JavaScript', 'TypeScript'] },
             { technologies: ['Python'], languages: ['Python'] }
         ];
 
-        expect(deriveSkillsFromProjects(projects)).toEqual(['React', 'JavaScript', 'CSS', 'Python']);
+        expect(deriveSkillsFromProjects(projects)).toEqual(['React', 'JavaScript', 'TypeScript', 'Python']);
+    });
+
+    it('skips raw GitHub language names that are not skills', () => {
+        const projects = [{ technologies: ['React'], languages: ['CSS', 'SCSS', 'HTML', 'Shell', 'Dockerfile'] }];
+
+        expect(deriveSkillsFromProjects(projects)).toEqual(['React']);
     });
 
     it('skips names already present in existingSkillNames, case-insensitively', () => {
