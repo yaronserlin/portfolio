@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { extractTechnologies, extractLiveUrl, fetchGitHubProjects, deriveSkillsFromProjects, categorizeSkill } from './githubService';
+import { extractTechnologies, extractLiveUrl, fetchGitHubProjects, deriveSkillsFromProjects, categorizeSkill, processReadmeHtml } from './githubService';
 
 describe('extractTechnologies', () => {
     it('leads with the repo primary language when present', () => {
@@ -200,5 +200,41 @@ describe('categorizeSkill', () => {
     it('is case-insensitive', () => {
         expect(categorizeSkill('javascript')).toBe('Frontend');
         expect(categorizeSkill('PYTHON')).toBe('Backend');
+    });
+});
+
+describe('extractTechnologies ordering', () => {
+    it('lists the main stack first regardless of GitHub topic order', () => {
+        expect(extractTechnologies('JavaScript', ['vite', 'mongodb', 'react', 'nodejs', 'cmms'])).toEqual([
+            'JavaScript', 'React', 'Node.js', 'MongoDB', 'Vite'
+        ]);
+    });
+});
+
+describe('processReadmeHtml', () => {
+    const html = [
+        '<p><img src="https://camo.githubusercontent.com/x" data-canonical-src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License"></p>',
+        '<p><img src="docs/logo.png" alt="Logo"></p>',
+        '<p><img src="media/demo.png" alt="Dashboard"></p>',
+        '<p><img src="./docs/media/screenshots/home.jpg" alt="Home"></p>',
+        '<p><a href="docs/user-guide.md">Guide</a> <a href="#setup">Setup</a></p>',
+        '<script>alert(1)</script><img src="x.png" onerror="alert(2)">'
+    ].join('');
+
+    it('resolves relative paths and keeps only real screenshots', () => {
+        const { images } = processReadmeHtml(html, 'demo-repo', 'main');
+        expect(images.map(i => i.src)).toEqual([
+            'https://raw.githubusercontent.com/yaronserlin/demo-repo/main/media/demo.png',
+            'https://raw.githubusercontent.com/yaronserlin/demo-repo/main/docs/media/screenshots/home.jpg',
+            'https://raw.githubusercontent.com/yaronserlin/demo-repo/main/x.png'
+        ]);
+    });
+
+    it('rewrites links to GitHub, keeps in-page anchors and strips scripts and handlers', () => {
+        const { html: out } = processReadmeHtml(html, 'demo-repo', 'main');
+        expect(out).toContain('href="https://github.com/yaronserlin/demo-repo/blob/main/docs/user-guide.md"');
+        expect(out).toContain('href="#setup"');
+        expect(out).not.toContain('<script');
+        expect(out).not.toContain('onerror');
     });
 });
