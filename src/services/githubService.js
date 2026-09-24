@@ -4,7 +4,7 @@
 
 const GITHUB_USERNAME = 'yaronserlin';
 const GITHUB_API_URL = 'https://api.github.com';
-const CACHE_KEY = 'github-projects-cache-v2';
+const CACHE_KEY = 'github-projects-cache-v3';
 const README_CACHE_PREFIX = 'github-readme-cache-v1:';
 const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes
 
@@ -80,6 +80,7 @@ const mapReposToProjects = (repos) => {
             url: repo.html_url,
             liveUrl: extractLiveUrl(repo),
             image: null,
+            images: [],
             video: null,
             gif: null,
             stars: repo.stargazers_count,
@@ -89,6 +90,29 @@ const mapReposToProjects = (repos) => {
             defaultBranch: repo.default_branch,
         }))
         .sort((a, b) => (featuredRank(a.repoName) - featuredRank(b.repoName)) || (b.stars - a.stars));
+};
+
+/**
+ * Builds a project's image gallery: the demo image first, then README images, without duplicates.
+ *
+ * @param {string|null} demoImage - URL of media/demo.* if the repo has one.
+ * @param {Array<{src: string, alt: string}>} [readmeImages=[]] - Images found in the README.
+ * @param {number} [limit=10] - Maximum number of images to keep.
+ * @returns {Array<{src: string, alt: string}>} Ordered, de-duplicated gallery.
+ */
+export const buildGallery = (demoImage, readmeImages = [], limit = 10) => {
+    const gallery = [];
+    const seen = new Set();
+    const add = (img) => {
+        if (!img?.src) return;
+        const key = img.src.split('?')[0];
+        if (seen.has(key)) return;
+        seen.add(key);
+        gallery.push(img);
+    };
+    if (demoImage) add({ src: demoImage, alt: '' });
+    (readmeImages || []).forEach(add);
+    return gallery.slice(0, limit);
 };
 
 /**
@@ -116,15 +140,15 @@ const enrichProject = async (project) => {
         // Ignore missing visual media implementations
     }
 
-    // No media/demo.* file: use the first screenshot from the repo's README instead.
-    if (!project.image) {
-        try {
-            const readme = await fetchProjectReadme(project.repoName, project.defaultBranch);
-            project.image = readme?.images[0]?.src || null;
-        } catch {
-            // No README image either; the card shows its placeholder
-        }
+    // Gallery: the demo image first (when there is one), then every screenshot from the README.
+    try {
+        const readme = await fetchProjectReadme(project.repoName, project.defaultBranch);
+        project.images = buildGallery(project.image, readme?.images);
+    } catch {
+        project.images = buildGallery(project.image, []);
     }
+    // No media/demo.* file: the card leads with the first README screenshot instead.
+    if (!project.image) project.image = project.images[0]?.src || null;
 };
 
 /**
