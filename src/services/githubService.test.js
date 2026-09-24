@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { extractTechnologies, extractLiveUrl, fetchGitHubProjects, deriveSkillsFromProjects, categorizeSkill, processReadmeHtml } from './githubService';
+import { extractTechnologies, extractLiveUrl, fetchGitHubProjects, deriveSkillsFromProjects, categorizeSkill, processReadmeHtml, buildGallery } from './githubService';
 
 describe('extractTechnologies', () => {
     it('leads with the repo primary language when present', () => {
@@ -236,5 +236,22 @@ describe('processReadmeHtml', () => {
         expect(out).toContain('href="#setup"');
         expect(out).not.toContain('<script');
         expect(out).not.toContain('onerror');
+    });
+});
+
+describe('buildGallery', () => {
+    it('puts the demo image first, then README images, without duplicates', () => {
+        const gallery = buildGallery('https://x/demo.png', [
+            { src: 'https://x/a.png', alt: 'A' },
+            { src: 'https://x/demo.png?raw=1', alt: 'dup' },
+            { src: 'https://x/b.png', alt: 'B' },
+        ]);
+        expect(gallery.map(i => i.src)).toEqual(['https://x/demo.png', 'https://x/a.png', 'https://x/b.png']);
+    });
+
+    it('works without a demo image and caps the length', () => {
+        const many = Array.from({ length: 15 }, (_, i) => ({ src: `https://x/${i}.png`, alt: '' }));
+        expect(buildGallery(null, many)).toHaveLength(10);
+        expect(buildGallery(null, undefined)).toEqual([]);
     });
 });
