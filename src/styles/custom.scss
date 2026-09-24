@@ -136,3 +136,63 @@ $body-color: #2b2d42; // אפור כהה מאוד (קריא ורך יותר מש
   transform: translateX(8px);
   color: var(--bs-primary);
 }
+// Project detail page
+.project-detail {
+  .project-hero-image {
+    max-height: 420px;
+    width: 100%;
+    object-fit: contain;
+    background: #fff;
+  }
+
+  .project-thumb {
+    height: 160px;
+
+    img {
+      object-fit: cover;
+      object-position: top;
+    }
+  }
+
+  .readme-content {
+    overflow-wrap: anywhere;
+    text-align: left;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    table {
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      margin-bottom: 1rem;
+    }
+
+    th,
+    td {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 0.4rem 0.6rem;
+    }
+
+    pre {
+      background: rgba(0, 0, 0, 0.04);
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-top: 1.5rem;
+    }
+
+    // GitHub adds hover anchor icons next to headings; they are not needed here
+    .anchor,
+    .octicon {
+      display: none;
+    }
+  }
+}
