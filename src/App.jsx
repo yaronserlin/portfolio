@@ -16,6 +16,7 @@ import PrivacyPage from './pages/PrivacyPage';
 import AccessibilityPage from './pages/AccessibilityPage';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
+import AccessibilityMenu from './components/AccessibilityMenu';
 
 /**
  * Root component that defines the application's layout and routing configuration.
@@ -39,6 +40,7 @@ function App() {
         <Route path="/accessibility" element={<AccessibilityPage />} />
       </Routes>
       <Footer />
+      <AccessibilityMenu />
     </>
   );
 }
