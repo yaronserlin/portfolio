@@ -1,6 +1,8 @@
 /**
  * PREVIEW: Floating accessibility menu - text size, high contrast, underline links.
- * Preferences persist in localStorage. The button sits bottom-right and lifts
+ * Preferences last for the visit only (kept in memory, not browser storage),
+ * because the privacy policy promises the site stores nothing in the browser.
+ * The button sits bottom-right and lifts
  * itself above the footer when it scrolls into view, so it never covers the
  * footer links.
  */
@@ -9,16 +11,8 @@ import { useEffect, useState } from 'react';
 import { Button, ButtonGroup, Form } from 'react-bootstrap';
 import { FaUniversalAccess, FaTimes } from 'react-icons/fa';
 import {
-    DEFAULT_PREFS, EDGE_GAP, FONT_STEPS, STORAGE_KEY, applyPrefs, computeBottomOffset, loadPrefs,
+    DEFAULT_PREFS, EDGE_GAP, FONT_STEPS, applyPrefs, computeBottomOffset,
 } from '../utils/accessibility';
-
-const safeStorage = () => {
-    try {
-        return window.localStorage;
-    } catch {
-        return null;
-    }
-};
 
 const measureBottomOffset = () => {
     const rects = Array.from(document.querySelectorAll('footer'))
@@ -32,16 +26,11 @@ const measureBottomOffset = () => {
  */
 const AccessibilityMenu = () => {
     const [open, setOpen] = useState(false);
-    const [prefs, setPrefs] = useState(() => loadPrefs(safeStorage()));
+    const [prefs, setPrefs] = useState({ ...DEFAULT_PREFS });
     const [bottomOffset, setBottomOffset] = useState(EDGE_GAP);
 
     useEffect(() => {
         applyPrefs(document.documentElement, prefs);
-        try {
-            safeStorage()?.setItem(STORAGE_KEY, JSON.stringify(prefs));
-        } catch {
-            /* storage unavailable - preferences apply for this session only */
-        }
     }, [prefs]);
 
     useEffect(() => {
